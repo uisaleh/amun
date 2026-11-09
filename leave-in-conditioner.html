@@ -13,7 +13,7 @@
 <helmet>
 <style>
 .hdr-burger{display:none}
-.pgrid article p,.sl-card p{display:-webkit-box;-webkit-line-clamp:1;line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}@media (max-width: 860px){.gal{flex:1 1 100%!important;align-items:stretch!important}
+.pgrid article p,.sl-card p{display:-webkit-box;-webkit-line-clamp:1;line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}@media (max-width: 860px){.sticky-atc{display:flex!important}footer{padding-bottom:96px!important}.gal{flex:1 1 100%!important;align-items:stretch!important}
 .hdr{flex-wrap:nowrap!important;min-height:56px!important;gap:12px!important}
 .hdr-nav,.hdr-text{display:none!important}
 .hdr-burger{display:inline-flex!important}
@@ -165,6 +165,15 @@ footer>img[aria-hidden="true"]{height:200px!important;top:auto!important;bottom:
 </div>
 </div>
 </div>
+</div>
+</sc-if>
+
+<!-- Mobile sticky add to cart -->
+<sc-if value="{{stickyOn}}" hint-placeholder-val="{{false}}">
+<div class="sticky-atc" role="region" aria-label="Quick add to cart" style="position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; display: none; align-items: center; gap: 12px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: #FEF9F6; border-top: 1px solid #121212; box-shadow: 0 -6px 18px rgba(18, 18, 18, 0.08)">
+<img src="{{stickyImg}}" alt="" style="flex: 0 0 44px; width: 44px; height: 54px; object-fit: cover; background: #efefea; display: block">
+<span style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; line-height: 17px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{stickyName}}</span><span style="font-size: 12px; line-height: 16px">{{stickyPrice}}</span></span>
+<button type="button" class="atc-dark" onClick="{{addMain}}" style="flex: 0 0 auto; height: 46px; padding: 0 18px; background: #585128; color: #ffffff; border: 1px solid #585128; border-radius: 0; font-family: inherit; font-size: 13px; cursor: pointer">Add to Cart</button>
 </div>
 </sc-if>
 
@@ -559,7 +568,7 @@ shrinkPhoto(file) {
     });
   }
   reviewKey() { return 'leave-in-conditioner'; }
-componentDidMount() { if (typeof fetch === 'undefined') return; fetch('/api/reviews?product=' + this.reviewKey()).then((r) => r.ok ? r.json() : null).then((d) => { if (d && Array.isArray(d.reviews)) this.setState({ liveReviews: d.reviews }); }).catch(() => {}); }
+componentDidMount() { if (typeof window !== 'undefined') { let raf = 0; const check = () => { raf = 0; const t = document.querySelector('.buyrow'); const past = !!t && t.getBoundingClientRect().bottom < 0; if (past !== !!this.state.stickyOn) this.setState({ stickyOn: past }); }; this._onScroll = () => { if (!raf) raf = requestAnimationFrame(check); }; window.addEventListener('scroll', this._onScroll, { passive: true }); window.addEventListener('resize', this._onScroll); } if (typeof fetch === 'undefined') return; fetch('/api/reviews?product=' + this.reviewKey()).then((r) => r.ok ? r.json() : null).then((d) => { if (d && Array.isArray(d.reviews)) this.setState({ liveReviews: d.reviews }); }).catch(() => {}); }
 
 renderVals() { const v = this.pageVals(); return this.respVals(Object.assign({ cartScale: 'scale(1)' }, v, this.shopVals())); }
 respVals(v) {
@@ -740,7 +749,7 @@ pickSub: () => this.setState({ sub: true }),
 qty: s.qty,
 inc: () => this.setState({ qty: Math.min(s.qty + 1, 9) }),
 dec: () => this.setState({ qty: Math.max(s.qty - 1, 1) }),
-ctaLabel: 'Add to Cart - $' + (price * s.qty).toFixed(2).replace('.00', ''),
+ctaLabel: 'Add to Cart - $' + (price * s.qty).toFixed(2).replace('.00', ''), stickyOn: !!this.state.stickyOn, stickyName: (typeof document !== 'undefined' && document.querySelector('h1')) ? document.querySelector('h1').textContent : '', stickyPrice: '$' + (price * s.qty).toFixed(2), stickyImg: imgs[0].src,
 addMain: (e) => this.flyToCart(e, s.qty),
 panels: panelData.map((p, i) => ({ ...p, open: s.panel === i, mark: s.panel === i ? '−' : '+', toggle: () => this.setState({ panel: s.panel === i ? -1 : i }) })),
 routine: [
