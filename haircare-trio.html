@@ -80,7 +80,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:1px solid #0000
 .vid-track{transform:none!important;gap:10px!important;padding-right:24px}
 .vid-item{flex:0 0 62%!important;scroll-snap-align:start}
 .gal-peek{display:block!important}
-.gal>img{display:none!important}
+.gal>img,.gal>.gal-main{display:none!important}
 .gal>.gal-arrow{top:calc(76vw * 1.25 / 2)!important}
 .pinfo>h1,.pinfo>p,.pinfo>a,.pinfo>div[style*="max-height"]{text-align:center}
 .pinfo>button,.pinfo>a{align-self:center!important}
@@ -233,7 +233,7 @@ footer>img[aria-hidden="true"]{height:200px!important;top:auto!important;bottom:
 <div class="gal-peek" style="display: none; position: relative; overflow: hidden; margin: 0 -24px">
 <div style="display: flex; gap: 10px; transition: transform 400ms cubic-bezier(0.22, 0.61, 0.36, 1); transform: {{galTx}}">
 <sc-for list="{{galPeek}}" as="g" hint-placeholder-count="4">
-<img src="{{g.src}}" alt="{{g.label}}" style="flex: 0 0 76%; min-width: 0; aspect-ratio: 4 / 5; object-fit: cover; background: #efefea; display: block">
+<div style="flex: 0 0 76%; min-width: 0; aspect-ratio: 4 / 5; overflow: hidden; background: #efefea"><img src="{{g.src}}" alt="{{g.label}}" style="display: block; width: 100%; height: 100%; object-fit: cover; transform: {{g.zoom}}"></div>
 </sc-for>
 </div>
 </div>
@@ -244,7 +244,7 @@ footer>img[aria-hidden="true"]{height:200px!important;top:auto!important;bottom:
 </sc-for>
 <button type="button" aria-label="Next image" onClick="{{nextImg}}" style="width: 44px; height: 24px; background: none; border: 0; cursor: pointer"><svg aria-hidden="true" width="14" height="8" viewBox="0 0 14 8" fill="none" stroke="#000" stroke-width="1"><path d="M1 1l6 6 6-6"></path></svg></button>
 </div>
-<img src="{{mainSrc}}" alt="{{mainLabel}}" style="flex: 0 0 auto; min-width: 0; width: 440px; max-width: 100%; aspect-ratio: 4 / 5; object-fit: cover; background: #efefea; display: block">
+<div class="gal-main" style="flex: 0 0 auto; min-width: 0; width: 440px; max-width: 100%; aspect-ratio: 4 / 5; overflow: hidden; background: #efefea"><img src="{{mainSrc}}" alt="{{mainLabel}}" style="display: block; width: 100%; height: 100%; object-fit: cover; transform: {{mainZoom}}"></div>
 <button type="button" class="gal-arrow" aria-label="Previous photo" onClick="{{prevImg}}" style="position: absolute; left: 6px; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; padding: 0; background: none; border: 0; cursor: pointer; align-items: center; justify-content: center"><svg aria-hidden="true" width="10" height="18" viewBox="0 0 10 18" fill="none" stroke="#121212" stroke-width="1.2"><path d="M9 1L1 9l8 8"></path></svg></button>
 <button type="button" class="gal-arrow" aria-label="Next photo" onClick="{{nextImg}}" style="position: absolute; right: 6px; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; padding: 0; background: none; border: 0; cursor: pointer; align-items: center; justify-content: center"><svg aria-hidden="true" width="10" height="18" viewBox="0 0 10 18" fill="none" stroke="#121212" stroke-width="1.2"><path d="M1 1l8 8-8 8"></path></svg></button>
 </div>
@@ -699,8 +699,8 @@ vidNext: () => this.setState({ vid: Math.min(vid + 1, vidMax) }),
 cart: s.cart,
 add,
 noSubmit: (e) => { e.preventDefault(); },
-thumbs: imgs.map((m, i) => ({ ...m, on: s.img === i, ring: s.img === i ? '#000000' : '#ffffff', pick: () => this.setState({ img: i }) })),
-mainSrc: imgs[s.img].src,
+thumbs: imgs.map((m, i) => ({ ...m, zoom: i === 0 ? 'none' : 'none', on: s.img === i, ring: s.img === i ? '#000000' : '#ffffff', pick: () => this.setState({ img: i }) })),
+mainSrc: imgs[s.img].src, mainZoom: s.img === 0 ? 'none' : 'none',
 mainLabel: imgs[s.img].label,
 prevImg: () => this.setState({ img: (s.img + imgs.length - 1) % imgs.length }),
 nextImg: () => this.setState({ img: (s.img + 1) % imgs.length }),
