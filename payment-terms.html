@@ -89,7 +89,7 @@ footer>img[aria-hidden="true"]{height:200px!important;top:auto!important;bottom:
 </helmet>
 <div style="width: 100%; background: #FEF9F6; color: #121212; font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif; font-weight: 400; letter-spacing: 0.6px">
 
-<div style="background: #DFDDD0; padding: 15px 24px; text-align: center; font-size: 15px; line-height: 15px">Free Shipping on orders $75+</div>
+<div style="background: #DFDDD0; padding: 15px 24px; text-align: center; font-size: 15px; line-height: 15px">Free Shipping on orders $150+</div>
 
 <header style="position: sticky; top: 0; z-index: 50; border-bottom: 1px solid rgba(18, 18, 18, 0.15); padding: 0 24px; background: #9FA383">
 <div class="hdr" style="min-height: 76px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px">
@@ -202,8 +202,18 @@ footer>img[aria-hidden="true"]{height:200px!important;top:auto!important;bottom:
 </div>
 <sc-if value="{{cartHasItems}}" hint-placeholder-val="{{true}}">
 <div style="padding: 24px; border-top: 1px solid #121212; display: flex; flex-direction: column; gap: 14px">
-<div style="display: flex; justify-content: space-between; font-size: 16px; line-height: 22.4px"><span>Subtotal</span><span>{{subtotalLabel}}</span></div>
-<p style="margin: 0; font-size: 12px; line-height: 16.8px">Taxes and shipping calculated at checkout. Or 4 interest-free payments of {{klarnaLabel}} with <strong style="font-weight: 700">Klarna.</strong></p>
+<fieldset style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 8px; min-width: 0">
+<legend style="padding: 0; margin-bottom: 8px; font-size: 12px; line-height: 16.8px; text-transform: uppercase">Shipping method</legend>
+<sc-for list="{{shipOptions}}" as="so" hint-placeholder-count="3">
+<label style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 8px 12px; border: 1px solid {{so.ring}}; cursor: pointer; font-size: 13px; line-height: 18px; box-sizing: border-box"><input type="radio" name="shipmethod" value="{{so.id}}" checked="{{so.on}}" onChange="{{so.pick}}" style="margin: 0; width: 16px; height: 16px; accent-color: #585128"><span style="flex: 1 1 auto; display: flex; flex-direction: column"><span>{{so.label}}</span><span style="font-size: 12px; line-height: 16.8px; color: #4a4a40">{{so.eta}}</span></span><span style="white-space: nowrap">{{so.priceLabel}}</span></label>
+</sc-for>
+</fieldset>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; justify-content: space-between; font-size: 14px; line-height: 19.6px"><span>Subtotal</span><span>{{subtotalLabel}}</span></div>
+<div style="display: flex; justify-content: space-between; font-size: 14px; line-height: 19.6px"><span>Shipping · {{shippingName}}</span><span>{{shippingLabel}}</span></div>
+<div style="display: flex; justify-content: space-between; font-size: 16px; line-height: 22.4px; padding-top: 6px; border-top: 1px solid rgba(18, 18, 18, 0.15)"><span>Total</span><span>{{totalLabel}}</span></div>
+</div>
+<p style="margin: 0; font-size: 12px; line-height: 16.8px">Taxes calculated at checkout. Or 4 interest-free payments of {{klarnaLabel}} with <strong style="font-weight: 700">Klarna.</strong></p>
 <button type="button" class="atc-dark" onClick="{{checkout}}" style="height: 52px; background: #585128; color: #ffffff; border: 1px solid #585128; border-radius: 0; font-family: inherit; font-size: 14px; cursor: pointer">{{checkoutLabel}}</button>
 <button type="button" onClick="{{closeCart}}" style="padding: 0; background: none; border: 0; font-family: inherit; font-size: 12px; text-decoration: underline; cursor: pointer; color: #121212">Continue shopping</button>
 </div>
@@ -358,6 +368,8 @@ if (!(btn.classList && btn.classList.contains('atc-dark'))) { const box = btn.cl
 if (!name) { const h = document.querySelector('h1'); name = firstIn(h && h.textContent); }
 this.cartAddName(name, n);
 }
+shipLoad() { try { return (typeof localStorage !== 'undefined' && localStorage.getItem('amun-ship')) || ''; } catch (e) { return ''; } }
+shipSave(id) { try { if (typeof localStorage !== 'undefined') localStorage.setItem('amun-ship', id); } catch (e) {} }
 shopVals() {
 const st = this.state; const cat = this.shopCat(); const items = this.cartItemsNow();
 const money = (x) => '$' + x.toFixed(2);
@@ -366,7 +378,11 @@ const count = lines.reduce((a, l) => a + l.qty, 0); const sub = lines.reduce((a,
 const setQty = (name, q) => this.cartSet(this.cartItemsNow().map((x) => x.name === name ? Object.assign({}, x, { qty: q }) : x).filter((x) => x.qty > 0));
 const q = (st.searchQ || '').trim().toLowerCase();
 const res = cat.filter((p) => !q || (p.name + ' ' + p.cat).toLowerCase().includes(q));
-const left = Math.max(0, 75 - sub);
+const FREE_AT = 150; const left = Math.max(0, FREE_AT - sub);
+const SHIP = [{ id: 'standard', label: 'Standard Shipping', eta: '5–7 business days', price: 8.95 }, { id: 'express', label: 'Express Shipping', eta: '2–3 business days', price: 19.95 }, { id: 'overnight', label: 'Overnight Shipping', eta: 'Next business day', price: 39.95 }];
+const shipCost = (o) => (o.id === 'standard' && sub >= FREE_AT) ? 0 : o.price;
+const selShip = SHIP.find((o) => o.id === (st.shipMethod || this.shipLoad())) || SHIP[0];
+const shipAmt = lines.length ? shipCost(selShip) : 0; const total = sub + shipAmt;
 return {
 cart: count,
 searchOpen: !!st.searchOpen, openSearch: (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ searchOpen: true, searchQ: '', cartOpen: false }); }, closeSearch: () => this.setState({ searchOpen: false }),
@@ -376,9 +392,10 @@ searchResults: res.map((p) => Object.assign({}, p, { priceLabel: money(p.price) 
 cartOpen: !!st.cartOpen, openCart: (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ cartOpen: true, searchOpen: false, items: this.cartLoad(), checkedOut: false }); }, closeCart: () => this.setState({ cartOpen: false }),
 cartEmpty: lines.length === 0, cartHasItems: lines.length > 0,
 cartItems: lines.map((l) => Object.assign({}, l, { priceLabel: money(l.price), lineLabel: money(l.price * l.qty), inc: () => setQty(l.name, l.qty + 1), dec: () => setQty(l.name, l.qty - 1), remove: () => setQty(l.name, 0) })),
-subtotalLabel: money(sub), klarnaLabel: money(sub / 4),
-shipMsg: left > 0 ? 'You are ' + money(left) + ' away from free shipping' : 'You have unlocked free shipping', shipPct: Math.min(100, Math.round(sub / 75 * 100)),
-checkout: () => this.setState({ checkedOut: true }), checkoutLabel: st.checkedOut ? 'Redirecting to secure checkout…' : 'Checkout · ' + money(sub)
+subtotalLabel: money(sub), klarnaLabel: money(total / 4), totalLabel: money(total), shippingLabel: shipAmt === 0 ? 'Free' : money(shipAmt), shippingName: selShip.label,
+shipOptions: SHIP.map((o) => Object.assign({}, o, { on: o.id === selShip.id, ring: o.id === selShip.id ? '#121212' : 'rgba(18, 18, 18, 0.25)', priceLabel: shipCost(o) === 0 ? 'Free' : money(shipCost(o)), pick: () => { this.shipSave(o.id); this.setState({ shipMethod: o.id, checkedOut: false }); } })),
+shipMsg: left > 0 ? 'You are ' + money(left) + ' away from free standard shipping' : 'You have unlocked free standard shipping', shipPct: Math.min(100, Math.round(sub / FREE_AT * 100)),
+checkout: () => this.setState({ checkedOut: true }), checkoutLabel: st.checkedOut ? 'Redirecting to secure checkout…' : 'Checkout · ' + money(total)
 };
 }
 
