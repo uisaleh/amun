@@ -8,8 +8,4 @@ Static site for the Amun Organics redesign, hosted on Cloudflare Pages at amun.s
 
 ## Product reviews
 
-`functions/api/reviews.js` is a Cloudflare Pages Function that stores customer reviews in Workers KV.
-Bind a KV namespace to this Pages project with the variable name `REVIEWS` (Settings → Bindings), then redeploy.
-Each product's reviews are stored under its own key (`p:<product>`, e.g. `p:origin-set`), so a review only shows on the product it was written for.
-Review photos are stored in the same namespace under `img:<id>` and served by `functions/api/review-photo.js`.
-To remove a review, edit that key's JSON in the KV namespace in the Cloudflare dashboard (and delete its `img:` photo keys if it had photos).
+The review form (with photo upload) works in the browser only; submitted reviews are not saved. Real, shared reviews will come from a Shopify review app when the store moves to Shopify.
