@@ -13,7 +13,7 @@
 <helmet>
 <style>
 .hdr-burger{display:none}
-@media (max-width: 860px){
+@media (max-width: 860px){.intro{grid-template-columns:minmax(0,1fr)!important;justify-items:center}.intro>div:first-child{display:none}.intro>div:last-child{justify-self:center!important}
 .hdr{flex-wrap:nowrap!important;min-height:64px!important;gap:12px!important}
 .hdr-nav,.hdr-text{display:none!important}
 .hdr-burger{display:inline-flex!important}
@@ -223,25 +223,28 @@ footer>img[aria-hidden="true"]{height:200px!important;top:auto!important;bottom:
 </sc-if>
 
 <!-- Title -->
-<section style="padding: 60px 24px 0">
-<div style="max-width: 1300px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center">
+<section style="padding: 20px 24px 0">
+<div class="intro" style="max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: end; gap: 14px">
+<div aria-hidden="true"></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center">
 <h1 style="margin: 0; font-size: 23px; line-height: 23px; font-weight: 400">Shop All</h1>
-<p style="margin: 14px 0 0; font-size: 16px; line-height: 22.4px">Tallow hair and skin essentials for your everyday ritual.</p>
+<p style="margin: 0; font-size: 16px; line-height: 22.4px">Tallow hair and skin essentials for your everyday ritual.</p>
 </div>
-<div style="max-width: 1300px; margin: 24px auto 0; display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 14px">
+<div style="justify-self: end">
+<button type="button" aria-expanded="{{filterOpen}}" onClick="{{toggleFilter}}" style="background: none; border: 0; padding: 8px 0; font-family: inherit; font-size: 12px; line-height: 12px; text-transform: uppercase; cursor: pointer; color: #000000">{{filterLabel}}</button>
+</div>
+</div>
 <sc-if value="{{filterOpen}}" hint-placeholder-val="{{false}}">
-<div role="group" aria-label="Filter by category" style="display: flex; flex-wrap: wrap; gap: 10px; margin-right: auto">
+<div role="group" aria-label="Filter by category" style="max-width: 1300px; margin: 14px auto 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px">
 <sc-for list="{{filters}}" as="f" hint-placeholder-count="4">
 <button type="button" aria-pressed="{{f.on}}" onClick="{{f.pick}}" style="height: 30px; padding: 0 20px; border: 1px solid #000000; border-radius: 0; background: {{f.bg}}; color: {{f.fg}}; font-family: inherit; font-size: 12px; cursor: pointer">{{f.label}}</button>
 </sc-for>
 </div>
 </sc-if>
-<button type="button" aria-expanded="{{filterOpen}}" onClick="{{toggleFilter}}" style="background: none; border: 0; padding: 8px 0; font-family: inherit; font-size: 12px; line-height: 12px; text-transform: uppercase; cursor: pointer; color: #000000">{{filterLabel}}</button>
-</div>
 </section>
 
 <!-- Product grid -->
-<section aria-label="Products" style="padding: 24px 24px 72px">
+<section aria-label="Products" style="padding: 16px 24px 72px">
 <div class="pgrid" style="max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 72px 60px">
 <sc-for list="{{items}}" as="p" hint-placeholder-count="12">
 <article style="display: flex; flex-direction: column; gap: 14px">
