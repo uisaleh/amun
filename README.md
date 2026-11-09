@@ -11,4 +11,5 @@ Static site for the Amun Organics redesign, hosted on Cloudflare Pages at amun.s
 `functions/api/reviews.js` is a Cloudflare Pages Function that stores customer reviews in Workers KV.
 Bind a KV namespace to this Pages project with the variable name `REVIEWS` (Settings → Bindings), then redeploy.
 Each product's reviews are stored under its own key (`p:<product>`, e.g. `p:origin-set`), so a review only shows on the product it was written for.
-To remove a review, edit that key's JSON in the KV namespace in the Cloudflare dashboard.
+Review photos are stored in the same namespace under `img:<id>` and served by `functions/api/review-photo.js`.
+To remove a review, edit that key's JSON in the KV namespace in the Cloudflare dashboard (and delete its `img:` photo keys if it had photos).

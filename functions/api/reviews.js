@@ -8,6 +8,24 @@ const PRODUCTS = new Set([
   'haircare-trio', 'haircare-duo', 'origin-set',
 ]);
 const MAX_KEEP = 500;
+const MAX_PHOTOS = 3;
+const MAX_PHOTO_BYTES = 2 * 1024 * 1024;
+
+// Decode a data URL and check it really is a JPEG, PNG or WebP image.
+function parsePhoto(dataUrl) {
+  const m = /^data:(image\/(?:jpeg|png|webp));base64,([A-Za-z0-9+/=]+)$/.exec(String(dataUrl || ''));
+  if (!m) return null;
+  let bin;
+  try { bin = atob(m[2]); } catch { return null; }
+  if (!bin.length || bin.length > MAX_PHOTO_BYTES) return null;
+  const bytes = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  const isJpeg = bytes[0] === 0xff && bytes[1] === 0xd8;
+  const isPng = bytes[0] === 0x89 && bytes[1] === 0x50 && bytes[2] === 0x4e && bytes[3] === 0x47;
+  const isWebp = bin.slice(0, 4) === 'RIFF' && bin.slice(8, 12) === 'WEBP';
+  const type = isJpeg ? 'image/jpeg' : isPng ? 'image/png' : isWebp ? 'image/webp' : null;
+  return type ? { type, bytes } : null;
+}
 
 const json = (data, status = 200) =>
   new Response(JSON.stringify(data), {
@@ -43,11 +61,29 @@ export async function onRequestPost({ request, env }) {
   if (!review.name || !review.title || !review.body) return json({ error: 'Please fill in your name, a title and your review.' }, 400);
   if (!(review.rating >= 1 && review.rating <= 5)) return json({ error: 'Please choose a star rating.' }, 400);
 
+  // Optional photos: up to 3 images, sent as data URLs (the page shrinks them first).
+  const rawPhotos = Array.isArray(body.photos) ? body.photos.slice(0, MAX_PHOTOS) : [];
+  const photos = [];
+  for (const p of rawPhotos) {
+    const parsed = parsePhoto(p);
+    if (!parsed) return json({ error: 'One of your photos could not be uploaded. Please use a JPG, PNG or WebP under 2 MB.' }, 400);
+    photos.push(parsed);
+  }
+
   // Light rate limit: one review per visitor per product per minute.
   const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
   const rlKey = 'rl:' + product + ':' + ip;
   if (await env.REVIEWS.get(rlKey)) return json({ error: 'Thanks! Please wait a minute before posting another review.' }, 429);
   await env.REVIEWS.put(rlKey, '1', { expirationTtl: 60 });
+
+  if (photos.length) {
+    review.photos = [];
+    for (const ph of photos) {
+      const id = crypto.randomUUID();
+      await env.REVIEWS.put('img:' + id, ph.bytes, { metadata: { type: ph.type, product } });
+      review.photos.push('/api/review-photo?id=' + id);
+    }
+  }
 
   const key = 'p:' + product;
   const list = (await env.REVIEWS.get(key, 'json')) || [];

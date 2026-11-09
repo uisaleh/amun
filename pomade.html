@@ -413,6 +413,21 @@ footer>img[aria-hidden="true"]{height:200px!important;top:auto!important;bottom:
 <input name="rvtitle" type="text" required placeholder="Give your review a title" style="height: 48px; padding: 0 14px; border: 1px solid #000000; border-radius: 0; font-family: inherit; font-size: 14px; box-sizing: border-box"></label>
 <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px">Review
 <textarea name="rvbody" required rows="5" placeholder="Share your experience" style="padding: 14px; border: 1px solid #000000; border-radius: 0; font-family: inherit; font-size: 14px; line-height: 19.6px; resize: vertical; box-sizing: border-box"></textarea></label>
+<div role="group" aria-labelledby="rvph-l" style="display: flex; flex-direction: column; gap: 8px; font-size: 12px">
+<span id="rvph-l">Photos (optional, up to 3)</span>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<sc-for list="{{rvPhotos}}" as="ph" hint-placeholder-count="0">
+<div style="position: relative; width: 80px; height: 80px">
+<img src="{{ph.src}}" alt="Your photo {{ph.n}}" style="display: block; width: 80px; height: 80px; object-fit: cover; background: #efefea">
+<button type="button" aria-label="Remove photo {{ph.n}}" onClick="{{ph.remove}}" style="position: absolute; top: 4px; right: 4px; width: 26px; height: 26px; padding: 0; display: flex; align-items: center; justify-content: center; background: #ffffff; border: 1px solid #000000; border-radius: 0; cursor: pointer"><svg aria-hidden="true" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#000" stroke-width="1.2"><path d="M1 1l8 8M9 1l-8 8"></path></svg></button>
+</div>
+</sc-for>
+<sc-if value="{{rvCanAddPhoto}}" hint-placeholder-val="{{true}}">
+<label style="position: relative; width: 80px; height: 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; border: 1px dashed #000000; font-size: 11px; line-height: 13px; text-align: center; cursor: pointer; box-sizing: border-box"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#000" stroke-width="1"><path d="M8 1v14M1 8h14"></path></svg>Add photo<input type="file" name="rvphotos" accept="image/jpeg,image/png,image/webp" multiple onChange="{{pickPhotos}}" style="position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer"></label>
+</sc-if>
+<sc-if value="{{rvPhotoBusy}}" hint-placeholder-val="{{false}}"><span>Preparing photo…</span></sc-if>
+</div>
+</div>
 <div style="display: flex; gap: 14px">
 <button type="submit" class="atc-dark" style="height: 50px; padding: 0 32px; background: #585128; color: #ffffff; border: 1px solid #585128; border-radius: 0; font-family: inherit; font-size: 14px; cursor: pointer">{{rvSubmitLabel}}</button>
 <button type="button" onClick="{{toggleReviewForm}}" style="height: 50px; padding: 0 24px; background: #ffffff; color: #000000; border: 1px solid #000000; border-radius: 0; font-family: inherit; font-size: 14px; cursor: pointer">Cancel</button>
@@ -425,6 +440,13 @@ footer>img[aria-hidden="true"]{height:200px!important;top:auto!important;bottom:
 <div style="flex: 3 1 480px; display: flex; flex-direction: column; gap: 8px">
 <h3 style="margin: 0; font-size: 14px; line-height: 19.6px; font-weight: 400">{{rv.title}}</h3>
 <p style="margin: 0; font-size: 14px; line-height: 19.6px">{{rv.body}}</p>
+<sc-if value="{{rv.hasPhotos}}" hint-placeholder-val="{{false}}">
+<div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px">
+<sc-for list="{{rv.photoList}}" as="pp" hint-placeholder-count="2">
+<a href="{{pp.src}}" target="_blank" rel="noopener" aria-label="Open photo from {{rv.name}}" style="display: block"><img src="{{pp.src}}" alt="Photo from {{rv.name}}" loading="lazy" style="display: block; width: 96px; height: 96px; object-fit: cover; background: #efefea"></a>
+</sc-for>
+</div>
+</sc-if>
 </div>
 </article>
 </sc-for>
@@ -515,7 +537,16 @@ footer>img[aria-hidden="true"]{height:200px!important;top:auto!important;bottom:
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":6000}}'>
 class Component extends DCLogic {
-reviewKey() { return 'pomade'; }
+shrinkPhoto(file) {
+    return new Promise((resolve) => {
+      if (!file || !/^image\//.test(file.type)) return resolve(null);
+      const url = URL.createObjectURL(file); const img = new Image();
+      img.onload = () => { const max = 1280; const k = Math.min(1, max / Math.max(img.naturalWidth, img.naturalHeight)); const c = document.createElement('canvas'); c.width = Math.round(img.naturalWidth * k); c.height = Math.round(img.naturalHeight * k); c.getContext('2d').drawImage(img, 0, 0, c.width, c.height); URL.revokeObjectURL(url); resolve(c.toDataURL('image/jpeg', 0.82)); };
+      img.onerror = () => { URL.revokeObjectURL(url); resolve(null); };
+      img.src = url;
+    });
+  }
+  reviewKey() { return 'pomade'; }
 componentDidMount() { if (typeof fetch === 'undefined') return; fetch('/api/reviews?product=' + this.reviewKey()).then((r) => r.ok ? r.json() : null).then((d) => { if (d && Array.isArray(d.reviews)) this.setState({ liveReviews: d.reviews }); }).catch(() => {}); }
 
 renderVals() { const v = this.pageVals(); return this.respVals(Object.assign({ cartScale: 'scale(1)' }, v, this.shopVals())); }
@@ -618,15 +649,19 @@ v[k + 'Prev'] = go(-1); v[k + 'Next'] = go(1); };
 slider('collection', 3, 24); slider('recs', 3, 24); slider('ig', 5, 4);
 const st = this.state; const mine = (st.liveReviews || []).concat(st.myReviews || []); const baseRev = v.reviews || [];
 const starStr = (n) => '★★★★★'.slice(0, n) + '☆☆☆☆☆'.slice(0, 5 - n);
-const revAll = mine.map((r) => Object.assign({}, r, { stars: starStr(r.rating), starsLabel: r.rating + ' out of 5 stars' })).concat(baseRev.map((r) => Object.assign({ stars: '', starsLabel: '' }, r)));
+const revAll = mine.map((r) => Object.assign({}, r, { stars: starStr(r.rating), starsLabel: r.rating + ' out of 5 stars', hasPhotos: !!(r.photos && r.photos.length), photoList: (r.photos || []).map((src) => ({ src: src })) })).concat(baseRev.map((r) => Object.assign({ stars: '', starsLabel: '' }, r)));
 const revShown = st.revShown || 4;
 const baseAvg = 5.0, baseN = baseRev.length; const sum = baseAvg * baseN + mine.reduce((a, r) => a + r.rating, 0);
 v.revCount = revAll.length; v.revAvg = revAll.length ? (sum / revAll.length).toFixed(1) : '0.0'; v.noReviews = revAll.length === 0; v.revSummary = revAll.length ? '★ ' + v.revAvg + ' · Read ' + revAll.length + (revAll.length === 1 ? ' Review' : ' Reviews') : 'Be the first to review this product';
 v.reviews = revAll.slice(0, revShown); v.moreReviews = revAll.length > revShown; v.loadReviews = () => this.setState({ revShown: revShown + 4 });
-const pickN = st.rvRating || 5; v.formOpen = !!st.rvOpen; v.rvError = st.rvError || ''; v.rvSubmitLabel = st.rvSending ? 'Submitting…' : 'Submit Review'; v.formLabel = st.rvOpen ? 'Close' : 'Write A Review'; v.revThanks = !!st.rvThanks;
+const pickN = st.rvRating || 5; v.formOpen = !!st.rvOpen; const photos = st.rvPhotos || [];
+    v.rvPhotos = photos.map((p, i) => ({ src: p, n: i + 1, remove: () => this.setState({ rvPhotos: photos.filter((x, j) => j !== i) }) }));
+    v.rvCanAddPhoto = photos.length < 3 && !st.rvPhotoBusy;
+    v.rvPhotoBusy = !!st.rvPhotoBusy;
+    v.pickPhotos = (e) => { const input = e.target; const files = Array.prototype.slice.call(input.files || [], 0, 3 - photos.length); input.value = ''; if (!files.length) return; this.setState({ rvPhotoBusy: true, rvError: '' }); Promise.all(files.map((f) => this.shrinkPhoto(f))).then((out) => { const ok = out.filter(Boolean); this.setState({ rvPhotos: (this.state.rvPhotos || []).concat(ok).slice(0, 3), rvPhotoBusy: false, rvError: ok.length < files.length ? 'One photo could not be read. Please try a JPG or PNG.' : '' }); }); }; v.rvError = st.rvError || ''; v.rvSubmitLabel = st.rvSending ? 'Submitting…' : 'Submit Review'; v.formLabel = st.rvOpen ? 'Close' : 'Write A Review'; v.revThanks = !!st.rvThanks;
 v.toggleReviewForm = () => this.setState({ rvOpen: !st.rvOpen, rvThanks: false });
 v.starPicks = [1, 2, 3, 4, 5].map((n) => ({ on: n === pickN, label: n + ' star' + (n > 1 ? 's' : ''), char: n <= pickN ? '★' : '☆', pick: () => this.setState({ rvRating: n }) }));
-v.submitReview = (e) => { e.preventDefault(); const el = e.target.elements; const r = { name: el.rvname.value.trim(), title: el.rvtitle.value.trim(), body: el.rvbody.value.trim(), rating: pickN }; if (!r.name || !r.title || !r.body || st.rvSending) return; const hp = el.rvweb ? el.rvweb.value : ''; const local = () => this.setState({ myReviews: [r].concat(st.myReviews || []), rvOpen: false, rvThanks: true, rvRating: 5, rvSending: false }); this.setState({ rvSending: true, rvError: '' }); fetch('/api/reviews', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.assign({ product: this.reviewKey(), website: hp }, r)) }).then((res) => res.json().then((d) => ({ ok: res.ok, d: d }))).then((x) => { if (x.ok && x.d && Array.isArray(x.d.reviews)) { this.setState({ liveReviews: x.d.reviews, rvOpen: false, rvThanks: true, rvRating: 5, rvSending: false }); } else if (x.d && x.d.error && x.d.configured !== false) { this.setState({ rvSending: false, rvError: x.d.error }); } else { local(); } }).catch(local); };
+v.submitReview = (e) => { e.preventDefault(); const el = e.target.elements; const r = { name: el.rvname.value.trim(), title: el.rvtitle.value.trim(), body: el.rvbody.value.trim(), rating: pickN, photos: (st.rvPhotos || []).slice() }; if (!r.name || !r.title || !r.body || st.rvSending) return; const hp = el.rvweb ? el.rvweb.value : ''; const local = () => this.setState({ myReviews: [r].concat(st.myReviews || []), rvOpen: false, rvThanks: true, rvRating: 5, rvSending: false, rvPhotos: [] }); this.setState({ rvSending: true, rvError: '' }); fetch('/api/reviews', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.assign({ product: this.reviewKey(), website: hp }, r)) }).then((res) => res.json().then((d) => ({ ok: res.ok, d: d }))).then((x) => { if (x.ok && x.d && Array.isArray(x.d.reviews)) { this.setState({ liveReviews: x.d.reviews, rvOpen: false, rvThanks: true, rvRating: 5, rvSending: false, rvPhotos: [] }); } else if (x.d && x.d.error && x.d.configured !== false) { this.setState({ rvSending: false, rvError: x.d.error }); } else { local(); } }).catch(local); };
 const descOpen = !!this.state.descOpen; v.descOpen = descOpen; v.descMax = descOpen ? 'none' : '58.8px'; v.descLabel = descOpen ? 'Read less' : 'Read more'; v.toggleDesc = () => this.setState({ descOpen: !descOpen });
 return v;
 }
