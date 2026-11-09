@@ -14,7 +14,7 @@
 <style>
 .hdr-burger{display:none}
 @media (max-width: 860px){
-.hdr{flex-wrap:nowrap!important;min-height:64px!important;gap:12px!important}
+.hdr{flex-wrap:nowrap!important;min-height:56px!important;gap:12px!important}
 .hdr-nav,.hdr-text{display:none!important}
 .hdr-burger{display:inline-flex!important}
 .hdr-logo{flex:1 1 auto!important;justify-content:center}
@@ -94,7 +94,7 @@ footer>img[aria-hidden="true"]{height:200px!important;top:auto!important;bottom:
 
 <!-- Header -->
 <header style="position: sticky; top: 0; z-index: 50; border-bottom: 1px solid rgba(18, 18, 18, 0.15); padding: 0 24px; background: #9FA383">
-<div class="hdr" style="min-height: 90px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px">
+<div class="hdr" style="min-height: 76px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px">
 <button type="button" class="hdr-burger" aria-label="Open menu" aria-expanded="{{menuOpen}}" onClick="{{toggleMenu}}" style="display: none; flex: 0 0 auto; width: 40px; height: 40px; padding: 0; background: none; border: 0; cursor: pointer; align-items: center; justify-content: flex-start"><svg aria-hidden="true" width="22" height="16" viewBox="0 0 22 16" fill="none" stroke="#121212" stroke-width="1.2"><path d="M0 1h22M0 8h22M0 15h22"></path></svg></button>
 <nav class="hdr-nav" aria-label="Primary" style="display: flex; flex-wrap: wrap; gap: 24px; font-size: 14px; line-height: 14px; flex: 1 1 300px">
 <a href="/shop">Shop</a>
@@ -107,7 +107,7 @@ footer>img[aria-hidden="true"]{height:200px!important;top:auto!important;bottom:
 <a href="/blog" class="hdr-text" aria-current="page">Blog</a>
 <button type="button" aria-label="Search" onClick="{{openSearch}}" style="padding: 0; background: none; border: 0; cursor: pointer; display: inline-flex; color: #000000"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#000" stroke-width="1"><circle cx="7.5" cy="7.5" r="6"></circle><path d="M12 12l5 5"></path></svg></button>
 <a href="/account" aria-label="Account"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#000" stroke-width="1"><circle cx="9" cy="5.5" r="4"></circle><path d="M1.5 17.5c0-4 3.4-6.5 7.5-6.5s7.5 2.5 7.5 6.5"></path></svg></a>
-<button type="button" aria-label="Cart, {{cart}} items" onClick="{{openCart}}" data-cart-icon="true" style="position: relative; padding: 0; background: none; border: 0; cursor: pointer; display: inline-flex; transform: {{cartScale}}; transition: transform 160ms ease"><svg aria-hidden="true" width="18" height="20" viewBox="0 0 18 20" fill="none" stroke="#000" stroke-width="1"><rect x="1" y="5.5" width="16" height="14"></rect><path d="M5.5 5.5V4a3.5 3.5 0 0 1 7 0v1.5"></path></svg><span style="position: absolute; left: 0; right: 0; top: 9px; text-align: center; font-size: 8px; line-height: 11.2px">{{cart}}</span></button>
+<button type="button" aria-label="Cart, {{cart}} items" onClick="{{openCart}}" data-cart-icon="true" style="position: relative; padding: 0; background: none; border: 0; cursor: pointer; display: inline-flex; transform: {{cartScale}}; transition: transform 160ms ease"><svg aria-hidden="true" width="18" height="20" viewBox="0 0 18 20" fill="none" stroke="#000" stroke-width="1"><rect x="1" y="5.5" width="16" height="14"></rect><path d="M5.5 5.5V4a3.5 3.5 0 0 1 7 0v1.5"></path></svg><span style="position: absolute; left: 1px; right: 1px; top: 6px; height: 13px; display: flex; align-items: center; justify-content: center; font-size: 9px; line-height: 1">{{cart}}</span></button>
 </div>
 </div>
 </header>

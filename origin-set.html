@@ -14,7 +14,7 @@
 <style>
 .hdr-burger{display:none}
 .pgrid article p,.sl-card p{display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}@media (max-width: 860px){.gal{flex:1 1 100%!important;align-items:stretch!important}
-.hdr{flex-wrap:nowrap!important;min-height:64px!important;gap:12px!important}
+.hdr{flex-wrap:nowrap!important;min-height:56px!important;gap:12px!important}
 .hdr-nav,.hdr-text{display:none!important}
 .hdr-burger{display:inline-flex!important}
 .hdr-logo{flex:1 1 auto!important;justify-content:center}
@@ -98,7 +98,7 @@ footer>img[aria-hidden="true"]{height:200px!important;top:auto!important;bottom:
 
 <!-- Header -->
 <header style="position: sticky; top: 0; z-index: 50; border-bottom: 1px solid rgba(18, 18, 18, 0.15); padding: 0 24px; background: #9FA383">
-<div class="hdr" style="min-height: 90px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px">
+<div class="hdr" style="min-height: 76px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px">
 <button type="button" class="hdr-burger" aria-label="Open menu" aria-expanded="{{menuOpen}}" onClick="{{toggleMenu}}" style="display: none; flex: 0 0 auto; width: 40px; height: 40px; padding: 0; background: none; border: 0; cursor: pointer; align-items: center; justify-content: flex-start"><svg aria-hidden="true" width="22" height="16" viewBox="0 0 22 16" fill="none" stroke="#121212" stroke-width="1.2"><path d="M0 1h22M0 8h22M0 15h22"></path></svg></button>
 <nav class="hdr-nav" aria-label="Primary" style="display: flex; flex-wrap: wrap; gap: 24px; font-size: 14px; line-height: 14px; flex: 1 1 300px">
 <a href="/shop">Shop</a>
@@ -111,7 +111,7 @@ footer>img[aria-hidden="true"]{height:200px!important;top:auto!important;bottom:
 <a href="/blog" class="hdr-text">Blog</a>
 <button type="button" aria-label="Search" onClick="{{openSearch}}" style="padding: 0; background: none; border: 0; cursor: pointer; display: inline-flex; color: #000000"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#000" stroke-width="1"><circle cx="7.5" cy="7.5" r="6"></circle><path d="M12 12l5 5"></path></svg></button>
 <a href="/account" aria-label="Account"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#000" stroke-width="1"><circle cx="9" cy="5.5" r="4"></circle><path d="M1.5 17.5c0-4 3.4-6.5 7.5-6.5s7.5 2.5 7.5 6.5"></path></svg></a>
-<button type="button" aria-label="Cart, {{cart}} items" onClick="{{openCart}}" data-cart-icon="true" style="position: relative; padding: 0; background: none; border: 0; cursor: pointer; display: inline-flex; transform: {{cartScale}}; transition: transform 160ms ease"><svg aria-hidden="true" width="18" height="20" viewBox="0 0 18 20" fill="none" stroke="#000" stroke-width="1"><rect x="1" y="5.5" width="16" height="14"></rect><path d="M5.5 5.5V4a3.5 3.5 0 0 1 7 0v1.5"></path></svg><span style="position: absolute; left: 0; right: 0; top: 9px; text-align: center; font-size: 8px; line-height: 11.2px">{{cart}}</span></button>
+<button type="button" aria-label="Cart, {{cart}} items" onClick="{{openCart}}" data-cart-icon="true" style="position: relative; padding: 0; background: none; border: 0; cursor: pointer; display: inline-flex; transform: {{cartScale}}; transition: transform 160ms ease"><svg aria-hidden="true" width="18" height="20" viewBox="0 0 18 20" fill="none" stroke="#000" stroke-width="1"><rect x="1" y="5.5" width="16" height="14"></rect><path d="M5.5 5.5V4a3.5 3.5 0 0 1 7 0v1.5"></path></svg><span style="position: absolute; left: 1px; right: 1px; top: 6px; height: 13px; display: flex; align-items: center; justify-content: center; font-size: 9px; line-height: 1">{{cart}}</span></button>
 </div>
 </div>
 </header>
@@ -257,7 +257,7 @@ footer>img[aria-hidden="true"]{height:200px!important;top:auto!important;bottom:
 <p style="margin: 0; font-size: 14px; line-height: 19.6px">A streamlined yet powerful duo for the modern man seeking healthy, intentional hair care. Our nutrient-rich, tallow-infused shampoo deeply cleanses the scalp, supports hair growth, and restores the natural balance of your hair without stripping essential oils. It’s followed by our Nature’s Tallow Pomade—a unique, ultra-clean formula that provides a matte, light-to-medium hold without stickiness or residue. Crafted to create touchable texture, shape, and definition, this pomade nourishes the scalp and strands while keeping your style effortlessly intact. Together, they deliver a daily ritual rooted in simplicity, performance, and the power of the earth.</p>
 </div>
 <button type="button" onClick="{{toggleDesc}}" aria-expanded="{{descOpen}}" style="align-self: flex-start; margin-top: -6px; padding: 0; background: none; border: 0; font-family: inherit; font-size: 14px; line-height: 19.6px; color: #000000; text-decoration: underline; cursor: pointer">{{descLabel}}</button>
-<a href="#reviews" style="font-size: 14px; text-decoration: underline; align-self: flex-start">Be the first to review this product</a>
+<a href="#reviews" style="font-size: 14px; text-decoration: underline; align-self: flex-start">{{revSummary}}</a>
 
 <fieldset style="border: 0; margin: 4px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 24px; font-size: 12px; line-height: 16.8px">
 <legend style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Purchase option</legend>
@@ -391,6 +391,8 @@ footer>img[aria-hidden="true"]{height:200px!important;top:auto!important;bottom:
 </sc-if>
 <sc-if value="{{formOpen}}" hint-placeholder-val="{{false}}">
 <form onSubmit="{{submitReview}}" style="display: flex; flex-direction: column; gap: 18px; border: 1px solid #000000; padding: 24px">
+<div aria-hidden="true" style="position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden"><label>Leave this field empty<input type="text" name="rvweb" tabindex="-1" autocomplete="off"></label></div>
+<sc-if value="{{rvError}}" hint-placeholder-val="{{false}}"><p role="alert" style="margin: 0; font-size: 14px; line-height: 20px; color: #8a1c1c">{{rvError}}</p></sc-if>
 <h3 style="margin: 0; font-size: 18px; line-height: 25.2px; font-weight: 400">Write A Review</h3>
 <div role="radiogroup" aria-label="Your rating" style="display: flex; align-items: center; gap: 4px">
 <span style="font-size: 12px; margin-right: 10px">Rating</span>
@@ -405,7 +407,7 @@ footer>img[aria-hidden="true"]{height:200px!important;top:auto!important;bottom:
 <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px">Review
 <textarea name="rvbody" required rows="5" placeholder="Share your experience" style="padding: 14px; border: 1px solid #000000; border-radius: 0; font-family: inherit; font-size: 14px; line-height: 19.6px; resize: vertical; box-sizing: border-box"></textarea></label>
 <div style="display: flex; gap: 14px">
-<button type="submit" class="atc-dark" style="height: 50px; padding: 0 32px; background: #585128; color: #ffffff; border: 1px solid #585128; border-radius: 0; font-family: inherit; font-size: 14px; cursor: pointer">Submit Review</button>
+<button type="submit" class="atc-dark" style="height: 50px; padding: 0 32px; background: #585128; color: #ffffff; border: 1px solid #585128; border-radius: 0; font-family: inherit; font-size: 14px; cursor: pointer">{{rvSubmitLabel}}</button>
 <button type="button" onClick="{{toggleReviewForm}}" style="height: 50px; padding: 0 24px; background: #ffffff; color: #000000; border: 1px solid #000000; border-radius: 0; font-family: inherit; font-size: 14px; cursor: pointer">Cancel</button>
 </div>
 </form>
@@ -506,6 +508,9 @@ footer>img[aria-hidden="true"]{height:200px!important;top:auto!important;bottom:
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":6000}}'>
 class Component extends DCLogic {
+reviewKey() { return 'origin-set'; }
+componentDidMount() { if (typeof fetch === 'undefined') return; fetch('/api/reviews?product=' + this.reviewKey()).then((r) => r.ok ? r.json() : null).then((d) => { if (d && Array.isArray(d.reviews)) this.setState({ liveReviews: d.reviews }); }).catch(() => {}); }
+
 renderVals() { const v = this.pageVals(); return this.respVals(Object.assign({ cartScale: 'scale(1)' }, v, this.shopVals())); }
 respVals(v) {
 if (typeof window !== 'undefined' && !this._rsz) { this._rsz = true; window.addEventListener('resize', () => this.setState({ vw: window.innerWidth })); }
@@ -604,17 +609,17 @@ if (vw0 < 640 && k !== 'ig') { v[k + 'Basis'] = '76%'; v[k + 'Tx'] = 'translateX
 const go = (d) => () => { const ni = i + d; this.setState({ slAnim: true, sl: Object.assign({}, this.state.sl || {}, { [k]: ni }) }); setTimeout(() => { const fix = n * 2 + ((((ni - n * 2) % n) + n) % n); if (fix !== ni) this.setState({ slAnim: false, sl: Object.assign({}, this.state.sl || {}, { [k]: fix }) }); }, 480); };
 v[k + 'Prev'] = go(-1); v[k + 'Next'] = go(1); };
 slider('collection', 3, 24); slider('recs', 3, 24); slider('ig', 5, 4);
-const st = this.state; const mine = st.myReviews || []; const baseRev = v.reviews || [];
+const st = this.state; const mine = (st.liveReviews || []).concat(st.myReviews || []); const baseRev = v.reviews || [];
 const starStr = (n) => '★★★★★'.slice(0, n) + '☆☆☆☆☆'.slice(0, 5 - n);
 const revAll = mine.map((r) => Object.assign({}, r, { stars: starStr(r.rating), starsLabel: r.rating + ' out of 5 stars' })).concat(baseRev.map((r) => Object.assign({ stars: '', starsLabel: '' }, r)));
 const revShown = st.revShown || 4;
 const baseAvg = 0.0, baseN = baseRev.length; const sum = baseAvg * baseN + mine.reduce((a, r) => a + r.rating, 0);
-v.revCount = revAll.length; v.revAvg = revAll.length ? (sum / revAll.length).toFixed(1) : '0.0'; v.noReviews = revAll.length === 0;
+v.revCount = revAll.length; v.revAvg = revAll.length ? (sum / revAll.length).toFixed(1) : '0.0'; v.noReviews = revAll.length === 0; v.revSummary = revAll.length ? '★ ' + v.revAvg + ' · Read ' + revAll.length + (revAll.length === 1 ? ' Review' : ' Reviews') : 'Be the first to review this product';
 v.reviews = revAll.slice(0, revShown); v.moreReviews = revAll.length > revShown; v.loadReviews = () => this.setState({ revShown: revShown + 4 });
-const pickN = st.rvRating || 5; v.formOpen = !!st.rvOpen; v.formLabel = st.rvOpen ? 'Close' : 'Write A Review'; v.revThanks = !!st.rvThanks;
+const pickN = st.rvRating || 5; v.formOpen = !!st.rvOpen; v.rvError = st.rvError || ''; v.rvSubmitLabel = st.rvSending ? 'Submitting…' : 'Submit Review'; v.formLabel = st.rvOpen ? 'Close' : 'Write A Review'; v.revThanks = !!st.rvThanks;
 v.toggleReviewForm = () => this.setState({ rvOpen: !st.rvOpen, rvThanks: false });
 v.starPicks = [1, 2, 3, 4, 5].map((n) => ({ on: n === pickN, label: n + ' star' + (n > 1 ? 's' : ''), char: n <= pickN ? '★' : '☆', pick: () => this.setState({ rvRating: n }) }));
-v.submitReview = (e) => { e.preventDefault(); const el = e.target.elements; const r = { name: el.rvname.value.trim(), title: el.rvtitle.value.trim(), body: el.rvbody.value.trim(), rating: pickN }; if (!r.name || !r.title || !r.body) return; this.setState({ myReviews: [r].concat(mine), rvOpen: false, rvThanks: true, rvRating: 5 }); };
+v.submitReview = (e) => { e.preventDefault(); const el = e.target.elements; const r = { name: el.rvname.value.trim(), title: el.rvtitle.value.trim(), body: el.rvbody.value.trim(), rating: pickN }; if (!r.name || !r.title || !r.body || st.rvSending) return; const hp = el.rvweb ? el.rvweb.value : ''; const local = () => this.setState({ myReviews: [r].concat(st.myReviews || []), rvOpen: false, rvThanks: true, rvRating: 5, rvSending: false }); this.setState({ rvSending: true, rvError: '' }); fetch('/api/reviews', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.assign({ product: this.reviewKey(), website: hp }, r)) }).then((res) => res.json().then((d) => ({ ok: res.ok, d: d }))).then((x) => { if (x.ok && x.d && Array.isArray(x.d.reviews)) { this.setState({ liveReviews: x.d.reviews, rvOpen: false, rvThanks: true, rvRating: 5, rvSending: false }); } else if (x.d && x.d.error && x.d.configured !== false) { this.setState({ rvSending: false, rvError: x.d.error }); } else { local(); } }).catch(local); };
 const descOpen = !!this.state.descOpen; v.descOpen = descOpen; v.descMax = descOpen ? 'none' : '58.8px'; v.descLabel = descOpen ? 'Read less' : 'Read more'; v.toggleDesc = () => this.setState({ descOpen: !descOpen });
 return v;
 }
