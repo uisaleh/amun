@@ -346,23 +346,7 @@ footer>img[aria-hidden="true"]{height:200px!important;top:auto!important;bottom:
 </section>
 
 <!-- 2. Amun on You -->
-<section aria-labelledby="onyou-h" style="padding: 0 24px 72px">
-<h2 id="onyou-h" style="margin: 0 0 42px; font-size: 23px; line-height: 23px; font-weight: 400; text-align: center">Amun on You</h2>
-<div class="vid-wrap" style="max-width: 1240px; margin: 0 auto; display: flex; align-items: center; gap: 14px">
-<button type="button" aria-label="Previous videos" onClick="{{vidPrev}}" style="flex: 0 0 auto; width: 44px; height: 44px; background: none; border: 0; cursor: pointer; opacity: {{vidPrevOp}}"><svg aria-hidden="true" width="14" height="28" viewBox="0 0 14 28" fill="none" stroke="#000" stroke-width="1"><path d="M13 1L1 14l12 13"></path></svg></button>
-<div class="vid-view" style="flex: 1 1 auto; min-width: 0; overflow: hidden">
-<div class="vid-track" style="display: flex; gap: 4px; transition: transform 300ms ease; transform: translateX(-{{vidShift}}px)">
-<sc-for list="{{videos}}" as="v" hint-placeholder-count="5">
-<figure class="vid-item" style="flex: 0 0 290px; margin: 0; display: flex; flex-direction: column; gap: 10px">
-<video src="{{v.src}}" aria-label="{{v.label}}" autoPlay="{{v.auto}}" controls muted loop playsinline preload="{{v.preload}}" style="display: block; width: 100%; aspect-ratio: 9 / 16; object-fit: cover; background: #000000"></video>
-<figcaption style="font-size: 12px; line-height: 16.8px">{{v.label}}</figcaption>
-</figure>
-</sc-for>
-</div>
-</div>
-<button type="button" aria-label="Next videos" onClick="{{vidNext}}" style="flex: 0 0 auto; width: 44px; height: 44px; background: none; border: 0; cursor: pointer; opacity: {{vidNextOp}}"><svg aria-hidden="true" width="14" height="28" viewBox="0 0 14 28" fill="none" stroke="#000" stroke-width="1"><path d="M1 1l12 13L1 27"></path></svg></button>
-</div>
-</section>
+
 
 <!-- 3. Key ingredients -->
 <section aria-labelledby="ing-h" style="position: relative; overflow: hidden; background: #2b2b22; color: #ffffff; padding: 96px 24px">
@@ -390,6 +374,24 @@ footer>img[aria-hidden="true"]{height:200px!important;top:auto!important;bottom:
 </div>
 </div>
 </div>
+</div>
+</section>
+
+<section aria-labelledby="onyou-h" style="padding: 72px 24px 72px">
+<h2 id="onyou-h" style="margin: 0 0 42px; font-size: 23px; line-height: 23px; font-weight: 400; text-align: center">Amun on You</h2>
+<div class="vid-wrap" style="max-width: 1240px; margin: 0 auto; display: flex; align-items: center; gap: 14px">
+<button type="button" aria-label="Previous videos" onClick="{{vidPrev}}" style="flex: 0 0 auto; width: 44px; height: 44px; background: none; border: 0; cursor: pointer; opacity: {{vidPrevOp}}"><svg aria-hidden="true" width="14" height="28" viewBox="0 0 14 28" fill="none" stroke="#000" stroke-width="1"><path d="M13 1L1 14l12 13"></path></svg></button>
+<div class="vid-view" style="flex: 1 1 auto; min-width: 0; overflow: hidden">
+<div class="vid-track" style="display: flex; gap: 4px; transition: transform 300ms ease; transform: translateX(-{{vidShift}}px)">
+<sc-for list="{{videos}}" as="v" hint-placeholder-count="5">
+<figure class="vid-item" style="flex: 0 0 290px; margin: 0; display: flex; flex-direction: column; gap: 10px">
+<video src="{{v.src}}" aria-label="{{v.label}}" autoPlay="{{v.auto}}" controls muted loop playsinline preload="{{v.preload}}" style="display: block; width: 100%; aspect-ratio: 9 / 16; object-fit: cover; background: #000000"></video>
+<figcaption style="font-size: 12px; line-height: 16.8px">{{v.label}}</figcaption>
+</figure>
+</sc-for>
+</div>
+</div>
+<button type="button" aria-label="Next videos" onClick="{{vidNext}}" style="flex: 0 0 auto; width: 44px; height: 44px; background: none; border: 0; cursor: pointer; opacity: {{vidNextOp}}"><svg aria-hidden="true" width="14" height="28" viewBox="0 0 14 28" fill="none" stroke="#000" stroke-width="1"><path d="M1 1l12 13L1 27"></path></svg></button>
 </div>
 </section>
 
