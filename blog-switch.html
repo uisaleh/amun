@@ -13,7 +13,7 @@
 <helmet>
 <style>
 .hdr-burger{display:none}
-@media (max-width: 860px){
+@media (max-width: 860px){.pop-img{flex-basis:100%!important;min-height:0!important;height:180px!important}.pop-body{padding:28px 24px 24px!important;gap:12px!important}.pop-body h2{font-size:24px!important;line-height:30px!important}
 .hdr{flex-wrap:nowrap!important;min-height:56px!important;gap:12px!important}
 .hdr-nav,.hdr-text{display:none!important}
 .hdr-burger{display:inline-flex!important}
@@ -165,11 +165,40 @@ footer>img[aria-hidden="true"]{height:200px!important;top:auto!important;bottom:
 </div>
 </sc-if>
 
+<!-- First-visit 10% popup -->
+<sc-if value="{{popupOpen}}" hint-placeholder-val="{{false}}">
+<div onClick="{{popBackdrop}}" onKeyDown="{{popKey}}" style="position: fixed; inset: 0; z-index: 120; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(18, 18, 18, 0.55)">
+<div role="dialog" aria-modal="true" aria-labelledby="pop-h" style="position: relative; width: 100%; max-width: 760px; max-height: calc(100vh - 32px); overflow: auto; display: flex; flex-wrap: wrap; background: #FEF9F6; color: #121212; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3)">
+<img class="pop-img" src="/assets/fb28d4cdcca288132289391ceb758d89.jpg" alt="" style="flex: 1 1 300px; min-width: 0; width: 100%; min-height: 420px; object-fit: cover; object-position: 30% center; display: block">
+<div class="pop-body" style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; justify-content: center; gap: 16px; padding: 48px 36px; box-sizing: border-box">
+<img src="/assets/78eb905abf9793cef1a556f0b494ba4b.svg" alt="" aria-hidden="true" width="30" height="32" style="display: block; width: 30px; height: 32px; filter: brightness(0)">
+<h2 id="pop-h" style="margin: 0; font-size: 28px; line-height: 34px; font-weight: 400">Take 10% Off Your First Order</h2>
+<sc-if value="{{nlNotDone}}" hint-placeholder-val="{{true}}">
+<p style="margin: 0; font-size: 14px; line-height: 20px">Join the Amun list for new formulas, rituals and launches — and get 10% off your first order.</p>
+<form onSubmit="{{popSubmit}}" novalidate style="display: flex; flex-direction: column; gap: 10px; margin: 0">
+<label for="pop-email" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Email address</label>
+<input id="pop-email" name="email" type="email" autocomplete="email" placeholder="Enter your email" style="height: 48px; padding: 0 14px; border: 1px solid #121212; border-radius: 0; background: #ffffff; color: #121212; font-family: inherit; font-size: 14px; box-sizing: border-box">
+<sc-if value="{{popError}}" hint-placeholder-val="{{false}}"><p role="alert" style="margin: 0; font-size: 12px; line-height: 16.8px; color: #8a1c1c">{{popError}}</p></sc-if>
+<button type="submit" style="height: 48px; background: #585128; color: #ffffff; border: 1px solid #585128; border-radius: 0; font-family: inherit; font-size: 14px; cursor: pointer">Get My 10% Off</button>
+</form>
+<button type="button" onClick="{{closePopup}}" style="align-self: flex-start; padding: 4px 0; background: none; border: 0; color: #121212; font-family: inherit; font-size: 12px; text-decoration: underline; cursor: pointer">No thanks</button>
+</sc-if>
+<sc-if value="{{nlDone}}" hint-placeholder-val="{{false}}">
+<p role="status" style="margin: 0; font-size: 14px; line-height: 20px">Welcome to Amun. Your code is ready — we’ve applied it to your cart.</p>
+<div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap"><span style="display: inline-flex; align-items: center; height: 48px; padding: 0 20px; border: 1px dashed #121212; font-size: 18px; letter-spacing: 2px">{{couponCode}}</span><button type="button" onClick="{{copyCode}}" style="height: 48px; padding: 0 18px; background: #121212; color: #ffffff; border: 1px solid #121212; border-radius: 0; font-family: inherit; font-size: 13px; cursor: pointer">{{copyLabel}}</button></div>
+<button type="button" onClick="{{closePopup}}" style="height: 48px; background: #585128; color: #ffffff; border: 1px solid #585128; border-radius: 0; font-family: inherit; font-size: 14px; cursor: pointer">Start Shopping</button>
+</sc-if>
+</div>
+<button type="button" aria-label="Close" onClick="{{closePopup}}" style="position: absolute; top: 10px; right: 10px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: #FEF9F6; border: 0; border-radius: 0; cursor: pointer"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#121212" stroke-width="1.2"><path d="M1 1l12 12M13 1L1 13"></path></svg></button>
+</div>
+</div>
+</sc-if>
+
 <!-- Cart drawer -->
 <sc-if value="{{cartOpen}}" hint-placeholder-val="{{false}}">
 <div style="position: fixed; inset: 0; z-index: 90">
 <div onClick="{{closeCart}}" aria-hidden="true" style="position: absolute; inset: 0; background: rgba(18, 18, 18, 0.4)"></div>
-<aside role="dialog" aria-modal="true" aria-labelledby="cart-h" style="position: absolute; top: 0; right: 0; bottom: 0; width: min(440px, 100%); background: #FEF9F6; display: flex; flex-direction: column; border-left: 1px solid #121212">
+<aside role="dialog" aria-modal="true" aria-labelledby="cart-h" style="position: absolute; top: 0; right: 0; bottom: 0; width: min(440px, 100%); background: #FEF9F6; display: flex; flex-direction: column; border-left: 1px solid #121212; overflow-y: auto; overscroll-behavior: contain">
 <div style="display: flex; justify-content: space-between; align-items: center; padding: 24px; border-bottom: 1px solid #121212">
 <h2 id="cart-h" style="margin: 0; font-size: 18px; line-height: 25.2px; font-weight: 400">Your Cart ({{cart}})</h2>
 <button type="button" onClick="{{closeCart}}" aria-label="Close cart" style="width: 44px; height: 44px; padding: 0; background: none; border: 0; cursor: pointer; display: inline-flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#121212" stroke-width="1.2"><path d="M1 1l14 14M15 1L1 15"></path></svg></button>
@@ -178,7 +207,7 @@ footer>img[aria-hidden="true"]{height:200px!important;top:auto!important;bottom:
 <p style="margin: 0; font-size: 12px; line-height: 16.8px">{{shipMsg}}</p>
 <div aria-hidden="true" style="height: 4px; background: #DFDDD0"><div style="height: 4px; width: {{shipPct}}%; background: #585128"></div></div>
 </div>
-<div style="flex: 1 1 auto; overflow-y: auto; padding: 0 24px">
+<div style="flex: 1 0 auto; padding: 0 24px">
 <sc-if value="{{cartEmpty}}" hint-placeholder-val="{{false}}">
 <div style="display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 72px 0; text-align: center">
 <p style="margin: 0; font-size: 16px; line-height: 22.4px">Your cart is empty</p>
@@ -211,9 +240,15 @@ footer>img[aria-hidden="true"]{height:200px!important;top:auto!important;bottom:
 <label style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 8px 12px; border: 1px solid {{so.ring}}; cursor: pointer; font-size: 13px; line-height: 18px; box-sizing: border-box"><input type="radio" name="shipmethod" value="{{so.id}}" checked="{{so.on}}" onChange="{{so.pick}}" style="margin: 0; width: 16px; height: 16px; accent-color: #585128"><span style="flex: 1 1 auto; display: flex; flex-direction: column"><span>{{so.label}}</span><span style="font-size: 12px; line-height: 16.8px; color: #4a4a40">{{so.eta}}</span></span><span style="white-space: nowrap">{{so.priceLabel}}</span></label>
 </sc-for>
 </fieldset>
+<form onSubmit="{{applyCode}}" style="display: flex; flex-direction: column; gap: 6px; margin: 0">
+<label for="cart-code" style="font-size: 12px; line-height: 16.8px; text-transform: uppercase">Discount code</label>
+<div style="display: flex; gap: 8px"><input id="cart-code" name="code" type="text" autocomplete="off" placeholder="WELCOME10" style="flex: 1 1 auto; min-width: 0; height: 44px; padding: 0 12px; border: 1px solid rgba(18, 18, 18, 0.4); border-radius: 0; background: #ffffff; color: #121212; font-family: inherit; font-size: 13px; text-transform: uppercase; box-sizing: border-box"><button type="submit" style="flex: 0 0 auto; height: 44px; padding: 0 18px; background: #ffffff; color: #121212; border: 1px solid #121212; border-radius: 0; font-family: inherit; font-size: 13px; cursor: pointer">Apply</button></div>
+<sc-if value="{{codeError}}" hint-placeholder-val="{{false}}"><p role="alert" style="margin: 0; font-size: 12px; line-height: 16.8px; color: #8a1c1c">{{codeError}}</p></sc-if>
+</form>
 <div style="display: flex; flex-direction: column; gap: 6px">
 <div style="display: flex; justify-content: space-between; font-size: 14px; line-height: 19.6px"><span>Subtotal</span><span>{{subtotalLabel}}</span></div>
 <div style="display: flex; justify-content: space-between; font-size: 14px; line-height: 19.6px"><span>Shipping · {{shippingName}}</span><span>{{shippingLabel}}</span></div>
+<sc-if value="{{hasDiscount}}" hint-placeholder-val="{{false}}"><div style="display: flex; justify-content: space-between; align-items: center; font-size: 14px; line-height: 19.6px"><span>Discount · {{couponCode}} <button type="button" onClick="{{removeCode}}" style="margin-left: 6px; padding: 0; background: none; border: 0; font-family: inherit; font-size: 12px; text-decoration: underline; color: #121212; cursor: pointer">Remove</button></span><span>{{discountLabel}}</span></div></sc-if>
 <div style="display: flex; justify-content: space-between; font-size: 16px; line-height: 22.4px; padding-top: 6px; border-top: 1px solid rgba(18, 18, 18, 0.15)"><span>Total</span><span>{{totalLabel}}</span></div>
 </div>
 <p style="margin: 0; font-size: 12px; line-height: 16.8px">Taxes calculated at checkout. Or 4 interest-free payments of {{klarnaLabel}} with <strong style="font-weight: 700">Klarna.</strong></p>
@@ -378,11 +413,22 @@ footer>img[aria-hidden="true"]{height:200px!important;top:auto!important;bottom:
 <div class="ft-nl" style="flex: 3 1 360px; display: flex; flex-direction: column; gap: 14px">
 <h2 style="margin: 0; font-size: 16px; line-height: 22.4px; font-weight: 400">Get 10% Off Your First Order</h2>
 <p style="margin: 0; font-size: 12px; line-height: 16.8px; max-width: 440px">Join our list for new formulas, blog posts and launches from Amun Organics.</p>
+<sc-if value="{{nlNotDone}}" hint-placeholder-val="{{true}}">
+<form onSubmit="{{nlSubmit}}" novalidate style="display: flex; flex-direction: column; gap: 8px; margin: 0">
 <div style="display: flex; align-items: center; gap: 14px">
 <label for="nl-article" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Email address</label>
-<input id="nl-article" type="email" placeholder="Enter your email" style="flex: 1 1 auto; min-width: 0; height: 30px; padding: 0 0 0 16px; border: 1px solid #121212; background: #9FA383; color: #121212; font-family: inherit; font-size: 12px; border-radius: 0">
-<button type="button" style="background: none; border: 0; color: #121212; font-family: inherit; font-size: 12px; font-weight: 700; text-transform: uppercase; text-decoration: underline; cursor: pointer; padding: 8px 0">Subscribe</button>
+<input id="nl-article" name="email" type="email" autocomplete="email" placeholder="Enter your email" style="flex: 1 1 auto; min-width: 0; height: 30px; padding: 0 0 0 16px; border: 1px solid #121212; background: #9FA383; color: #121212; font-family: inherit; font-size: 12px; border-radius: 0">
+<button type="submit" style="background: none; border: 0; color: #121212; font-family: inherit; font-size: 12px; font-weight: 700; text-transform: uppercase; text-decoration: underline; cursor: pointer; padding: 8px 0">Subscribe</button>
 </div>
+<sc-if value="{{nlError}}" hint-placeholder-val="{{false}}"><p role="alert" style="margin: 0; font-size: 12px; line-height: 16.8px; color: #5a1010">{{nlError}}</p></sc-if>
+</form>
+</sc-if>
+<sc-if value="{{nlDone}}" hint-placeholder-val="{{false}}">
+<div role="status" style="display: flex; flex-direction: column; gap: 10px">
+<p style="margin: 0; font-size: 13px; line-height: 18.2px">Welcome to Amun. Here’s your 10% off code — it’s already applied to your cart.</p>
+<div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap"><span style="display: inline-flex; align-items: center; height: 40px; padding: 0 16px; border: 1px dashed #121212; font-size: 15px; letter-spacing: 1.5px">{{couponCode}}</span><button type="button" onClick="{{copyCode}}" style="height: 40px; padding: 0 16px; background: #121212; color: #ffffff; border: 1px solid #121212; border-radius: 0; font-family: inherit; font-size: 12px; cursor: pointer">{{copyLabel}}</button></div>
+</div>
+</sc-if>
 </div>
 </div>
 <div style="border-top: 1px solid #121212; padding-top: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px; font-size: 12px; line-height: 16.8px">
@@ -414,7 +460,7 @@ document.addEventListener('dragstart', (e) => { if (e.target && e.target.tagName
 document.addEventListener('click', (e) => { if (blockClick) { e.preventDefault(); e.stopPropagation(); blockClick = false; } }, true);
 }
 respVals(v) {
-this.installSwipe();
+this.installSwipe(); this.installPopup();
 if (typeof window !== 'undefined' && !this._rsz) { this._rsz = true; window.addEventListener('resize', () => this.setState({ vw: window.innerWidth })); }
 const vw = typeof window !== 'undefined' ? window.innerWidth : 1440;
 v.menuOpen = !!this.state.menuOpen; v.toggleMenu = () => this.setState({ menuOpen: !this.state.menuOpen, cartOpen: false, searchOpen: false }); v.closeMenu = () => this.setState({ menuOpen: false });
@@ -437,6 +483,12 @@ this.cartAddName(name, n);
 }
 shipLoad() { try { return (typeof localStorage !== 'undefined' && localStorage.getItem('amun-ship')) || ''; } catch (e) { return ''; } }
 shipSave(id) { try { if (typeof localStorage !== 'undefined') localStorage.setItem('amun-ship', id); } catch (e) {} }
+nlStore(k, v) { try { if (typeof localStorage === 'undefined') return v === undefined ? '' : undefined; if (v === undefined) return localStorage.getItem(k) || ''; if (v === null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) { return ''; } }
+installPopup() {
+if (typeof window === 'undefined' || this._popup) return; this._popup = true;
+if (this.nlStore('amun-nl') || this.nlStore('amun-popup-seen')) return;
+this._popT = setTimeout(() => { if (this.nlStore('amun-nl')) return; this.nlStore('amun-popup-seen', '1'); this.setState({ popupOpen: true }); setTimeout(() => { const el = document.getElementById('pop-email'); if (el) el.focus(); }, 60); }, 2500);
+}
 shopVals() {
 const st = this.state; const cat = this.shopCat(); const items = this.cartItemsNow();
 const money = (x) => '$' + x.toFixed(2);
@@ -449,7 +501,12 @@ const FREE_AT = 150; const left = Math.max(0, FREE_AT - sub);
 const SHIP = [{ id: 'standard', label: 'Standard Shipping', eta: '5–7 business days', price: 8.95 }, { id: 'express', label: 'Express Shipping', eta: '2–3 business days', price: 19.95 }, { id: 'overnight', label: 'Overnight Shipping', eta: 'Next business day', price: 39.95 }];
 const shipCost = (o) => (o.id === 'standard' && sub >= FREE_AT) ? 0 : o.price;
 const selShip = SHIP.find((o) => o.id === (st.shipMethod || this.shipLoad())) || SHIP[0];
-const shipAmt = lines.length ? shipCost(selShip) : 0; const total = sub + shipAmt;
+const CODE = 'WELCOME10'; const applied = (st.coupon != null ? st.coupon : this.nlStore('amun-coupon')) === CODE;
+const discount = applied && lines.length ? Math.round(sub * 10) / 100 : 0;
+const shipAmt = lines.length ? shipCost(selShip) : 0; const total = sub - discount + shipAmt;
+const nlSaved = st.nlEmail != null ? st.nlEmail : this.nlStore('amun-nl');
+const subscribe = (e, where) => { e.preventDefault(); const f = e.target; const em = ((f.elements.email && f.elements.email.value) || '').trim(); if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)) { this.setState({ nlError: 'Please enter a valid email address.', nlWhere: where }); return; } this.nlStore('amun-nl', em); this.nlStore('amun-coupon', CODE); this.setState({ nlEmail: em, coupon: CODE, nlError: '', nlWhere: where, nlCopied: false }); };
+const copyCode = () => { try { if (navigator.clipboard) navigator.clipboard.writeText(CODE).catch(() => {}); } catch (e) {} this.setState({ nlCopied: true }); setTimeout(() => this.setState({ nlCopied: false }), 1800); };
 return {
 cart: count,
 searchOpen: !!st.searchOpen, openSearch: (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ searchOpen: true, searchQ: '', cartOpen: false }); }, closeSearch: () => this.setState({ searchOpen: false }),
@@ -459,7 +516,12 @@ searchResults: res.map((p) => Object.assign({}, p, { priceLabel: money(p.price) 
 cartOpen: !!st.cartOpen, openCart: (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ cartOpen: true, searchOpen: false, items: this.cartLoad(), checkedOut: false }); }, closeCart: () => this.setState({ cartOpen: false }),
 cartEmpty: lines.length === 0, cartHasItems: lines.length > 0,
 cartItems: lines.map((l) => Object.assign({}, l, { priceLabel: money(l.price), lineLabel: money(l.price * l.qty), inc: () => setQty(l.name, l.qty + 1), dec: () => setQty(l.name, l.qty - 1), remove: () => setQty(l.name, 0) })),
-subtotalLabel: money(sub), klarnaLabel: money(total / 4), totalLabel: money(total), shippingLabel: shipAmt === 0 ? 'Free' : money(shipAmt), shippingName: selShip.label,
+subtotalLabel: money(sub), hasDiscount: discount > 0, discountLabel: '−' + money(discount), couponCode: CODE,
+nlDone: !!nlSaved, nlNotDone: !nlSaved, nlError: st.nlError && st.nlWhere === 'footer' ? st.nlError : '', popError: st.nlError && st.nlWhere === 'popup' ? st.nlError : '', copyLabel: st.nlCopied ? 'Copied' : 'Copy code',
+nlSubmit: (e) => subscribe(e, 'footer'), popSubmit: (e) => subscribe(e, 'popup'), copyCode: copyCode,
+popupOpen: !!st.popupOpen, closePopup: () => this.setState({ popupOpen: false, nlError: '' }), popKey: (e) => { if (e.key === 'Escape') this.setState({ popupOpen: false }); }, popBackdrop: (e) => { if (e.target === e.currentTarget) this.setState({ popupOpen: false }); },
+codeError: st.codeError || '', applyCode: (e) => { e.preventDefault(); const v = ((e.target.elements.code && e.target.elements.code.value) || '').trim().toUpperCase(); if (v === CODE) { this.nlStore('amun-coupon', CODE); this.setState({ coupon: CODE, codeError: '' }); } else { this.setState({ codeError: v ? 'That code isn’t valid.' : 'Enter a discount code.' }); } },
+removeCode: () => { this.nlStore('amun-coupon', null); this.setState({ coupon: '', codeError: '' }); }, klarnaLabel: money(total / 4), totalLabel: money(total), shippingLabel: shipAmt === 0 ? 'Free' : money(shipAmt), shippingName: selShip.label,
 shipOptions: SHIP.map((o) => Object.assign({}, o, { on: o.id === selShip.id, ring: o.id === selShip.id ? '#121212' : 'rgba(18, 18, 18, 0.25)', priceLabel: shipCost(o) === 0 ? 'Free' : money(shipCost(o)), pick: () => { this.shipSave(o.id); this.setState({ shipMethod: o.id, checkedOut: false }); } })),
 shipMsg: left > 0 ? 'You are ' + money(left) + ' away from free standard shipping' : 'You have unlocked free standard shipping', shipPct: Math.min(100, Math.round(sub / FREE_AT * 100)),
 checkout: () => this.setState({ checkedOut: true }), checkoutLabel: st.checkedOut ? 'Redirecting to secure checkout…' : 'Checkout · ' + money(total)
