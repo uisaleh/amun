@@ -267,7 +267,7 @@ footer>img[aria-hidden="true"]{height:200px!important;top:auto!important;bottom:
 <article class="sl-card" data-on="{{p.slOn}}" style="flex: 0 0 {{collectionBasis}}; display: flex; flex-direction: column; gap: 14px">
 <a href="{{p.href}}" aria-label="{{p.name}}" style="position: relative; display: block; aspect-ratio: 1 / 1; background: #ececea">
 <sc-if value="{{p.img}}" hint-placeholder-val="{{false}}"><img src="{{p.img}}" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></sc-if>
-<span style="position: absolute; top: 14px; left: 14px; background: #ffffff; padding: 8px 20px; font-size: 10px; line-height: 14px; text-transform: uppercase">{{p.badge}}</span>
+<sc-if value="{{p.badge}}" hint-placeholder-val="{{false}}"><span style="position: absolute; top: 14px; left: 14px; background: #ffffff; padding: 8px 20px; font-size: 10px; line-height: 14px; text-transform: uppercase">{{p.badge}}</span></sc-if>
 </a>
 <div style="flex: 1 1 auto; display: flex; flex-direction: column; gap: 10px">
 <h3 style="margin: 0; font-size: 18px; line-height: 25.2px; font-weight: 400"><a href="{{p.href}}">{{p.name}}</a></h3>
@@ -345,7 +345,7 @@ footer>img[aria-hidden="true"]{height:200px!important;top:auto!important;bottom:
 <article style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 14px">
 <a href="{{p.href}}" aria-label="{{p.name}}" style="position: relative; display: block; aspect-ratio: 1 / 1; background: #ececea">
 <sc-if value="{{p.img}}" hint-placeholder-val="{{false}}"><img src="{{p.img}}" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></sc-if>
-<span style="position: absolute; top: 14px; left: 14px; background: #ffffff; padding: 8px 20px; font-size: 10px; line-height: 14px; text-transform: uppercase">{{p.badge}}</span>
+<sc-if value="{{p.badge}}" hint-placeholder-val="{{false}}"><span style="position: absolute; top: 14px; left: 14px; background: #ffffff; padding: 8px 20px; font-size: 10px; line-height: 14px; text-transform: uppercase">{{p.badge}}</span></sc-if>
 </a>
 <div style="flex: 1 1 auto; display: flex; flex-direction: column; gap: 10px">
 <h3 style="margin: 0; font-size: 18px; line-height: 25.2px; font-weight: 400"><a href="{{p.href}}">{{p.name}}</a></h3>
