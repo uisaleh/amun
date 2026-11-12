@@ -13,7 +13,7 @@
 <helmet>
 <style>
 .hdr-burger{display:none}
-.pgrid article p,.sl-card p{display:-webkit-box;-webkit-line-clamp:1;line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}@media (max-width: 860px){.pop-img{flex-basis:100%!important;min-height:0!important;height:180px!important}.pop-body{padding:28px 24px 24px!important;gap:12px!important}.pop-body h2{font-size:24px!important;line-height:30px!important}.sticky-atc{display:flex!important}footer{padding-bottom:96px!important}.gal{flex:1 1 100%!important;align-items:stretch!important}
+.pgrid article p,.sl-card p{display:-webkit-box;-webkit-line-clamp:1;line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}@media (max-width: 860px){.rev-grid{grid-template-columns:minmax(0,1fr)!important}.pop-img{flex-basis:100%!important;min-height:0!important;height:180px!important}.pop-body{padding:28px 24px 24px!important;gap:12px!important}.pop-body h2{font-size:24px!important;line-height:30px!important}.sticky-atc{display:flex!important}footer{padding-bottom:96px!important}.gal{flex:1 1 100%!important;align-items:stretch!important}
 .hdr{flex-wrap:nowrap!important;min-height:56px!important;gap:12px!important}
 .hdr-nav,.hdr-text{display:none!important}
 .hdr-burger{display:inline-flex!important}
@@ -183,7 +183,7 @@ footer>img[aria-hidden="true"]{height:200px!important;top:auto!important;bottom:
 <div role="dialog" aria-modal="true" aria-labelledby="pop-h" style="position: relative; width: 100%; max-width: 760px; max-height: calc(100vh - 32px); overflow: auto; display: flex; flex-wrap: wrap; background: #FEF9F6; color: #121212; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3)">
 <img class="pop-img" src="/assets/fb28d4cdcca288132289391ceb758d89.jpg" alt="" style="flex: 1 1 300px; min-width: 0; width: 100%; min-height: 420px; object-fit: cover; object-position: 30% center; display: block">
 <div class="pop-body" style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; justify-content: center; gap: 16px; padding: 48px 36px; box-sizing: border-box">
-<img src="/assets/78eb905abf9793cef1a556f0b494ba4b.svg" alt="" aria-hidden="true" width="30" height="32" style="display: block; width: 30px; height: 32px; filter: brightness(0)">
+<img src="/assets/e775cf7d0d69a82a68d8fad91aa2aaa8.png" alt="" aria-hidden="true" width="57" height="30" style="display: block; width: 57px; height: 30px">
 <h2 id="pop-h" style="margin: 0; font-size: 28px; line-height: 34px; font-weight: 400">Take 10% Off Your First Order</h2>
 <sc-if value="{{nlNotDone}}" hint-placeholder-val="{{true}}">
 <p style="margin: 0; font-size: 14px; line-height: 20px">Join the Amun list for new formulas, rituals and launches — and get 10% off your first order.</p>
@@ -445,15 +445,11 @@ footer>img[aria-hidden="true"]{height:200px!important;top:auto!important;bottom:
 </section>
 
 <!-- 6. Reviews -->
-<section id="reviews" aria-labelledby="rev-h" style="padding: 0 24px 72px">
-<div style="max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px">
-<div style="display: flex; flex-direction: column; align-items: center; gap: 10px">
-<h2 id="rev-h" style="margin: 0; font-size: 23px; line-height: 23px; font-weight: 400">Reviews</h2>
-<span style="font-size: 14px"><span aria-hidden="true">★ </span>{{revAvg}} · {{revCount}} Reviews</span>
-</div>
-<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px; font-size: 12px; line-height: 16.8px; border-bottom: 1px solid #000000; padding-bottom: 10px">
-<span style="text-decoration: underline">Reviews ({{revCount}})</span>
-<button type="button" onClick="{{toggleReviewForm}}" aria-expanded="{{formOpen}}" style="padding: 0; background: none; border: 0; font-family: inherit; font-size: 12px; line-height: 16.8px; color: #000000; text-decoration: underline; cursor: pointer">{{formLabel}}</button>
+<section id="reviews" aria-labelledby="rev-h" style="padding: 0 24px 56px">
+<div style="max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px 24px; padding-bottom: 14px; border-bottom: 1px solid #121212">
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px"><h2 id="rev-h" style="margin: 0; font-size: 23px; line-height: 28px; font-weight: 400">Reviews</h2><span style="font-size: 14px; line-height: 20px"><span aria-hidden="true">★ </span>{{revAvg}} · {{revCount}} Reviews</span></div>
+<button type="button" onClick="{{toggleReviewForm}}" aria-expanded="{{formOpen}}" style="height: 44px; padding: 0 20px; background: #ffffff; border: 1px solid #121212; border-radius: 0; color: #121212; font-family: inherit; font-size: 15px; line-height: 20px; font-weight: 700; cursor: pointer">{{formLabel}}</button>
 </div>
 <sc-if value="{{revThanks}}" hint-placeholder-val="{{false}}">
 <p role="status" style="margin: 0; padding: 14px; background: #DFDDD0; font-size: 14px; line-height: 19.6px">Thank you! Your review has been added.</p>
@@ -496,27 +492,27 @@ footer>img[aria-hidden="true"]{height:200px!important;top:auto!important;bottom:
 </div>
 </form>
 </sc-if>
+<div class="rev-grid" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px">
 <sc-for list="{{reviews}}" as="rv" hint-placeholder-count="4">
-<article style="display: flex; flex-wrap: wrap; gap: 14px 42px; padding: 24px 0; border-bottom: 1px solid #000000">
-<div style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 19.6px"><span>{{rv.name}}</span><sc-if value="{{rv.stars}}" hint-placeholder-val="{{false}}"><span aria-label="{{rv.starsLabel}}">{{rv.stars}}</span></sc-if></div>
-<div style="flex: 3 1 480px; display: flex; flex-direction: column; gap: 8px">
-<h3 style="margin: 0; font-size: 14px; line-height: 19.6px; font-weight: 400">{{rv.title}}</h3>
-<p style="margin: 0; font-size: 14px; line-height: 19.6px">{{rv.body}}</p>
+<article style="display: flex; flex-direction: column; gap: 8px; padding: 18px 20px; background: #F6F2EA; border: 1px solid rgba(18, 18, 18, 0.12); min-width: 0">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 12px"><span style="font-size: 15px; line-height: 20px; font-weight: 700">{{rv.name}}</span><sc-if value="{{rv.stars}}" hint-placeholder-val="{{false}}"><span aria-label="{{rv.starsLabel}}" style="font-size: 13px; letter-spacing: 1px">{{rv.stars}}</span></sc-if></div>
+<h3 style="margin: 0; font-size: 14px; line-height: 19.6px; font-weight: 400; font-style: italic">{{rv.title}}</h3>
+<p style="margin: 0; font-size: 14px; line-height: 20px">{{rv.body}}</p>
 <sc-if value="{{rv.hasPhotos}}" hint-placeholder-val="{{false}}">
-<div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px">
+<div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px">
 <sc-for list="{{rv.photoList}}" as="pp" hint-placeholder-count="2">
-<a href="{{pp.src}}" target="_blank" rel="noopener" aria-label="Open photo from {{rv.name}}" style="display: block"><img src="{{pp.src}}" alt="Photo from {{rv.name}}" loading="lazy" style="display: block; width: 96px; height: 96px; object-fit: cover; background: #efefea"></a>
+<a href="{{pp.src}}" target="_blank" rel="noopener" aria-label="Open photo from {{rv.name}}" style="display: block"><img src="{{pp.src}}" alt="Photo from {{rv.name}}" loading="lazy" style="display: block; width: 72px; height: 72px; object-fit: cover; background: #efefea"></a>
 </sc-for>
 </div>
 </sc-if>
-</div>
 </article>
 </sc-for>
+</div>
 <sc-if value="{{noReviews}}" hint-placeholder-val="{{false}}">
 <p style="margin: 24px 0 0; text-align: center; font-size: 14px; line-height: 19.6px">Be the first to review this product</p>
 </sc-if>
 <sc-if value="{{moreReviews}}" hint-placeholder-val="{{true}}">
-<button type="button" onClick="{{loadReviews}}" class="atc" style="align-self: center; margin-top: 18px; height: 50px; min-width: 200px; padding: 0 24px; border: 1px solid #000000; background: #ffffff; color: #000000; font-family: inherit; font-size: 14px; border-radius: 0; cursor: pointer">View More</button>
+<button type="button" onClick="{{loadReviews}}" class="atc" style="align-self: center; margin-top: 6px; height: 50px; min-width: 200px; padding: 0 24px; border: 1px solid #000000; background: #ffffff; color: #000000; font-family: inherit; font-size: 14px; border-radius: 0; cursor: pointer">View More</button>
 </sc-if>
 </div>
 </section>
