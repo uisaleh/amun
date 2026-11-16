@@ -1,0 +1,248 @@
+
+    {% render 'gp-head', isThemeSection: true %}
+    
+    <style {% if section.settings.section_preload == "false" %} class="gps-link gps-style" type="text/disabled-css" {% endif %}>.gps-554411285102461748.gps.gpsil [style*="--as:"]{align-self:var(--as)}.gps-554411285102461748.gps.gpsil [style*="--aspect:"]{aspect-ratio:var(--aspect)}.gps-554411285102461748.gps.gpsil [style*="--bg:"]{background:var(--bg)}.gps-554411285102461748.gps.gpsil [style*="--bga:"]{background-attachment:var(--bga)}.gps-554411285102461748.gps.gpsil [style*="--bgc:"]{background-color:var(--bgc)}.gps-554411285102461748.gps.gpsil [style*="--bgi:"]{background-image:var(--bgi)}.gps-554411285102461748.gps.gpsil [style*="--bgp:"]{background-position:var(--bgp)}.gps-554411285102461748.gps.gpsil [style*="--bgr:"]{background-repeat:var(--bgr)}.gps-554411285102461748.gps.gpsil [style*="--bgs:"]{background-size:var(--bgs)}.gps-554411285102461748.gps.gpsil [style*="--b:"]{border:var(--b)}.gps-554411285102461748.gps.gpsil [style*="--bb:"]{border-bottom:var(--bb)}.gps-554411285102461748.gps.gpsil [style*="--bc:"]{border-color:var(--bc)}.gps-554411285102461748.gps.gpsil [style*="--bblr:"]{border-bottom-left-radius:var(--bblr)}.gps-554411285102461748.gps.gpsil [style*="--bbrr:"]{border-bottom-right-radius:var(--bbrr)}.gps-554411285102461748.gps.gpsil [style*="--bl:"]{border-left:var(--bl)}.gps-554411285102461748.gps.gpsil [style*="--bs:"]{border-style:var(--bs)}.gps-554411285102461748.gps.gpsil [style*="--bt:"]{border-top:var(--bt)}.gps-554411285102461748.gps.gpsil [style*="--btlr:"]{border-top-left-radius:var(--btlr)}.gps-554411285102461748.gps.gpsil [style*="--btrr:"]{border-top-right-radius:var(--btrr)}.gps-554411285102461748.gps.gpsil [style*="--bw:"]{border-width:var(--bw)}.gps-554411285102461748.gps.gpsil [style*="--shadow:"]{box-shadow:var(--shadow)}.gps-554411285102461748.gps.gpsil [style*="--c:"]{color:var(--c)}.gps-554411285102461748.gps.gpsil [style*="--cg:"]{-moz-column-gap:var(--cg);column-gap:var(--cg)}.gps-554411285102461748.gps.gpsil [style*="--size:"]{font-size:var(--size)}.gps-554411285102461748.gps.gpsil [style*="--gtc:"]{grid-template-columns:var(--gtc)}.gps-554411285102461748.gps.gpsil [style*="--h:"]{height:var(--h)}.gps-554411285102461748.gps.gpsil [style*="--jc:"]{justify-content:var(--jc)}.gps-554411285102461748.gps.gpsil [style*="--tdt:"]{text-decoration-thickness:var(--tdt)}.gps-554411285102461748.gps.gpsil [style*="--m:"]{margin:var(--m)}.gps-554411285102461748.gps.gpsil [style*="--mb:"]{margin-bottom:var(--mb)}.gps-554411285102461748.gps.gpsil [style*="--objf:"]{-o-object-fit:var(--objf);object-fit:var(--objf)}.gps-554411285102461748.gps.gpsil [style*="--op:"]{opacity:var(--op)}.gps-554411285102461748.gps.gpsil [style*="--o:"]{order:var(--o)}.gps-554411285102461748.gps.gpsil [style*="--pc:"]{place-content:var(--pc)}.gps-554411285102461748.gps.gpsil [style*="--p:"]{padding:var(--p)}.gps-554411285102461748.gps.gpsil [style*="--pb:"]{padding-bottom:var(--pb)}.gps-554411285102461748.gps.gpsil [style*="--pl:"]{padding-left:var(--pl)}.gps-554411285102461748.gps.gpsil [style*="--pr:"]{padding-right:var(--pr)}.gps-554411285102461748.gps.gpsil [style*="--pt:"]{padding-top:var(--pt)}.gps-554411285102461748.gps.gpsil [style*="--rg:"]{row-gap:var(--rg)}.gps-554411285102461748.gps.gpsil [style*="--ta:"]{text-align:var(--ta)}.gps-554411285102461748.gps.gpsil [style*="--t:"]{transform:var(--t)}.gps-554411285102461748.gps.gpsil [style*="--v:"]{visibility:var(--v)}.gps-554411285102461748.gps.gpsil [style*="--w:"]{width:var(--w)}.gps-554411285102461748.gps.gpsil [style*="--line-clamp:"]{display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:var(--line-clamp)}@media only screen and (max-width:1024px){.gps-554411285102461748.gps.gpsil [style*="--aspect-tablet:"]{aspect-ratio:var(--aspect-tablet)}.gps-554411285102461748.gps.gpsil [style*="--cg-tablet:"]{-moz-column-gap:var(--cg-tablet);column-gap:var(--cg-tablet)}.gps-554411285102461748.gps.gpsil [style*="--size-tablet:"]{font-size:var(--size-tablet)}.gps-554411285102461748.gps.gpsil [style*="--gtc-tablet:"]{grid-template-columns:var(--gtc-tablet)}.gps-554411285102461748.gps.gpsil [style*="--h-tablet:"]{height:var(--h-tablet)}.gps-554411285102461748.gps.gpsil [style*="--pl-tablet:"]{padding-left:var(--pl-tablet)}.gps-554411285102461748.gps.gpsil [style*="--pr-tablet:"]{padding-right:var(--pr-tablet)}.gps-554411285102461748.gps.gpsil [style*="--rg-tablet:"]{row-gap:var(--rg-tablet)}.gps-554411285102461748.gps.gpsil [style*="--v-tablet:"]{visibility:var(--v-tablet)}.gps-554411285102461748.gps.gpsil [style*="--w-tablet:"]{width:var(--w-tablet)}.gps-554411285102461748.gps.gpsil [style*="--line-clamp-tablet:"]{display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:var(--line-clamp-tablet)}}@media only screen and (max-width:767px){.gps-554411285102461748.gps.gpsil [style*="--aspect-mobile:"]{aspect-ratio:var(--aspect-mobile)}.gps-554411285102461748.gps.gpsil [style*="--cg-mobile:"]{-moz-column-gap:var(--cg-mobile);column-gap:var(--cg-mobile)}.gps-554411285102461748.gps.gpsil [style*="--size-mobile:"]{font-size:var(--size-mobile)}.gps-554411285102461748.gps.gpsil [style*="--gtc-mobile:"]{grid-template-columns:var(--gtc-mobile)}.gps-554411285102461748.gps.gpsil [style*="--h-mobile:"]{height:var(--h-mobile)}.gps-554411285102461748.gps.gpsil [style*="--mb-mobile:"]{margin-bottom:var(--mb-mobile)}.gps-554411285102461748.gps.gpsil [style*="--pl-mobile:"]{padding-left:var(--pl-mobile)}.gps-554411285102461748.gps.gpsil [style*="--pr-mobile:"]{padding-right:var(--pr-mobile)}.gps-554411285102461748.gps.gpsil [style*="--rg-mobile:"]{row-gap:var(--rg-mobile)}.gps-554411285102461748.gps.gpsil [style*="--v-mobile:"]{visibility:var(--v-mobile)}.gps-554411285102461748.gps.gpsil [style*="--w-mobile:"]{width:var(--w-mobile)}.gps-554411285102461748.gps.gpsil [style*="--line-clamp-mobile:"]{display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:var(--line-clamp-mobile)}}.gps-554411285102461748 [data-browser=safari]:after{--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: }.gps-554411285102461748 .gp-g-heading-3{font-family:var(--g-h3-ff);font-size:var(--g-h3-size);font-style:var(--g-h3-fs);font-weight:var(--g-h3-weight);letter-spacing:var(--g-h3-ls);line-height:var(--g-h3-lh)}.gps-554411285102461748 .gp-g-subheading-1{font-family:var(--g-sh1-ff);font-size:var(--g-sh1-size);font-style:var(--g-sh1-fs);font-weight:var(--g-sh1-weight);letter-spacing:var(--g-sh1-ls);line-height:var(--g-sh1-lh)}.gps-554411285102461748 .gp-g-paragraph-2{font-family:var(--g-p2-ff);font-size:var(--g-p2-size);font-style:var(--g-p2-fs);font-weight:var(--g-p2-weight);letter-spacing:var(--g-p2-ls);line-height:var(--g-p2-lh)}.gps-554411285102461748 .gp-relative{position:relative}.gps-554411285102461748 .\!gp-m-auto{margin:auto!important}.gps-554411285102461748 .gp-mx-auto{margin-left:auto;margin-right:auto}.gps-554411285102461748 .gp-mb-0{margin-bottom:0}.gps-554411285102461748 .gp-inline-block{display:inline-block}.gps-554411285102461748 .gp-flex{display:flex}.gps-554411285102461748 .gp-grid{display:grid}.gps-554411285102461748 .\!gp-hidden{display:none!important}.gps-554411285102461748 .gp-hidden{display:none}.gps-554411285102461748 .gp-h-auto{height:auto}.gps-554411285102461748 .gp-h-full{height:100%}.gps-554411285102461748 .gp-w-full{width:100%}.gps-554411285102461748 .gp-max-w-full{max-width:100%}.gps-554411285102461748 .gp-flex-none{flex:none}.gps-554411285102461748 .gp-grid-rows-\[1fr\]{grid-template-rows:1fr}.gps-554411285102461748 .gp-flex-col{flex-direction:column}.gps-554411285102461748 .gp-break-words{overflow-wrap:break-word}.gps-554411285102461748 .gp-text-center{text-align:center}.gps-554411285102461748 .gp-text-g-text-2{color:var(--g-c-text-2)}.gps-554411285102461748 .gp-transition-colors{transition-duration:.15s;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1)}.gps-554411285102461748 .gp-duration-200{transition-duration:.2s}.gps-554411285102461748 .gp-ease-in-out{transition-timing-function:cubic-bezier(.4,0,.2,1)}.gps-554411285102461748 .data-\[browser\=safari\]\:after\:gp-absolute[data-browser=safari]:after{content:var(--tw-content);position:absolute}.gps-554411285102461748 .data-\[browser\=safari\]\:after\:gp-bottom-0[data-browser=safari]:after{bottom:0;content:var(--tw-content)}.gps-554411285102461748 .data-\[browser\=safari\]\:after\:gp-left-0[data-browser=safari]:after{content:var(--tw-content);left:0}.gps-554411285102461748 .data-\[browser\=safari\]\:after\:gp-right-0[data-browser=safari]:after{content:var(--tw-content);right:0}.gps-554411285102461748 .data-\[browser\=safari\]\:after\:gp-h-1\/2[data-browser=safari]:after{content:var(--tw-content);height:50%}.gps-554411285102461748 .data-\[browser\=safari\]\:after\:gp-w-full[data-browser=safari]:after{content:var(--tw-content);width:100%}.gps-554411285102461748 .data-\[browser\=safari\]\:after\:gp-bg-gradient-to-t[data-browser=safari]:after{background-image:linear-gradient(to top,var(--tw-gradient-stops));content:var(--tw-content)}.gps-554411285102461748 .data-\[browser\=safari\]\:after\:gp-from-white[data-browser=safari]:after{content:var(--tw-content);--tw-gradient-from:#fff var(--tw-gradient-from-position);--tw-gradient-to:hsla(0,0%,100%,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}@media (max-width:1024px){.gps-554411285102461748 .tablet\:\!gp-hidden{display:none!important}.gps-554411285102461748 .tablet\:gp-hidden{display:none}.gps-554411285102461748 .tablet\:gp-h-auto{height:auto}.gps-554411285102461748 .tablet\:gp-flex-none{flex:none}}@media (max-width:767px){.gps-554411285102461748 .mobile\:\!gp-hidden{display:none!important}.gps-554411285102461748 .mobile\:gp-hidden{display:none}.gps-554411285102461748 .mobile\:gp-h-auto{height:auto}.gps-554411285102461748 .mobile\:gp-flex-none{flex:none}}.gps-554411285102461748 .\[\&_\*\]\:gp-max-w-full *{max-width:100%}@media not all and (min-resolution:0.001dpcm){.gps-554411285102461748 .safari\:\[\&_p\]\:gp-inline p{display:inline}.gps-554411285102461748 .safari\:\[\&_p\]\:after\:gp-whitespace-pre p:after{content:var(--tw-content);white-space:pre}}</style>
+    
+  
+    
+    
+    
+
+    {% assign locationOrigin = request.origin | append: routes.root_url | split: '/' | join: '/' %}
+
+    
+        <section
+          class="gp-mx-auto gp-max-w-full [&_*]:gp-max-w-full {% if section.settings.section_preload == "false" %}gps-lazy {% endif %}"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--pl:none;--pl-tablet:none;--pl-mobile:none;--pr:none;--pr-tablet:none;--pr-mobile:none"
+        >
+          
+    <gp-row
+      data-id="gGxSnzywDJ" id="gGxSnzywDJ" data-same-height-subgrid-container
+      class="gGxSnzywDJ gp-relative gp-mx-auto gp-mb-0 gp-grid gp-max-w-full gp-transition-colors gp-duration-200 gp-ease-in-out [&_*]:gp-max-w-full gp-grid-rows-[1fr]"
+      style="--blockPadding:base;--bs:none;--bw:1px 1px 1px 1px;--bc:#121212;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--pt:var(--g-s-4xl);--pl:var(--g-s-xl);--pb:var(--g-s-4xl);--pr:var(--g-s-xl);--cg:32px;--gtc:minmax(0, 12fr);--w:100%;--w-tablet:100%;--w-mobile:100%;--bgc:#FEF9F6;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll;--pc:start"
+    >
+      <script gp-data type="application/json">{"background":{"desktop":{"attachment":"scroll","color":"#FEF9F6","image":{"height":0,"src":"","width":0},"position":{"x":50,"y":50},"repeat":"no-repeat","size":"cover","type":"color","video":"","videoHtml5":""}},"uid":"gGxSnzywDJ"}</script>
+      
+
+      <div
+      data-same-height-display-contents
+      style="--jc:start"
+      class="gvUJ_JNpUN gp-relative gp-flex gp-flex-col"
+    >
+      
+  <gp-animation
+    gp-interaction-wrapper
+    display-init="show"
+    style="display:contents"
+  >
+    <script gp-data type="application/json">{"config":{"desktop":{"enabled":true,"trigger":"appear","triggerConfig":{"appear":{"animation":"fade","setting":{"fade":{"delay":"0","easing":"ease-out","speed":1.7},"shake":{"delay":"0","easing":"linear","intensity":11,"loop":false,"speed":0.7},"slide":{"delay":"0","direction":"left","easing":"ease-out","isCustomDistance":false,"speed":1.7},"zoom":{"delay":"0","easing":"ease-out","isFade":true,"scale":{"in":[80,100],"out":[120,100]},"speed":1.7,"zoomDirection":"in"}}},"hover":{"animation":"none","setting":{"fade":{"delay":"0","easing":"ease-out","speed":1.7},"shake":{"delay":"0","easing":"linear","intensity":11,"loop":false,"speed":0.7},"slide":{"delay":"0","direction":"left","easing":"ease-out","isCustomDistance":false,"speed":1.7},"zoom":{"delay":"0","easing":"ease-out","isFade":false,"scale":{"in":[100,120],"out":[100,80]},"speed":1.7,"zoomDirection":"in"}}}}}},"tag":"Row","opacity":{"desktop":"100%"},"notEnableAnimationWhenInit":false}</script>
+    <div style="--v:hidden;--v-tablet:hidden;--v-mobile:hidden;display:contents">
+    
+
+    
+
+    
+    <gp-row
+      data-id="gl_t4WTUvh" id="gl_t4WTUvh" data-same-height-subgrid-container
+      class="gl_t4WTUvh gp-relative gp-mx-auto gp-mb-0 gp-grid gp-max-w-full gp-transition-colors gp-duration-200 gp-ease-in-out [&_*]:gp-max-w-full gp-grid-rows-[1fr]"
+      style="--bs:none;--bw:1px 1px 1px 1px;--bc:#121212;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--cg:8px;--gtc:minmax(0, 12fr);--gtc-mobile:minmax(0, 12fr);--w:var(--g-ct-w, 1200px);--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll;--pc:start"
+    >
+      <script gp-data type="application/json">{"background":{"desktop":{"attachment":"scroll","color":"transparent","image":{"height":0,"src":"","width":0},"position":{"x":50,"y":50},"repeat":"no-repeat","size":"cover","type":"color"}},"uid":"gl_t4WTUvh"}</script>
+      
+
+      <div
+      data-same-height-display-contents
+      style="--jc:start"
+      class="gl-t7alU67 gp-relative gp-flex gp-flex-col"
+    >
+      
+    {% assign locationOrigin = request.origin | append: routes.root_url | split: '/' | join: '/' %}
+    <div data-id="gqssjbAIkR"
+      class="gqssjbAIkR"
+      style="--ta:center;--bs:none;--bw:1px 1px 1px 1px;--bc:#121212;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:80px;--mb-mobile:33px;--dynamic-source-color:#F4F4F4"
+    >
+      <div class="gp-flex" style="--jc:center">
+        <h2
+          data-gp-text
+          class="gp-g-heading-3  gp-text-instant gp-text"
+          style="--w:var(--g-ct-w);--w-tablet:var(--g-ct-w);--w-mobile:var(--g-ct-w);--tdt:auto;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--ta:center;--c:var(--g-c-text-2, text-2);word-break:break-word;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll;overflow:hidden"
+        >
+          {{ section.settings.ggqssjbAIkR_text_-1118522816 | replace: '$locationOrigin', locationOrigin }}
+        </h2>
+      </div>
+    </div>
+    
+    <div
+    style="--d:block;--d-mobile:block;--d-tablet:block"
+    data-id="g2PFnKaQJ5"
+      items-repeat
+    >
+      <div style="--bs:none;--bw:1px 1px 1px 1px;--bc:#121212;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--shadow:none;--w:100%;--w-tablet:100%;--w-mobile:100%;--rg:60px;--rg-tablet:25px;--rg-mobile:30px;--cg:60px;--cg-tablet:25px;--cg-mobile:20px;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll;--gtc:repeat(2, minmax(0, 1fr));--gtc-tablet:repeat(2, minmax(0, 1fr));--gtc-mobile:repeat(1, minmax(0, 1fr))"
+          class="gp-grid !gp-m-auto gp-w-full"
+        >
+        {% liquid
+            assign articlePickType = 'manually'
+            assign articleHandles = 'news/why-tallow,news/why-glass-packaging'| split: ","
+            assign articleBlogTitle = "News,News" | split: ","
+            assign limit = "2"
+            assign blogTitle = ''
+            assign all_articles = null | sort
+
+            if articlePickType == 'manually'
+              for handle in articleHandles
+                assign articleByHandle = articles[handle] | sort
+                assign all_articles = all_articles | concat: articleByHandle
+              endfor
+            else
+              assign current_blog_handle = blogs['news']
+              if gp_enable_custom_dynamic_blog == true
+                assign current_blog_handle = blogs[blog.handle]
+              endif
+              assign all_articles = current_blog_handle.articles | limit: limit | sort: "updated_at" | reverse
+              assign blogTitle = current_blog_handle.title
+            endif
+
+        %}
+        {% for article in all_articles limit: limit %}
+          {% if articlePickType == 'manually' %}
+              {% assign blogTitle = articleBlogTitle[forloop.index0] %}
+          {% endif %}
+          <div><div gp-el-wrapper style="--bs:solid;--bw:1px 1px 1px 1px;--bc:#121212;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--bblr:50px;--bbrr:50px;--btlr:50px;--btrr:50px;--mb:33px;--mb-mobile:17px" class="gwviwgXSom ">
+      
+    <div class="gp-text-center" style="border-radius: inherit">
+      
+          <a href="{{article.url}}" target="_self" title="{{article.title}}">
+            
+    <div
+      role="presentation"
+      data-id="gwviwgXSom"
+      style="--ta:center"
+      class="gp-group/image gp-relative force-publish-1794847733609 gp-flex-none gp-h-auto mobile:gp-flex-none mobile:gp-h-auto tablet:gp-flex-none tablet:gp-h-auto gwviwgXSom"
+    >
+      <div
+        
+        style="border-radius:inherit;--jc:center"
+        class="gp-h-full gp-w-full gp-flex pointer-events-auto"
+      >
+        
+    <img
+      alt="{{article.image.alt}}" width="2237" height="1678" draggable="false" src="{% if article.image != blank %}{{ article.image | image_url }}{% else %}https://cdn.shopify.com/s/assets/no-image-2048-5e88c1b20e087fb7bbe9a3771824e743c244f437e4f8ba93bbf7b11b53f7824c_large.gif{% endif %}" srcset="{% if article.image != blank %}{{ article.image | image_url: width: 480 }} 768w, {{ article.image | image_url: width: 768 }} 1024w, {{ article.image | image_url: width: 1024 }} 1440w{% endif %}" sizes="{{ gp_list_img_sizes | default: '(max-width: 1024px) 50vw, 100vw' }}" loading="lazy" fetchpriority="low"
+      style="--w:100%;--w-tablet:100%;--w-mobile:100%;--h:auto;--h-tablet:auto;--h-mobile:auto;--aspect:4/3;--aspect-tablet:4/3;--aspect-mobile:4/3;--objf:cover"
+      class="gp-inline-block gp-w-full gp-max-w-full"
+    />
+      </div>
+    </div>
+  
+          </a>
+        
+    </div>
+  
+      </div><div gp-el-wrapper style="--bs:none;--bw:0px 1px 0px 0px;--bc:#DDDDDD;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:5px;--pt:0px;--pr:var(--g-s-s)" class="gHGQpUgnY3 ">
+      
+    
+    {% assign locationOrigin = request.origin | append: routes.root_url | split: '/' | join: '/' %}
+    <div data-id="gHGQpUgnY3"
+      class="category_link"
+      style="--dynamic-source-color:#F4F4F4"
+    >
+      <div  >
+        <div
+          data-gp-text
+          class="gp-g-paragraph-2  gp-text-instant"
+          style="--w:100%;--tdt:auto;--ta:center;--c:#282727;--size:16px;--size-tablet:14px;--size-mobile:15px;word-break:break-word;overflow:hidden"
+        >
+          {{ blogTitle }}
+        </div>
+      </div>
+    </div>
+    
+  
+      </div><div gp-el-wrapper style="--bs:none;--bw:1px 1px 1px 1px;--bc:#121212;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:20px;--mb-mobile:7px" class="gwRgFZ1bhB ">
+      
+    
+          <a href="{{article.url}}" target="_self" title="{{article.title}}">
+          
+    {% assign locationOrigin = request.origin | append: routes.root_url | split: '/' | join: '/' %}
+    <div data-id="gwRgFZ1bhB"
+      
+      style="--dynamic-source-color:#F4F4F4"
+    >
+      <div  >
+        <h1
+          data-gp-text
+          class="gp-g-subheading-1 gp-text-g-text-2 gp-text-instant"
+          style="--w:100%;--tdt:auto;--ta:center;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:var(--g-c-text-2, text-2);word-break:break-word;overflow:hidden"
+        >
+          {{article.title}}
+        </h1>
+      </div>
+    </div>
+    
+          </a>
+        
+  
+      </div><div gp-el-wrapper style="--bs:none;--bw:1px 1px 1px 1px;--bc:#121212;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:var(--g-s-s)" class="g4DtNNpi96 ">
+      
+<gp-article-content data-id="g4DtNNpi96" >
+  <div
+      class="gp-relative gp-p-description-text gp-content-text-override gp-break-words safari:[&_p]:gp-inline safari:[&_p]:after:gp-whitespace-pre gp-g-paragraph-2 gp-text-g-text-2 data-[browser=safari]:after:gp-content-[' '] data-[browser=safari]:after:gp-absolute data-[browser=safari]:after:gp-left-0 data-[browser=safari]:after:gp-right-0 data-[browser=safari]:after:gp-bottom-0 data-[browser=safari]:after:gp-w-full data-[browser=safari]:after:gp-h-1/2 data-[browser=safari]:after:gp-bg-gradient-to-t data-[browser=safari]:after:gp-from-white"
+      style="--ta:center;--c:var(--g-c-text-2, text-2);--line-clamp:2;--line-clamp-tablet:2;--line-clamp-mobile:2"
+    >
+    {{article.content}}
+  </div>
+  {% style %}
+    .gp-p-description-text * {
+      color: inherit
+    }
+    
+.gp-content-text-override.gp-p-description-text p,
+.gp-content-text-override.gp-p-description-text div,
+.gp-content-text-override.gp-p-description-text span,
+.gp-content-text-override.gp-p-description-text h1,
+.gp-content-text-override.gp-p-description-text h2,
+.gp-content-text-override.gp-p-description-text h3,
+.gp-content-text-override.gp-p-description-text h4,
+.gp-content-text-override.gp-p-description-text h5,
+.gp-content-text-override.gp-p-description-text h6,
+.gp-content-text-override.gp-p-description-text * {
+  line-height: inherit !important;
+}
+  {% endstyle %}
+</gp-article-content>
+{%- unless gp_script_gp_article_content_v7_5_js -%}{%- assign gp_script_gp_article_content_v7_5_js = true -%}<script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://assets.gemcommerce.com/assets-v2/gp-article-content-v7-5.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>{%- endunless -%}
+  
+      </div></div>
+        {% endfor %}
+      </div>
+    </div>
+
+  
+    </div>
+
+      
+    </gp-row>
+  
+  </div>
+  </gp-animation>
+  {%- unless gp_script_gp_animation_v7_5_js -%}{%- assign gp_script_gp_animation_v7_5_js = true -%}<script src="https://assets.gemcommerce.com/assets-v2/gp-animation-v7-5.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>{%- endunless -%}
+  
+    </div>
+
+      
+    </gp-row>
+  
+        </section>
+      
+  
+    
+{% schema %}
+  {
+    "presets": [{ "name": "Related blog post" }],
+    "name": "Related blog post",
+    "tag": "section",
+    "class": "gps-554411285102461748 gps gpsil",
+    "settings": [{"type":"paragraph","content":"Section design by GemPages. [Click here to start design](https://admin.shopify.com/store/d1qsyp-fy/apps/gempages-cro/app/shopify/edit?pageType=THEME_SECTION&editorId=554411285102461748)"},{"type":"select","label":"Section Preload","id":"section_preload","options":[{"label":"On","value":"true"},{"label":"Off","value":"false"},{"label":"Off Lazy Script","value":"off_lazy_script"}],"default":"off_lazy_script"},{"type":"text","label":"Checksum","id":"checksum"},{"type":"html","id":"ggqssjbAIkR_text_-1118522816","label":"ggqssjbAIkR_text_-1118522816","default":"Read our latest Posts"}],
+    "blocks": [{"type": "@app"}],
+    "locales": {}
+  }
+{% endschema %}
