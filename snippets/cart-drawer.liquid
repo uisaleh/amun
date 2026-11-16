@@ -18,7 +18,7 @@
       </fieldset>
       <form data-code-form style="display: flex; flex-direction: column; gap: 6px; margin: 0">
         <label for="cart-code" style="font-size: 12px; line-height: 16.8px; text-transform: uppercase">Discount code</label>
-        <div style="display: flex; gap: 8px"><input id="cart-code" name="code" type="text" autocomplete="off" placeholder="{{ settings.newsletter_code | default: 'WELCOME10' | escape }}" style="flex: 1 1 auto; min-width: 0; height: 44px; padding: 0 12px; border: 1px solid rgba(18, 18, 18, 0.4); border-radius: 0; background: #ffffff; color: #121212; font-size: 13px; text-transform: uppercase"><button type="submit" style="flex: 0 0 auto; height: 44px; padding: 0 18px; background: #ffffff; color: #121212; border: 1px solid #121212; border-radius: 0; font-size: 13px; cursor: pointer">Apply</button></div>
+        <div style="display: flex; gap: 8px"><input id="cart-code" name="code" type="text" autocomplete="off" placeholder="Enter discount code" style="flex: 1 1 auto; min-width: 0; height: 44px; padding: 0 12px; border: 1px solid rgba(18, 18, 18, 0.4); border-radius: 0; background: #ffffff; color: #121212; font-size: 13px"><button type="submit" style="flex: 0 0 auto; height: 44px; padding: 0 18px; background: #ffffff; color: #121212; border: 1px solid #121212; border-radius: 0; font-size: 13px; cursor: pointer">Apply</button></div>
         <p class="form-msg form-msg--error" role="alert" data-code-error hidden></p>
       </form>
       <div style="display: flex; flex-direction: column; gap: 6px">
