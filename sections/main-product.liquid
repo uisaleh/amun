@@ -158,9 +158,9 @@
           {%- endif -%}
 
           <div class="buyrow" style="display: flex; gap: 14px; flex-wrap: wrap">
-            <div style="display: flex; align-items: center; border: 1px solid #000000; height: 50px">
+            <div style="display: flex; align-items: center; border: 1px solid #000000; height: 50px; background: #ffffff">
               <button type="button" aria-label="Decrease quantity" data-qty-dec style="width: 44px; height: 48px; background: #ffffff; border: 0; font-size: 16px; cursor: pointer; color: #000">−</button>
-              <input type="number" name="quantity" value="1" min="1" aria-label="Quantity" data-qty style="width: 32px; border: 0; text-align: center; font-size: 14px; background: #fff; -moz-appearance: textfield; appearance: textfield">
+              <input type="number" name="quantity" value="1" min="1" aria-label="Quantity" data-qty style="width: 32px; height: 48px; padding: 0; border: 0; border-radius: 0; text-align: center; font-size: 14px; color: #000000; background: #ffffff; -moz-appearance: textfield; appearance: textfield">
               <button type="button" aria-label="Increase quantity" data-qty-inc style="width: 44px; height: 48px; background: #ffffff; border: 0; font-size: 16px; cursor: pointer; color: #000">+</button>
             </div>
             <button type="submit" class="atc-dark" data-atc {% unless v.available %}disabled{% endunless %} style="flex: 1 1 220px; height: 50px; background: #585128; color: #ffffff; border: 1px solid #585128; border-radius: 0; font-size: 14px; cursor: pointer">{% if v.available %}Add to Cart - {{ v.price | money_without_trailing_zeros }}{% else %}Sold Out{% endif %}</button>
