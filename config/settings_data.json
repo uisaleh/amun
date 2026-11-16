@@ -1,0 +1,12 @@
+{
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "use_design_images": true,
+      "free_shipping_threshold": 150,
+      "newsletter_code": "WELCOME10",
+      "popup_enabled": true,
+      "popup_delay": 2.5
+    }
+  }
+}

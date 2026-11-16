@@ -1,0 +1,25 @@
+<section aria-labelledby="vs-h-{{ section.id }}" style="padding: 64px 24px 72px">
+  <div class="sec-head">
+    <h2 id="vs-h-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+    {%- if section.settings.text != blank -%}<p>{{ section.settings.text | escape }}</p>{%- endif -%}
+  </div>
+  {% render 'video-slider', blocks: section.blocks %}
+</section>
+
+{% schema %}
+{
+  "name": "Video slider",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "See Our Formulas in Action" },
+    { "type": "text", "id": "text", "label": "Text", "default": "See our tallow formulas in action." }
+  ],
+  "blocks": [
+    { "type": "video", "name": "Video", "settings": [
+      { "type": "video", "id": "video", "label": "Video (upload to Shopify)" },
+      { "type": "text", "id": "video_url", "label": "Or video file / link", "info": "A full link, or a file name on the video host set in Theme settings → Videos." },
+      { "type": "text", "id": "label", "label": "Caption", "default": "Made by nature, for nature" }
+    ] }
+  ],
+  "presets": [{ "name": "Video slider" }]
+}
+{% endschema %}

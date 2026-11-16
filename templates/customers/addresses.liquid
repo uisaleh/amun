@@ -1,0 +1,28 @@
+<section style="max-width: 720px; margin: 0 auto; padding: 72px 24px; display: flex; flex-direction: column; gap: 18px">
+  <a href="{{ routes.account_url }}" style="font-size: 12px; text-decoration: underline">Back to account</a>
+  <h1 style="margin: 0; font-size: 28px">Addresses</h1>
+  {%- paginate customer.addresses by 10 -%}
+    {%- for address in customer.addresses -%}
+      <div style="padding: 14px; background: #F6F2EA; font-size: 14px">{% if address == customer.default_address %}<strong>Default</strong><br>{% endif %}{{ address | format_address }}
+        {%- form 'customer_address', address -%}<input type="hidden" name="_method" value="delete"><button type="submit" class="link-btn" style="margin-top: 8px">Delete</button>{%- endform -%}
+      </div>
+    {%- endfor -%}
+  {%- endpaginate -%}
+  <h2 style="margin: 12px 0 0; font-size: 18px">Add a new address</h2>
+  {%- form 'customer_address', customer.new_address -%}
+    <div style="display: flex; flex-direction: column; gap: 12px">
+      {{ form.errors | default_errors }}
+      <input type="text" name="address[first_name]" placeholder="First name" value="{{ form.first_name }}" style="height: 50px; padding: 0 14px; border: 1px solid #121212; border-radius: 0; background: #fff; font-size: 14px; width: 100%">
+      <input type="text" name="address[last_name]" placeholder="Last name" value="{{ form.last_name }}" style="height: 50px; padding: 0 14px; border: 1px solid #121212; border-radius: 0; background: #fff; font-size: 14px; width: 100%">
+      <input type="text" name="address[address1]" placeholder="Address" value="{{ form.address1 }}" style="height: 50px; padding: 0 14px; border: 1px solid #121212; border-radius: 0; background: #fff; font-size: 14px; width: 100%">
+      <input type="text" name="address[address2]" placeholder="Apartment, suite, etc." value="{{ form.address2 }}" style="height: 50px; padding: 0 14px; border: 1px solid #121212; border-radius: 0; background: #fff; font-size: 14px; width: 100%">
+      <input type="text" name="address[city]" placeholder="City" value="{{ form.city }}" style="height: 50px; padding: 0 14px; border: 1px solid #121212; border-radius: 0; background: #fff; font-size: 14px; width: 100%">
+      <select name="address[country]" data-default="{{ form.country }}" style="height: 50px; padding: 0 14px; border: 1px solid #121212; border-radius: 0; background: #fff; font-size: 14px; width: 100%">{{ all_country_option_tags }}</select>
+      <input type="text" name="address[province]" placeholder="State / Province" value="{{ form.province }}" style="height: 50px; padding: 0 14px; border: 1px solid #121212; border-radius: 0; background: #fff; font-size: 14px; width: 100%">
+      <input type="text" name="address[zip]" placeholder="ZIP / Postal code" value="{{ form.zip }}" style="height: 50px; padding: 0 14px; border: 1px solid #121212; border-radius: 0; background: #fff; font-size: 14px; width: 100%">
+      <input type="tel" name="address[phone]" placeholder="Phone" value="{{ form.phone }}" style="height: 50px; padding: 0 14px; border: 1px solid #121212; border-radius: 0; background: #fff; font-size: 14px; width: 100%">
+      <label style="display: flex; gap: 10px; align-items: center; font-size: 12px">{{ form.set_as_default_checkbox }} Set as default address</label>
+      <button type="submit" class="atc-dark" style="height: 50px; background: #585128; color: #fff; border: 1px solid #585128; border-radius: 0; font-size: 14px; cursor: pointer; width: 100%">Add Address</button>
+    </div>
+  {%- endform -%}
+</section>

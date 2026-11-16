@@ -1,0 +1,19 @@
+{%- if settings.popup_enabled -%}
+<div data-popup hidden style="position: fixed; inset: 0; z-index: 120; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(18, 18, 18, 0.55)">
+  <div role="dialog" aria-modal="true" aria-labelledby="pop-h" data-popup-box style="position: relative; width: 100%; max-width: 760px; max-height: calc(100vh - 32px); overflow: auto; display: flex; flex-wrap: wrap; background: #FEF9F6; color: #121212; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3)">
+    {%- if settings.popup_image != blank -%}
+      {{ settings.popup_image | image_url: width: 900 | image_tag: class: 'pop-img', alt: '', loading: 'lazy', style: 'flex: 1 1 300px; min-width: 0; width: 100%; min-height: 420px; object-fit: cover; object-position: 30% center; display: block' }}
+    {%- else -%}
+      <img width="1200" height="1200" class="pop-img" src="{{ 'amun-fb28d4cdcc.jpg' | asset_url }}" alt="" loading="lazy" style="flex: 1 1 300px; min-width: 0; width: 100%; min-height: 420px; object-fit: cover; object-position: 30% center; display: block; height: auto">
+    {%- endif -%}
+    <div class="pop-body" style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; justify-content: center; gap: 16px; padding: 48px 36px">
+      {% render 'icon-logo', size: 'small' %}
+      <h2 id="pop-h" style="margin: 0; font-size: 28px; line-height: 34px">{{ settings.popup_heading | escape }}</h2>
+      <p data-popup-intro style="margin: 0; font-size: 14px; line-height: 20px">{{ settings.popup_text | escape }}</p>
+      {% render 'newsletter-form', form_id: 'NewsletterPopup', variant: 'popup' %}
+      <button type="button" data-close-popup data-popup-nothanks style="align-self: flex-start; padding: 4px 0; background: none; border: 0; color: #121212; font-size: 12px; text-decoration: underline; cursor: pointer">No thanks</button>
+    </div>
+    <button type="button" aria-label="Close" data-close-popup style="position: absolute; top: 10px; right: 10px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: #FEF9F6; border: 0; border-radius: 0; cursor: pointer"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#121212" stroke-width="1.2"><path d="M1 1l12 12M13 1L1 13"></path></svg></button>
+  </div>
+</div>
+{%- endif -%}

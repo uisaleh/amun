@@ -1,0 +1,14 @@
+<section style="padding: 42px 24px 72px">
+  <h1 style="margin: 0 0 42px; font-size: 23px; line-height: 23px; text-align: center">Collections</h1>
+  <div class="pgrid" style="max-width: 1300px; margin: 0 auto">
+    {%- for c in collections -%}
+      <a href="{{ c.url }}" class="pcard" style="text-decoration: none">
+        <span class="pcard__media">{% if c.featured_image %}{{ c.featured_image | image_url: width: 800 | image_tag: alt: '', loading: 'lazy' }}{% endif %}</span>
+        <span class="pcard__title" style="font-family: 'Sentient', Georgia, serif">{% render 'title-case', text: c.title %}</span>
+      </a>
+    {%- endfor -%}
+  </div>
+</section>
+{% schema %}
+{ "name": "Collections list", "settings": [] }
+{% endschema %}

@@ -1,0 +1,29 @@
+{%- comment -%}Email signup that adds the customer to Shopify marketing and reveals the 10% code. Params: form_id, variant (footer | popup | band){%- endcomment -%}
+{%- assign code = settings.newsletter_code | default: 'WELCOME10' -%}
+{%- form 'customer', id: form_id, novalidate: 'novalidate', class: 'nl-form', data-nl-form: variant -%}
+  <input type="hidden" name="contact[tags]" value="newsletter, welcome-10">
+  {%- if form.posted_successfully? -%}
+    <div role="status" data-nl-done style="display: flex; flex-direction: column; gap: 10px">
+      <p style="margin: 0; font-size: 13px; line-height: 18.2px">Welcome to Amun. Here’s your 10% off code — it’s already applied to your cart.</p>
+      <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap"><span style="display: inline-flex; align-items: center; height: 40px; padding: 0 16px; border: 1px dashed #121212; font-size: 15px; letter-spacing: 1.5px">{{ code | escape }}</span><button type="button" data-copy-code="{{ code | escape }}" style="height: 40px; padding: 0 16px; background: #121212; color: #ffffff; border: 1px solid #121212; border-radius: 0; font-size: 12px; cursor: pointer">Copy Code</button></div>
+    </div>
+  {%- else -%}
+    {%- if variant == 'popup' -%}
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <label for="{{ form_id }}-email" class="visually-hidden">Email address</label>
+        <input id="{{ form_id }}-email" name="contact[email]" type="email" autocomplete="email" required placeholder="Enter your email" style="height: 48px; padding: 0 14px; border: 1px solid #121212; border-radius: 0; background: #ffffff; color: #121212; font-size: 14px">
+        <p class="form-msg form-msg--error" role="alert" data-nl-error {% unless form.errors %}hidden{% endunless %}>{% if form.errors %}{{ form.errors.messages['email'] | default: 'Please enter a valid email address.' }}{% endif %}</p>
+        <button type="submit" class="atc-dark" style="height: 48px; background: #585128; color: #ffffff; border: 1px solid #585128; border-radius: 0; font-size: 14px; cursor: pointer">Get My 10% Off</button>
+      </div>
+    {%- else -%}
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <div style="display: flex; align-items: center; gap: 14px">
+          <label for="{{ form_id }}-email" class="visually-hidden">Email address</label>
+          <input id="{{ form_id }}-email" name="contact[email]" type="email" autocomplete="email" required placeholder="Enter your email" style="flex: 1 1 auto; min-width: 0; height: 30px; padding: 0 0 0 16px; border: 1px solid #121212; background: {% if variant == 'band' %}#ffffff{% else %}#9FA383{% endif %}; color: #121212; font-size: 12px; border-radius: 0">
+          <button type="submit" style="background: none; border: 0; color: #121212; font-size: 12px; font-weight: 700; text-transform: uppercase; text-decoration: underline; cursor: pointer; padding: 8px 0">Subscribe</button>
+        </div>
+        <p class="form-msg form-msg--error" role="alert" data-nl-error {% unless form.errors %}hidden{% endunless %} style="color: #5a1010">{% if form.errors %}{{ form.errors.messages['email'] | default: 'Please enter a valid email address.' }}{% endif %}</p>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+{%- endform -%}

@@ -1,0 +1,22 @@
+{%- layout none -%}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Your {{ gift_card.balance | money }} gift card – {{ shop.name }}</title>
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+  {{ content_for_header }}
+</head>
+<body>
+  <main style="max-width: 560px; margin: 0 auto; padding: 72px 24px; display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center">
+    <img src="{{ 'amun-logo.png' | asset_url }}" alt="{{ shop.name | escape }}" width="118" height="30">
+    <h1 style="margin: 0; font-size: 28px">Your gift card</h1>
+    <p style="margin: 0; font-size: 34px; font-family: 'Sentient', Georgia, serif">{{ gift_card.balance | money }}</p>
+    {%- if gift_card.enabled == false or gift_card.expired -%}<p style="margin: 0">This gift card is no longer active.</p>{%- endif -%}
+    <p style="margin: 0; font-size: 18px; letter-spacing: 2px; padding: 12px 20px; border: 1px dashed #121212">{{ gift_card.code | format_code }}</p>
+    {%- if gift_card.expires_on -%}<p style="margin: 0; font-size: 12px">Expires {{ gift_card.expires_on | date: '%B %-d, %Y' }}</p>{%- endif -%}
+    {%- if gift_card.pass_url -%}<a href="{{ gift_card.pass_url }}"><img src="{{ 'gift-card/add-to-apple-wallet.svg' | shopify_asset_url }}" width="120" height="40" alt="Add to Apple Wallet" loading="lazy"></a>{%- endif -%}
+    <a href="{{ shop.url }}" class="atc-dark" style="display: inline-flex; align-items: center; justify-content: center; height: 50px; min-width: 200px; padding: 0 24px; background: #585128; color: #fff">Start Shopping</a>
+  </main>
+</body>
+</html>

@@ -1,0 +1,231 @@
+{%- liquid
+  assign h = product.handle
+  capture nm
+    render 'amun-data', handle: h, key: 'name'
+  endcapture
+  capture size
+    render 'amun-data', handle: h, key: 'size'
+  endcapture
+  capture desc
+    render 'amun-data', handle: h, key: 'desc'
+  endcapture
+  capture free_of
+    render 'amun-data', handle: h, key: 'free_of'
+  endcapture
+  capture benefits
+    render 'amun-data', handle: h, key: 'benefits'
+  endcapture
+  capture panels
+    render 'amun-data', handle: h, key: 'panels'
+  endcapture
+  capture gallery
+    render 'amun-data', handle: h, key: 'gallery'
+  endcapture
+  capture zoom
+    render 'amun-data', handle: h, key: 'zoom'
+  endcapture
+  capture routine
+    render 'amun-data', handle: h, key: 'routine'
+  endcapture
+  capture routine_title
+    render 'amun-data', handle: h, key: 'routine_title'
+  endcapture
+  capture reviews
+    render 'amun-data', handle: h, key: 'reviews'
+  endcapture
+
+  assign v = product.selected_or_first_available_variant
+  assign use_gal = false
+  if settings.use_design_images and gallery != blank
+    assign use_gal = true
+    assign gal_items = gallery | split: '~~'
+  endif
+  if zoom == blank
+    assign zoom = 'none'
+  endif
+  assign review_list = reviews | split: '~~'
+  assign review_count = review_list.size
+  assign has_plans = false
+  if product.selling_plan_groups.size > 0
+    assign has_plans = true
+    assign first_alloc = v.selling_plan_allocations | first
+  endif
+  assign klarna = v.price | divided_by: 4
+-%}
+<section style="padding: 28px 24px 72px" data-product data-product-handle="{{ product.handle }}">
+  <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 42px 60px; align-items: flex-start">
+
+    <div class="gal" data-gallery>
+      <div class="gal-peek">
+        <div class="gal-peek__track" data-gal-peek>
+          {%- if use_gal -%}
+            {%- for it in gal_items -%}
+              {%- assign f = it | split: '^^' -%}
+              <div class="gal-peek__item"><img width="1200" height="1200" src="{{ f[0] | asset_url }}" alt="{{ f[1] | escape }}" {% unless forloop.first %}loading="lazy"{% endunless %} style="transform: {% if forloop.first %}{{ zoom }}{% else %}none{% endif %}; height: 100%"></div>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for m in product.media -%}
+              <div class="gal-peek__item">{{ m | image_url: width: 900 | image_tag: alt: m.alt, loading: 'lazy' }}</div>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+      </div>
+      <div class="gal-thumbs">
+        <button type="button" aria-label="Previous image" data-gal-prev style="flex: 0 0 auto; width: 44px; height: 24px; background: none; border: 0; cursor: pointer"><svg aria-hidden="true" width="14" height="8" viewBox="0 0 14 8" fill="none" stroke="#000" stroke-width="1"><path d="M1 7l6-6 6 6"></path></svg></button>
+        {%- if use_gal -%}
+          {%- for it in gal_items -%}
+            {%- assign f = it | split: '^^' -%}
+            <button type="button" class="gal-thumb" aria-label="Show image: {{ f[1] | escape }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}" data-gal-thumb="{{ forloop.index0 }}" data-src="{{ f[0] | asset_url }}" data-alt="{{ f[1] | escape }}" data-zoom="{% if forloop.first %}{{ zoom }}{% else %}none{% endif %}"><img width="1200" height="1200" src="{{ f[0] | asset_url }}" alt="" loading="lazy"></button>
+          {%- endfor -%}
+        {%- else -%}
+          {%- for m in product.media -%}
+            <button type="button" class="gal-thumb" aria-label="Show image {{ forloop.index }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}" data-gal-thumb="{{ forloop.index0 }}" data-src="{{ m | image_url: width: 1100 }}" data-alt="{{ m.alt | escape }}" data-zoom="none">{{ m | image_url: width: 160 | image_tag: alt: '', loading: 'lazy' }}</button>
+          {%- endfor -%}
+        {%- endif -%}
+        <button type="button" aria-label="Next image" data-gal-next style="flex: 0 0 auto; width: 44px; height: 24px; background: none; border: 0; cursor: pointer"><svg aria-hidden="true" width="14" height="8" viewBox="0 0 14 8" fill="none" stroke="#000" stroke-width="1"><path d="M1 1l6 6 6-6"></path></svg></button>
+      </div>
+      <div class="gal-main">
+        {%- if use_gal -%}
+          {%- assign f = gal_items[0] | split: '^^' -%}
+          <img width="1200" height="1200" src="{{ f[0] | asset_url }}" alt="{{ f[1] | escape }}" data-gal-main style="transform: {{ zoom }}; height: 100%">
+        {%- elsif product.featured_media -%}
+          {{ product.featured_media | image_url: width: 1100 | image_tag: alt: product.featured_media.alt, data-gal-main: '' }}
+        {%- endif -%}
+      </div>
+      <button type="button" class="gal-arrow gal-arrow--prev" aria-label="Previous photo" data-gal-prev><svg aria-hidden="true" width="10" height="18" viewBox="0 0 10 18" fill="none" stroke="#121212" stroke-width="1.2"><path d="M9 1L1 9l8 8"></path></svg></button>
+      <button type="button" class="gal-arrow gal-arrow--next" aria-label="Next photo" data-gal-next><svg aria-hidden="true" width="10" height="18" viewBox="0 0 10 18" fill="none" stroke="#121212" stroke-width="1.2"><path d="M1 1l8 8-8 8"></path></svg></button>
+    </div>
+
+    <div class="pinfo" style="flex: 1 1 400px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+      <h1 style="margin: 0; font-size: 23px; line-height: 32.2px">{% if nm != blank %}{{ nm | escape }}{% else %}{% render 'title-case', text: product.title %}{% endif %}</h1>
+      <p class="pinfo-price" style="margin: 0; font-size: 18px; line-height: 25.2px"><span data-price>{{ v.price | money }}</span>{% if v.compare_at_price > v.price %} <s data-compare style="font-size: 14px; color: #4a4a40">{{ v.compare_at_price | money }}</s>{% endif %} <span style="font-size: 12px; line-height: 16.8px">· {% if size != blank %}{{ size | escape }}{% else %}{{ v.title | escape }}{% endif %}</span></p>
+
+      {%- if desc != blank -%}
+        <div class="desc-clip" data-desc>
+          {%- assign paras = desc | split: '~~' -%}
+          {%- for para in paras -%}<p style="margin: 0; font-size: 14px; line-height: 19.6px">{{ para | escape }}</p>{%- endfor -%}
+        </div>
+      {%- else -%}
+        <div class="desc-clip rte" data-desc style="font-size: 14px; line-height: 19.6px">{{ product.description }}</div>
+      {%- endif -%}
+      <button type="button" class="desc-toggle" data-desc-toggle aria-expanded="false" style="align-self: flex-start; margin-top: -6px; padding: 0; background: none; border: 0; font-size: 14px; line-height: 19.6px; color: #000000; text-decoration: underline; cursor: pointer">Read more</button>
+      {%- if free_of != blank -%}
+        <p class="free-of" style="margin: 0; font-size: 12px; line-height: 16.8px; display: flex; flex-wrap: wrap; gap: 10px">{{ free_of | escape }}</p>
+      {%- endif -%}
+      <a href="#reviews" class="rev-link" style="font-size: 14px; text-decoration: underline; align-self: flex-start">{% if review_count > 0 %}★ 5.0 · Read {{ review_count }} {% if review_count == 1 %}Review{% else %}Reviews{% endif %}{% else %}Be the first to review this product{% endif %}</a>
+
+      {%- form 'product', product, id: 'ProductForm', data-product-form: '', novalidate: 'novalidate' -%}
+        <input type="hidden" name="id" value="{{ v.id }}" data-variant-id>
+        <input type="hidden" name="selling_plan" value="" data-selling-plan>
+        <div style="display: flex; flex-direction: column; gap: 14px">
+          {%- unless product.has_only_default_variant -%}
+            <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px">Option
+              <span style="position: relative; display: inline-flex; align-items: center; align-self: flex-start">
+                <select data-variant-select style="appearance: none; -webkit-appearance: none; height: 40px; min-width: 200px; padding: 0 40px 0 14px; border: 1px solid #000000; border-radius: 0; background: #ffffff; color: #000000; font-size: 13px; cursor: pointer">
+                  {%- for variant in product.variants -%}
+                    <option value="{{ variant.id }}" data-price="{{ variant.price | money }}" data-cents="{{ variant.price }}"{% if variant.id == v.id %} selected{% endif %}{% unless variant.available %} disabled{% endunless %}>{{ variant.title | escape }}{% unless variant.available %} — Sold out{% endunless %}</option>
+                  {%- endfor -%}
+                </select>
+                <svg aria-hidden="true" width="12" height="7" viewBox="0 0 12 7" fill="none" stroke="#000" stroke-width="1" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); pointer-events: none"><path d="M1 1l5 5 5-5"></path></svg>
+              </span>
+            </label>
+          {%- endunless -%}
+
+          {%- if has_plans -%}
+            <fieldset class="radio-row" style="border: 0; margin: 4px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 24px; font-size: 12px; line-height: 16.8px">
+              <legend class="visually-hidden">Purchase option</legend>
+              {%- unless product.requires_selling_plan -%}
+                <label><input type="radio" name="purchase_type" value="once" checked data-buy-once>One-time purchase - {{ v.price | money_without_trailing_zeros }}</label>
+              {%- endunless -%}
+              <label><input type="radio" name="purchase_type" value="sub" data-buy-sub{% if product.requires_selling_plan %} checked{% endif %}>Subscribe &amp; save {% if first_alloc.selling_plan.price_adjustments.first.value_type == 'percentage' %}{{ first_alloc.selling_plan.price_adjustments.first.value }}%{% endif %} - <span data-sub-price>{{ first_alloc.price | money }}</span></label>
+            </fieldset>
+            <div data-sub-opts {% unless product.requires_selling_plan %}hidden{% endunless %} style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; font-size: 12px; line-height: 16.8px">
+              <label for="freq-{{ section.id }}" style="font-size: 12px">Deliver every</label>
+              <span style="position: relative; display: inline-flex; align-items: center">
+                <select id="freq-{{ section.id }}" data-plan-select style="appearance: none; -webkit-appearance: none; height: 36px; min-width: 132px; padding: 0 40px 0 14px; border: 1px solid #000000; border-radius: 0; background: #ffffff; color: #000000; font-size: 12px; line-height: 16.8px; cursor: pointer">
+                  {%- for group in product.selling_plan_groups -%}
+                    {%- for plan in group.selling_plans -%}
+                      {%- assign alloc = v.selling_plan_allocations | where: 'selling_plan_id', plan.id | first -%}
+                      {%- assign plan_label = plan.name | split: ',' | first | remove: 'Deliver every ' | remove: 'Delivery every ' | strip | capitalize -%}
+                      <option value="{{ plan.id }}" data-price="{{ alloc.price | money }}">{{ plan_label | escape }}</option>
+                    {%- endfor -%}
+                  {%- endfor -%}
+                </select>
+                <svg aria-hidden="true" width="12" height="7" viewBox="0 0 12 7" fill="none" stroke="#000" stroke-width="1" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); pointer-events: none"><path d="M1 1l5 5 5-5"></path></svg>
+              </span>
+              <span>Auto-renews. Skip or cancel anytime.</span>
+            </div>
+          {%- endif -%}
+
+          <div class="buyrow" style="display: flex; gap: 14px; flex-wrap: wrap">
+            <div style="display: flex; align-items: center; border: 1px solid #000000; height: 50px">
+              <button type="button" aria-label="Decrease quantity" data-qty-dec style="width: 44px; height: 48px; background: #ffffff; border: 0; font-size: 16px; cursor: pointer; color: #000">−</button>
+              <input type="number" name="quantity" value="1" min="1" aria-label="Quantity" data-qty style="width: 32px; border: 0; text-align: center; font-size: 14px; background: #fff; -moz-appearance: textfield; appearance: textfield">
+              <button type="button" aria-label="Increase quantity" data-qty-inc style="width: 44px; height: 48px; background: #ffffff; border: 0; font-size: 16px; cursor: pointer; color: #000">+</button>
+            </div>
+            <button type="submit" class="atc-dark" data-atc {% unless v.available %}disabled{% endunless %} style="flex: 1 1 220px; height: 50px; background: #585128; color: #ffffff; border: 1px solid #585128; border-radius: 0; font-size: 14px; cursor: pointer">{% if v.available %}Add to Cart - {{ v.price | money_without_trailing_zeros }}{% else %}Sold Out{% endif %}</button>
+          </div>
+          <p class="form-msg form-msg--error" role="alert" data-form-error hidden></p>
+        </div>
+      {%- endform -%}
+      <p style="margin: 0; font-size: 12px; line-height: 16.8px">or 4 interest-free payments of <span data-klarna-pdp>{{ klarna | money }}</span> with <strong style="font-weight: 700">Klarna.</strong></p>
+
+      {%- if benefits != blank -%}
+        <div style="background: #DFDDD0; padding: 14px; display: flex; flex-direction: column; gap: 8px">
+          <span style="font-size: 14px; line-height: 19.6px">Benefits</span>
+          <ul style="margin: 0; padding: 0 0 0 18px; display: flex; flex-direction: column; gap: 4px; font-size: 12px; line-height: 16.8px">
+            {%- assign items = benefits | split: '~~' -%}
+            {%- for b in items -%}<li>{{ b | escape }}</li>{%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+
+      {%- if panels != blank -%}
+        <div style="display: flex; flex-direction: column; border-top: 1px solid #000000; margin-top: 10px">
+          {%- assign items = panels | split: '~~' -%}
+          {%- for pn in items -%}
+            {%- assign f = pn | split: '^^' -%}
+            <div style="border-bottom: 1px solid #000000" data-acc>
+              <button type="button" class="ptabs-btn" aria-expanded="false" data-acc-btn><span>{{ f[0] | escape }}</span><span aria-hidden="true" data-acc-mark>+</span></button>
+              <p hidden data-acc-body style="margin: 0; padding: 0 0 18px; font-size: 14px; line-height: 19.6px">{{ f[1] | escape }}</p>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- if routine != blank -%}
+        <h2 style="margin: 14px 0 0; font-size: 16px; line-height: 22.4px">{{ routine_title | escape }}</h2>
+        {%- assign items = routine | split: '~~' -%}
+        {%- for rh in items -%}
+          {%- assign rp = all_products[rh] -%}
+          {%- if rp != blank and rp.id -%}
+            {% render 'routine-item', product: rp %}
+          {%- endif -%}
+        {%- endfor -%}
+        <p style="margin: 0; font-size: 12px; line-height: 16.8px">Pick your favorites and save with <a href="{{ routes.collections_url }}/bundle" style="text-decoration: underline">Bundle &amp; Save</a></p>
+        <p style="margin: 0; font-size: 12px; line-height: 16.8px">Have a question? <a href="/pages/faqs" style="text-decoration: underline">Read our FAQ</a></p>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="sticky-atc" data-sticky-atc role="region" aria-label="Quick add to cart" aria-hidden="true">
+    {%- if use_gal -%}
+      {%- assign f = gal_items[0] | split: '^^' -%}
+      <img src="{{ f[0] | asset_url }}" alt="" width="44" height="54" loading="lazy" style="flex: 0 0 44px; width: 44px; height: 54px; object-fit: cover; background: #efefea; display: block">
+    {%- elsif product.featured_media -%}
+      {{ product.featured_media | image_url: width: 120 | image_tag: alt: '', loading: 'lazy', style: 'flex: 0 0 44px; width: 44px; height: 54px; object-fit: cover; background: #efefea; display: block' }}
+    {%- endif -%}
+    <span style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; line-height: 17px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{% if nm != blank %}{{ nm | escape }}{% else %}{% render 'title-case', text: product.title %}{% endif %}</span><span data-sticky-price style="font-size: 12px; line-height: 16px">{{ v.price | money }}</span></span>
+    <button type="button" class="atc-dark" data-sticky-btn tabindex="-1" style="flex: 0 0 auto; height: 46px; padding: 0 18px; background: #585128; color: #ffffff; border: 1px solid #585128; border-radius: 0; font-size: 13px; cursor: pointer">Add to Cart</button>
+  </div>
+  <script type="application/json" data-product-json>{{ product | json }}</script>
+</section>
+
+{% schema %}
+{
+  "name": "Product information",
+  "settings": [
+    { "type": "paragraph", "content": "Product text, benefits, ingredients and gallery for the Amun products come from the Amun design. Products without design content use their Shopify details automatically." }
+  ]
+}
+{% endschema %}

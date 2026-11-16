@@ -1,0 +1,24 @@
+<section style="padding: 20px 24px 0">
+  <div style="max-width: 1300px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center">
+    <h1 style="margin: 0; font-size: 23px; line-height: 23px">{{ section.settings.heading | escape }}</h1>
+    {%- if section.settings.text != blank -%}<p style="margin: 0; font-size: 16px; line-height: 22.4px">{{ section.settings.text | escape }}</p>{%- endif -%}
+  </div>
+</section>
+<section aria-label="Products" style="padding: 16px 24px 72px">
+  <div class="pgrid" style="max-width: 1300px; margin: 0 auto; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 72px 60px">
+    {%- for p in section.settings.products -%}
+      <div style="display: flex">{% render 'product-card', product: p, strike: true %}</div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Picked products page",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Best Sellers" },
+    { "type": "text", "id": "text", "label": "Intro", "default": "The tallow formulas our community reaches for most." },
+    { "type": "product_list", "id": "products", "label": "Products", "limit": 24 }
+  ]
+}
+{% endschema %}

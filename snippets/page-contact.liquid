@@ -1,0 +1,27 @@
+<section style="padding: 84px 24px 72px">
+  <div style="max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center">
+    <h1 style="margin: 0; font-size: 34px; line-height: 40px">Contact Us</h1>
+    <p style="margin: 14px 0 0; font-size: 16px; line-height: 22.4px">We'd love to chat all things tallow, ritual, hair, skin and general well-being.<br>We do our best to answer all inquiries within 1-2 business days. Please allow additional time for a response during US holidays and promotional periods.</p>
+  </div>
+  <div style="max-width: 680px; margin: 60px auto 0">
+    {%- form 'contact', id: 'ContactForm' -%}
+      {%- if form.posted_successfully? -%}
+        <p role="status" style="margin: 0 0 30px; padding: 14px; background: #DFDDD0; font-size: 14px; line-height: 19.6px">Thank you for reaching out. We’ll get back to you within 1-2 business days.</p>
+      {%- endif -%}
+      {%- if form.errors -%}
+        <p role="alert" style="margin: 0 0 30px; font-size: 14px; color: #8a1c1c">{{ form.errors | default_errors }}</p>
+      {%- endif -%}
+      <div style="display: flex; flex-direction: column; gap: 30px">
+        <label for="c-first" class="visually-hidden">First Name</label>
+        <input id="c-first" name="contact[First name]" type="text" autocomplete="given-name" placeholder="First Name" style="height: 52px; padding: 0 18px; border: 1px solid #000000; border-radius: 0; background: #ffffff; color: #000000; font-size: 14px">
+        <label for="c-last" class="visually-hidden">Last Name</label>
+        <input id="c-last" name="contact[Last name]" type="text" autocomplete="family-name" placeholder="Last Name" style="height: 52px; padding: 0 18px; border: 1px solid #000000; border-radius: 0; background: #ffffff; color: #000000; font-size: 14px">
+        <label for="c-email" class="visually-hidden">Email</label>
+        <input id="c-email" name="contact[email]" type="email" autocomplete="email" required placeholder="Email" style="height: 52px; padding: 0 18px; border: 1px solid #000000; border-radius: 0; background: #ffffff; color: #000000; font-size: 14px">
+        <label for="c-comment" class="visually-hidden">Comment</label>
+        <textarea id="c-comment" name="contact[body]" rows="8" placeholder="Comment" style="min-height: 192px; padding: 18px; border: 1px solid #000000; border-radius: 0; background: #ffffff; color: #000000; font-size: 14px; line-height: 19.6px; resize: vertical"></textarea>
+        <button type="submit" class="atc-dark" style="margin-top: 6px; height: 50px; background: #585128; color: #ffffff; border: 1px solid #585128; border-radius: 0; font-size: 14px; cursor: pointer">Submit</button>
+      </div>
+    {%- endform -%}
+  </div>
+</section>

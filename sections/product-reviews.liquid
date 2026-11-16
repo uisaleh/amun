@@ -1,0 +1,81 @@
+{%- liquid
+  capture reviews
+    render 'amun-data', handle: product.handle, key: 'reviews'
+  endcapture
+  assign list = reviews | split: '~~'
+  assign has_app = false
+  for block in section.blocks
+    if block.type == '@app'
+      assign has_app = true
+    endif
+  endfor
+-%}
+<section id="reviews" aria-labelledby="rev-h" style="padding: 0 24px 56px">
+  <div style="max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px">
+    {%- if has_app -%}
+      <h2 id="rev-h" style="margin: 0; font-size: 23px; line-height: 28px">Reviews</h2>
+      {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}{% render block %}{%- endif -%}
+      {%- endfor -%}
+    {%- else -%}
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px 24px; padding-bottom: 14px; border-bottom: 1px solid #121212">
+        <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px"><h2 id="rev-h" style="margin: 0; font-size: 23px; line-height: 28px">Reviews</h2>{% if list.size > 0 %}<span style="font-size: 14px; line-height: 20px"><span aria-hidden="true">★ </span>5.0 · {{ list.size }} Reviews</span>{% endif %}</div>
+        <button type="button" data-review-toggle aria-expanded="false" style="height: 44px; padding: 0 20px; background: #ffffff; border: 1px solid #121212; border-radius: 0; color: #121212; font-size: 15px; line-height: 20px; font-weight: 700; cursor: pointer">Write A Review</button>
+      </div>
+
+      {%- form 'contact', id: 'ReviewForm', data-review-form: '' -%}
+        {%- if form.posted_successfully? -%}
+          <p role="status" style="margin: 0; padding: 14px; background: #DFDDD0; font-size: 14px; line-height: 19.6px">Thank you! Your review was sent and will appear here once it’s approved.</p>
+        {%- else -%}
+          <div data-review-panel {% unless form.errors %}hidden{% endunless %} style="display: flex; flex-direction: column; gap: 18px; border: 1px solid #000000; padding: 24px">
+            {%- if form.errors -%}<p role="alert" style="margin: 0; font-size: 14px; line-height: 20px; color: #8a1c1c">{{ form.errors | default_errors }}</p>{%- endif -%}
+            <h3 style="margin: 0; font-size: 18px; line-height: 25.2px">Write A Review</h3>
+            <input type="hidden" name="contact[Review for]" value="{{ product.title | escape }} ({{ shop.url }}{{ product.url }})">
+            <input type="hidden" name="contact[Rating]" value="5" data-rating-input>
+            <div role="radiogroup" aria-label="Your rating" style="display: flex; align-items: center; gap: 4px">
+              <span style="font-size: 12px; margin-right: 10px">Rating</span>
+              {%- for i in (1..5) -%}
+                <button type="button" role="radio" class="star-pick" aria-checked="{% if i == 5 %}true{% else %}false{% endif %}" aria-label="{{ i }} star{% if i > 1 %}s{% endif %}" data-star="{{ i }}">★</button>
+              {%- endfor -%}
+            </div>
+            <label class="field">Name<input name="contact[name]" type="text" required autocomplete="name" placeholder="Your name"></label>
+            <label class="field">Email<input name="contact[email]" type="email" required autocomplete="email" placeholder="So we can follow up (not shown)"></label>
+            <label class="field">Review title<input name="contact[Review title]" type="text" required placeholder="Give your review a title"></label>
+            <label class="field">Review<textarea name="contact[body]" required rows="5" placeholder="Share your experience"></textarea></label>
+            <div style="display: flex; gap: 14px; flex-wrap: wrap">
+              <button type="submit" class="atc-dark" style="height: 50px; padding: 0 32px; background: #585128; color: #ffffff; border: 1px solid #585128; border-radius: 0; font-size: 14px; cursor: pointer">Submit Review</button>
+              <button type="button" data-review-toggle style="height: 50px; padding: 0 24px; background: #ffffff; color: #000000; border: 1px solid #000000; border-radius: 0; font-size: 14px; cursor: pointer">Cancel</button>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endform -%}
+
+      {%- if list.size > 0 -%}
+        <div class="rev-grid" data-rev-grid>
+          {%- for r in list -%}
+            {%- assign f = r | split: '^^' -%}
+            <article class="rev-card{% if forloop.index > 4 %} is-hidden{% endif %}">
+              <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 12px"><span style="font-size: 15px; line-height: 20px; font-weight: 700">{{ f[0] | escape }}</span></div>
+              <h3 style="margin: 0; font-size: 14px; line-height: 19.6px; font-style: italic">{{ f[1] | escape }}</h3>
+              <p style="margin: 0; font-size: 14px; line-height: 20px">{{ f[2] | escape }}</p>
+            </article>
+          {%- endfor -%}
+        </div>
+        {%- if list.size > 4 -%}
+          <button type="button" class="atc" data-rev-more style="align-self: center; margin-top: 6px; height: 50px; min-width: 200px; padding: 0 24px; border: 1px solid #000000; background: #ffffff; color: #000000; font-size: 14px; border-radius: 0; cursor: pointer">View More</button>
+        {%- endif -%}
+      {%- else -%}
+        <p style="margin: 24px 0 0; text-align: center; font-size: 14px; line-height: 19.6px">Be the first to review this product</p>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Reviews",
+  "settings": [],
+  "blocks": [{ "type": "@app" }],
+  "enabled_on": { "templates": ["product"] }
+}
+{% endschema %}

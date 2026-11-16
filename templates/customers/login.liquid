@@ -1,0 +1,27 @@
+<section style="max-width: 520px; margin: 0 auto; padding: 72px 24px; display: flex; flex-direction: column; gap: 18px">
+  <h1 style="margin: 0; font-size: 34px; line-height: 40px; text-align: center">Login</h1>
+  {%- form 'customer_login' -%}
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      {{ form.errors | default_errors }}
+      <label for="li-email" class="visually-hidden">Email</label><input id="li-email" type="email" name="customer[email]" autocomplete="email" placeholder="Email" required style="height: 50px; padding: 0 14px; border: 1px solid #121212; border-radius: 0; background: #fff; font-size: 14px; width: 100%">
+      {%- if form.password_needed -%}<label for="li-pw" class="visually-hidden">Password</label><input id="li-pw" type="password" name="customer[password]" autocomplete="current-password" placeholder="Password" style="height: 50px; padding: 0 14px; border: 1px solid #121212; border-radius: 0; background: #fff; font-size: 14px; width: 100%">{%- endif -%}
+      <button type="submit" class="atc-dark" style="height: 50px; background: #585128; color: #fff; border: 1px solid #585128; border-radius: 0; font-size: 14px; cursor: pointer; width: 100%">Sign In</button>
+      <a href="#recover" style="font-size: 12px; text-decoration: underline; text-align: center">Forgot your password?</a>
+      <a href="{{ routes.account_register_url }}" style="font-size: 12px; text-decoration: underline; text-align: center">Create account</a>
+    </div>
+  {%- endform -%}
+  <div id="recover" style="margin-top: 24px; display: flex; flex-direction: column; gap: 14px">
+    <h2 style="margin: 0; font-size: 18px">Reset your password</h2>
+    {%- form 'recover_customer_password' -%}
+      {%- if form.posted_successfully? -%}<p style="margin: 0 0 10px; font-size: 14px">We’ve sent you an email with a link to update your password.</p>{%- endif -%}
+      {{ form.errors | default_errors }}
+      <div style="display: flex; flex-direction: column; gap: 14px">
+        <label for="rc-email" class="visually-hidden">Email</label><input id="rc-email" type="email" name="email" autocomplete="email" placeholder="Email" style="height: 50px; padding: 0 14px; border: 1px solid #121212; border-radius: 0; background: #fff; font-size: 14px; width: 100%">
+        <button type="submit" style="height: 50px; background: #fff; border: 1px solid #121212; border-radius: 0; font-size: 14px; cursor: pointer">Send Reset Link</button>
+      </div>
+    {%- endform -%}
+  </div>
+  {%- if shop.checkout.guest_login -%}
+    {%- form 'guest_login' -%}<button type="submit" style="height: 50px; width: 100%; background: none; border: 1px solid #121212; border-radius: 0; font-size: 14px; cursor: pointer">Continue as guest</button>{%- endform -%}
+  {%- endif -%}
+</section>

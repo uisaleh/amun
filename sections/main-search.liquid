@@ -1,0 +1,30 @@
+<section style="padding: 72px 24px">
+  <div style="max-width: 1300px; margin: 0 auto; display: flex; flex-direction: column; gap: 42px">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center">
+      <h1 style="margin: 0; font-size: 34px; line-height: 40px">Search</h1>
+      <form action="{{ routes.search_url }}" method="get" role="search" style="display: flex; gap: 10px; width: 100%; max-width: 560px">
+        <label for="s-q" class="visually-hidden">Search</label>
+        <input id="s-q" type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search {{ shop.name | escape }}" style="flex: 1 1 auto; min-width: 0; height: 50px; padding: 0 16px; border: 1px solid #121212; border-radius: 0; background: #ffffff; font-size: 14px">
+        <button type="submit" class="atc-dark" style="height: 50px; padding: 0 24px; background: #585128; color: #fff; border: 1px solid #585128; border-radius: 0; font-size: 14px; cursor: pointer">Search</button>
+      </form>
+      {%- if search.performed -%}<p style="margin: 0; font-size: 14px">{{ search.results_count }} result{% if search.results_count != 1 %}s{% endif %} for “{{ search.terms | escape }}”</p>{%- endif -%}
+    </div>
+    {%- if search.performed -%}
+      {%- paginate search.results by 24 -%}
+        <div class="pgrid">
+          {%- for item in search.results -%}
+            {%- if item.object_type == 'product' -%}
+              <div style="display: flex">{% render 'product-card', product: item %}</div>
+            {%- else -%}
+              <a href="{{ item.url }}" style="display: flex; flex-direction: column; gap: 10px; padding: 24px; background: #F6F2EA; text-decoration: none"><span style="font-size: 12px; text-transform: uppercase">{{ item.object_type }}</span><span style="font-family: 'Sentient', Georgia, serif; font-size: 18px">{{ item.title | escape }}</span></a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+        {%- if paginate.pages > 1 -%}<p style="text-align: center; font-size: 14px">{% if paginate.previous %}<a href="{{ paginate.previous.url }}" style="text-decoration: underline">Previous</a> · {% endif %}Page {{ paginate.current_page }} of {{ paginate.pages }}{% if paginate.next %} · <a href="{{ paginate.next.url }}" style="text-decoration: underline">Next</a>{% endif %}</p>{%- endif -%}
+      {%- endpaginate -%}
+    {%- endif -%}
+  </div>
+</section>
+{% schema %}
+{ "name": "Search results", "settings": [] }
+{% endschema %}

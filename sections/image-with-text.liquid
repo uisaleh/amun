@@ -1,0 +1,45 @@
+{%- liquid
+  assign img_first = false
+  if section.settings.layout == 'image_left'
+    assign img_first = true
+  endif
+-%}
+{%- capture img -%}{% render 'amun-image', image: section.settings.image, fallback: section.settings.fallback, alt: section.settings.alt, style: section.settings.img_style, sizes: '(min-width: 990px) 66vw, 100vw' %}{%- endcapture -%}
+{%- capture copy -%}
+  <div style="flex: 1 1 320px; display: flex; flex-direction: column; align-items: flex-start; gap: 14px; padding: 0 42px">
+    <h2 style="margin: 0; font-size: 18px; line-height: 25.2px">{{ section.settings.heading | escape }}</h2>
+    <p style="margin: 0; font-size: 14px; line-height: 19.6px; max-width: 320px">{{ section.settings.text | escape }}</p>
+    {%- if section.settings.button_label != blank -%}
+      <a href="{{ section.settings.button_link }}" class="btn-outline" style="margin-top: 10px">{{ section.settings.button_label | escape }}</a>
+    {%- endif -%}
+  </div>
+{%- endcapture -%}
+{%- if img_first -%}
+  <section class="easy" style="display: flex; flex-wrap: wrap; align-items: center; gap: 42px 0; padding-top: {{ section.settings.pad_top }}px; padding-bottom: {{ section.settings.pad_bottom }}px">
+    {{ img }}{{ copy }}
+  </section>
+{%- else -%}
+  <section class="split-rev" style="display: flex; flex-wrap: wrap-reverse; align-items: center; gap: 42px 0; padding-top: {{ section.settings.pad_top }}px; padding-bottom: {{ section.settings.pad_bottom }}px">
+    {{ copy }}{{ img }}
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Image with text",
+  "settings": [
+    { "type": "select", "id": "layout", "label": "Layout", "options": [ { "value": "image_right", "label": "Text left, image right" }, { "value": "image_left", "label": "Image left, text right" } ], "default": "image_right" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "fallback", "label": "Built-in design photo" },
+    { "type": "text", "id": "alt", "label": "Image description" },
+    { "type": "text", "id": "img_style", "label": "Image style (advanced)", "default": "flex: 2 1 640px; min-width: 0; width: 100%; height: 600px; object-fit: cover; object-position: center; display: block; background: #c9c3b6" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "A Better Way to Gift" },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop Now" },
+    { "type": "text", "id": "button_link", "label": "Button link", "default": "/collections/all" },
+    { "type": "range", "id": "pad_top", "label": "Top space", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 0 },
+    { "type": "range", "id": "pad_bottom", "label": "Bottom space", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 0 }
+  ],
+  "presets": [{ "name": "Image with text" }]
+}
+{% endschema %}

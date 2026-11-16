@@ -1,0 +1,81 @@
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "announcement": {
+      "type": "announcement-bar",
+      "settings": {
+        "text": "NEW: The Tallow Haircare Collection",
+        "link": "/collections/haircare"
+      }
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "l0": {
+          "type": "left_link",
+          "settings": {
+            "label": "Shop",
+            "url": "/collections/all"
+          }
+        },
+        "l1": {
+          "type": "left_link",
+          "settings": {
+            "label": "Bundle & Save",
+            "url": "/collections/bundle"
+          }
+        },
+        "l2": {
+          "type": "left_link",
+          "settings": {
+            "label": "Best Sellers",
+            "url": "/collections/all?view=best-sellers"
+          }
+        },
+        "l3": {
+          "type": "right_link",
+          "settings": {
+            "label": "About",
+            "url": "/pages/about-page"
+          }
+        },
+        "l4": {
+          "type": "right_link",
+          "settings": {
+            "label": "Blog",
+            "url": "/blogs/news"
+          }
+        },
+        "l5": {
+          "type": "menu_link",
+          "settings": {
+            "label": "Contact",
+            "url": "/pages/contact-us"
+          }
+        },
+        "l6": {
+          "type": "menu_link",
+          "settings": {
+            "label": "FAQ",
+            "url": "/pages/faqs"
+          }
+        }
+      },
+      "block_order": [
+        "l0",
+        "l1",
+        "l2",
+        "l3",
+        "l4",
+        "l5",
+        "l6"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "announcement",
+    "header"
+  ]
+}

@@ -1,0 +1,33 @@
+<section class="social" aria-labelledby="ig-h-{{ section.id }}" style="padding: 0 0 72px">
+  <h2 id="ig-h-{{ section.id }}" style="margin: 0 0 42px; font-size: 23px; line-height: 23px; text-align: center"><a href="{{ settings.instagram_url }}" target="_blank" rel="noopener">{{ settings.instagram_handle | escape }}</a></h2>
+  <div class="ig" data-slider>
+    <div class="slider__view" data-slider-view>
+      <div class="slider__track">
+        {%- for block in section.blocks -%}
+          {%- capture pos_style -%}object-position: {{ block.settings.pos | default: 'center' }}{%- endcapture -%}
+          <a href="{{ block.settings.link | default: settings.instagram_url }}" target="_blank" rel="noopener" aria-label="{{ block.settings.alt | escape }} on Instagram" {{ block.shopify_attributes }}>
+            {% render 'amun-image', image: block.settings.image, fallback: block.settings.fallback, alt: block.settings.alt, width: 700, style: pos_style %}
+          </a>
+        {%- endfor -%}
+      </div>
+    </div>
+    <button type="button" class="ig__arrow ig__arrow--prev" aria-label="Previous posts" data-slider-prev><svg aria-hidden="true" width="10" height="18" viewBox="0 0 10 18" fill="none" stroke="#000" stroke-width="1"><path d="M9 1L1 9l8 8"></path></svg></button>
+    <button type="button" class="ig__arrow ig__arrow--next" aria-label="Next posts" data-slider-next><svg aria-hidden="true" width="10" height="18" viewBox="0 0 10 18" fill="none" stroke="#000" stroke-width="1"><path d="M1 1l8 8-8 8"></path></svg></button>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Instagram strip",
+  "blocks": [
+    { "type": "post", "name": "Photo", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "text", "id": "fallback", "label": "Built-in design photo" },
+      { "type": "text", "id": "alt", "label": "Description" },
+      { "type": "text", "id": "pos", "label": "Image focus (CSS position)", "default": "center" },
+      { "type": "text", "id": "link", "label": "Link (optional)" }
+    ] }
+  ],
+  "presets": [{ "name": "Instagram strip" }]
+}
+{% endschema %}

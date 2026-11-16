@@ -1,0 +1,6 @@
+{
+  "sections": {
+    "main": { "type": "featured-collection-page", "settings": { "heading": "Best Sellers", "text": "The tallow formulas our community reaches for most.", "products": ["regenerative-shampoo", "leave-in-conditioner", "tallow-face-lotion"] } }
+  },
+  "order": ["main"]
+}

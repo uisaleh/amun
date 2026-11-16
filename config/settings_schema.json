@@ -1,0 +1,60 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Amun",
+    "theme_version": "1.0.0",
+    "theme_author": "Amun Organics",
+    "theme_documentation_url": "https://amunorganics.com",
+    "theme_support_url": "https://amunorganics.com/pages/contact-us"
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      { "type": "image_picker", "id": "logo", "label": "Logo (wordmark)", "info": "Leave empty to use the built-in Amun wordmark." },
+      { "type": "image_picker", "id": "logo_icon", "label": "Single icon logo", "info": "Shown above section titles and in the popup. Leave empty to use the built-in icon." },
+      { "type": "image_picker", "id": "favicon", "label": "Favicon", "info": "Leave empty to use the built-in icon favicon." },
+      { "type": "checkbox", "id": "use_design_images", "label": "Use the Amun design photos for product cards and galleries", "default": true, "info": "Turn off to use the images saved on each product in Shopify instead." }
+    ]
+  },
+  {
+    "name": "Shipping messages",
+    "settings": [
+      { "type": "paragraph", "content": "These numbers are shown in the cart. Set the real rates customers pay in Settings → Shipping and delivery so checkout matches." },
+      { "type": "number", "id": "free_shipping_threshold", "label": "Free standard shipping from ($)", "default": 150 },
+      { "type": "text", "id": "ship_standard_label", "label": "Standard name", "default": "Standard" },
+      { "type": "text", "id": "ship_standard_eta", "label": "Standard delivery time", "default": "5–7 business days" },
+      { "type": "text", "id": "ship_standard_price", "label": "Standard price ($)", "default": "8.95" },
+      { "type": "text", "id": "ship_express_label", "label": "Express name", "default": "Express" },
+      { "type": "text", "id": "ship_express_eta", "label": "Express delivery time", "default": "2–3 business days" },
+      { "type": "text", "id": "ship_express_price", "label": "Express price ($)", "default": "19.95" },
+      { "type": "text", "id": "ship_overnight_label", "label": "Overnight name", "default": "Overnight" },
+      { "type": "text", "id": "ship_overnight_eta", "label": "Overnight delivery time", "default": "Next business day" },
+      { "type": "text", "id": "ship_overnight_price", "label": "Overnight price ($)", "default": "39.95" }
+    ]
+  },
+  {
+    "name": "10% signup offer",
+    "settings": [
+      { "type": "paragraph", "content": "Create this code in Discounts (10% off, one use per customer) so it works at checkout." },
+      { "type": "text", "id": "newsletter_code", "label": "Discount code given after signup", "default": "WELCOME10" },
+      { "type": "checkbox", "id": "popup_enabled", "label": "Show the first-visit popup", "default": true },
+      { "type": "range", "id": "popup_delay", "label": "Popup delay", "min": 0, "max": 15, "step": 0.5, "unit": "s", "default": 2.5 },
+      { "type": "image_picker", "id": "popup_image", "label": "Popup image", "info": "Leave empty to use the meadow photo." },
+      { "type": "text", "id": "popup_heading", "label": "Popup heading", "default": "Take 10% Off Your First Order" },
+      { "type": "textarea", "id": "popup_text", "label": "Popup text", "default": "Join the Amun list for new formulas, rituals and launches — and get 10% off your first order." }
+    ]
+  },
+  {
+    "name": "Videos",
+    "settings": [
+      { "type": "text", "id": "video_base_url", "label": "Video host address", "default": "https://amun.keeply.workers.dev/assets/", "info": "Where the design videos are hosted. You can instead upload videos to Content → Files and paste their links in each video block." }
+    ]
+  },
+  {
+    "name": "Social",
+    "settings": [
+      { "type": "text", "id": "instagram_url", "label": "Instagram link", "default": "https://www.instagram.com/amun.organics/" },
+      { "type": "text", "id": "instagram_handle", "label": "Instagram handle", "default": "@amun.organics" }
+    ]
+  }
+]

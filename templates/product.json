@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": { "type": "main-product", "settings": {} },
+    "ingredients": { "type": "key-ingredients", "settings": {} },
+    "videos": { "type": "product-videos", "settings": {} },
+    "ritual": { "type": "product-ritual", "settings": {} },
+    "reviews": { "type": "product-reviews", "settings": {} },
+    "recommendations": { "type": "product-recommendations", "settings": {} }
+  },
+  "order": ["main", "ingredients", "videos", "ritual", "reviews", "recommendations"]
+}

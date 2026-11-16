@@ -1,0 +1,9 @@
+<section style="padding: 120px 24px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 24px">
+  {% render 'icon-logo' %}
+  <h1 style="margin: 0; font-size: 34px; line-height: 40px">Page not found</h1>
+  <p style="margin: 0; font-size: 16px; line-height: 22.4px">The page you were looking for doesn’t exist or has moved.</p>
+  <a href="{{ routes.all_products_collection_url }}" class="btn-outline">Shop All</a>
+</section>
+{% schema %}
+{ "name": "404", "settings": [] }
+{% endschema %}

@@ -1,0 +1,20 @@
+{%- if section.settings.text != blank -%}
+<div style="background: #DFDDD0; padding: 15px 24px; text-align: center; font-size: 15px; line-height: 15px">
+  {%- if section.settings.link != blank -%}
+    <a href="{{ section.settings.link }}" style="text-decoration: underline">{{ section.settings.text | escape }}</a>
+  {%- else -%}
+    <span>{{ section.settings.text | escape }}</span>
+  {%- endif -%}
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": [
+    { "type": "text", "id": "text", "label": "Text", "default": "NEW: The Tallow Haircare Collection" },
+    { "type": "text", "id": "link", "label": "Link", "default": "/collections/haircare" }
+  ],
+  "enabled_on": { "groups": ["header"] }
+}
+{% endschema %}

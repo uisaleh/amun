@@ -1,0 +1,53 @@
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "c0": {
+          "type": "links",
+          "settings": {
+            "heading": "Shop",
+            "labels": "Shop All\nBundle & Save\nBest Sellers",
+            "urls": "/collections/all\n/collections/bundle\n/collections/all?view=best-sellers"
+          }
+        },
+        "c1": {
+          "type": "links",
+          "settings": {
+            "heading": "Learn",
+            "labels": "About Us\nBlog",
+            "urls": "/pages/about-page\n/blogs/news"
+          }
+        },
+        "c2": {
+          "type": "links",
+          "settings": {
+            "heading": "Help",
+            "labels": "Contact\nFAQ\nShipping & Returns",
+            "urls": "/pages/contact-us\n/pages/faqs\n/pages/shipping-and-returns"
+          }
+        },
+        "c3": {
+          "type": "links",
+          "settings": {
+            "heading": "Policies",
+            "labels": "Klarna Payments\nPayment Terms\nPrivacy Policy",
+            "urls": "/pages/klarna-payments\n/pages/payment-terms-conditions\n/pages/privacy-policy"
+          }
+        }
+      },
+      "block_order": [
+        "c0",
+        "c1",
+        "c2",
+        "c3"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

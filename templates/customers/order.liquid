@@ -1,0 +1,13 @@
+<section style="max-width: 1000px; margin: 0 auto; padding: 72px 24px; display: flex; flex-direction: column; gap: 18px">
+  <a href="{{ routes.account_url }}" style="font-size: 12px; text-decoration: underline">Back to account</a>
+  <h1 style="margin: 0; font-size: 28px">Order {{ order.name }}</h1>
+  <p style="margin: 0; font-size: 14px">Placed {{ order.created_at | date: '%B %-d, %Y' }} · {{ order.financial_status_label }} · {{ order.fulfillment_status_label }}</p>
+  <div style="border-top: 1px solid #121212">
+    {%- for li in order.line_items -%}
+      <div style="display: flex; justify-content: space-between; gap: 10px; padding: 12px 0; border-bottom: 1px solid rgba(18,18,18,.15); font-size: 14px"><span>{{ li.title | escape }} × {{ li.quantity }}</span><span>{{ li.final_line_price | money }}</span></div>
+    {%- endfor -%}
+  </div>
+  <p style="margin: 0; font-size: 14px">Subtotal {{ order.line_items_subtotal_price | money }} · Shipping {{ order.shipping_price | money }} · Tax {{ order.tax_price | money }}</p>
+  <p style="margin: 0; font-size: 16px">Total {{ order.total_price | money }}</p>
+  {%- if order.shipping_address -%}<div style="font-size: 14px"><h2 style="margin: 12px 0 6px; font-size: 16px">Shipping address</h2>{{ order.shipping_address | format_address }}</div>{%- endif -%}
+</section>

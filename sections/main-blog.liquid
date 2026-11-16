@@ -1,0 +1,66 @@
+{%- paginate blog.articles by 12 -%}
+<section style="padding: 72px 24px 42px">
+  <div style="max-width: 1300px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center">
+    <h1 style="margin: 0; font-size: 34px; line-height: 40px">{{ section.settings.heading | default: blog.title | escape }}</h1>
+    {%- if section.settings.text != blank -%}<p style="margin: 0; font-size: 16px; line-height: 22.4px; max-width: 620px">{{ section.settings.text | escape }}</p>{%- endif -%}
+  </div>
+</section>
+{%- assign featured = blog.articles.first -%}
+{%- if featured and paginate.current_page == 1 and current_tags == blank -%}
+  <section aria-label="Featured story" style="display: flex; flex-wrap: wrap; align-items: center; gap: 42px 0; border-top: 1px solid #000000; border-bottom: 1px solid #000000">
+    <a href="{{ featured.url }}" aria-label="Read {{ featured.title | escape }}" style="position: relative; flex: 2 1 640px; min-height: 560px; background: #c7b49a; display: block">
+      {%- if featured.image -%}{{ featured.image | image_url: width: 1600 | image_tag: alt: '', style: 'position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 40%', sizes: '(min-width: 990px) 66vw, 100vw' }}{%- endif -%}
+    </a>
+    <div style="flex: 1 1 360px; display: flex; flex-direction: column; align-items: flex-start; gap: 14px; padding: 42px">
+      <span style="font-size: 10px; line-height: 14px; text-transform: uppercase; border: 1px solid #000000; padding: 8px 20px">Featured</span>
+      <p style="margin: 10px 0 0; font-size: 12px; line-height: 16.8px">{% if featured.tags.first %}{{ featured.tags.first | escape }} · {% endif %}{{ featured.published_at | date: '%B %-d, %Y' }}</p>
+      <h2 style="margin: 0; font-size: 23px; line-height: 32.2px"><a href="{{ featured.url }}">{{ featured.title | escape }}</a></h2>
+      <p style="margin: 0; font-size: 14px; line-height: 19.6px; max-width: 360px">{{ featured.excerpt_or_content | strip_html | truncatewords: 30 }}</p>
+      <a href="{{ featured.url }}" class="btn-outline" style="margin-top: 10px">Read the Story</a>
+    </div>
+  </section>
+{%- endif -%}
+{%- if blog.all_tags.size > 0 -%}
+  <section style="padding: 60px 24px 0">
+    <div role="group" aria-label="Filter stories by topic" style="max-width: 1300px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px">
+      <a href="{{ blog.url }}" aria-current="{% if current_tags == blank %}true{% else %}false{% endif %}" style="display: inline-flex; align-items: center; height: 36px; padding: 0 20px; border: 1px solid #000000; font-size: 12px; text-decoration: none; {% if current_tags == blank %}background: #585128; color: #ffffff{% else %}background: #ffffff; color: #000000{% endif %}">All</a>
+      {%- for tag in blog.all_tags -%}
+        <a href="{{ blog.url }}/tagged/{{ tag | handleize }}" style="display: inline-flex; align-items: center; height: 36px; padding: 0 20px; border: 1px solid #000000; font-size: 12px; text-decoration: none; {% if current_tags contains tag %}background: #585128; color: #ffffff{% else %}background: #ffffff; color: #000000{% endif %}">{{ tag | escape }}</a>
+      {%- endfor -%}
+    </div>
+  </section>
+{%- endif -%}
+<section aria-label="Stories" style="padding: 42px 24px 72px">
+  <div style="max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 72px 60px">
+    {%- for article in blog.articles -%}
+      {%- if forloop.first and paginate.current_page == 1 and current_tags == blank and blog.articles.size > 1 -%}{%- continue -%}{%- endif -%}
+      <article style="display: flex; flex-direction: column; gap: 14px">
+        <a href="{{ article.url }}" aria-label="{{ article.title | escape }}" style="position: relative; display: block; aspect-ratio: 4 / 5; background: #dfe6d2">
+          {%- if article.image -%}{{ article.image | image_url: width: 800 | image_tag: alt: '', loading: 'lazy', style: 'position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover' }}{%- endif -%}
+        </a>
+        <p style="margin: 0; font-size: 12px; line-height: 16.8px">{% if article.tags.first %}{{ article.tags.first | escape }} · {% endif %}{{ article.published_at | date: '%B %-d, %Y' }}</p>
+        <h2 style="margin: 0; font-size: 18px; line-height: 25.2px"><a href="{{ article.url }}">{{ article.title | escape }}</a></h2>
+        <p style="margin: 0; font-size: 14px; line-height: 19.6px">{{ article.excerpt_or_content | strip_html | truncatewords: 24 }}</p>
+        <a href="{{ article.url }}" style="font-size: 12px; line-height: 16.8px; text-decoration: underline">Read More</a>
+      </article>
+    {%- endfor -%}
+  </div>
+  {%- if paginate.pages > 1 -%}
+    <nav aria-label="Pagination" style="display: flex; justify-content: center; gap: 18px; margin-top: 48px; font-size: 14px">
+      {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}" style="text-decoration: underline">Newer</a>{%- endif -%}
+      <span>Page {{ paginate.current_page }} of {{ paginate.pages }}</span>
+      {%- if paginate.next -%}<a href="{{ paginate.next.url }}" style="text-decoration: underline">Older</a>{%- endif -%}
+    </nav>
+  {%- endif -%}
+</section>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "Blog",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The Journal" },
+    { "type": "textarea", "id": "text", "label": "Intro", "default": "Notes on ingredients from the Earth, slower rituals, and how we make our tallow hair and skin care." }
+  ]
+}
+{% endschema %}

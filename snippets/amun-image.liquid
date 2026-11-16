@@ -1,0 +1,8 @@
+{%- comment -%}Image from a picker, falling back to a built-in design photo. Params: image, fallback, alt, style, class, width, loading, sizes{%- endcomment -%}
+{%- assign w = width | default: 1600 -%}
+{%- assign ld = loading | default: 'lazy' -%}
+{%- if image != blank -%}
+  {{ image | image_url: width: w | image_tag: alt: alt, style: style, class: class, loading: ld, sizes: sizes, widths: '480, 800, 1200, 1600, 2000' }}
+{%- elsif fallback != blank -%}
+  <img width="1200" height="1200" src="{{ fallback | asset_url }}" alt="{{ alt | escape }}"{% if style %} style="{{ style }}{% unless style contains 'height:' %}; height: auto{% endunless %}"{% endif %}{% if class %} class="{{ class }}"{% endif %} loading="{{ ld }}">
+{%- endif -%}

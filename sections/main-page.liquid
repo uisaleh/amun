@@ -1,0 +1,76 @@
+{%- liquid
+  assign design = ''
+  if section.settings.use_design
+    case page.handle
+      when 'about-page', 'about', 'about-us'
+        assign design = 'about'
+      when 'faqs', 'faq'
+        assign design = 'faq'
+      when 'contact-us', 'contact'
+        assign design = 'contact'
+      when 'shipping-and-returns', 'shipping'
+        assign design = 'shipping'
+      when 'klarna-payments', 'klarna'
+        assign design = 'klarna'
+      when 'payment-terms-conditions', 'payment-terms'
+        assign design = 'payment-terms'
+      when 'privacy-policy', 'privacy'
+        assign design = 'privacy'
+      when 'bundle-save', 'bundle-and-save'
+        assign design = 'bundle'
+    endcase
+  endif
+  if section.settings.layout != 'auto'
+    assign design = section.settings.layout
+  endif
+-%}
+{%- case design -%}
+  {%- when 'about' -%}{% render 'page-about' %}
+  {%- when 'faq' -%}{% render 'page-faq' %}
+  {%- when 'contact' -%}{% render 'page-contact' %}
+  {%- when 'shipping' -%}{% render 'page-shipping' %}
+  {%- when 'klarna' -%}{% render 'page-klarna' %}
+  {%- when 'payment-terms' -%}{% render 'page-payment-terms' %}
+  {%- when 'privacy' -%}{% render 'page-privacy' %}
+  {%- when 'bundle' -%}
+    <section style="padding: 20px 24px 0">
+      <div style="max-width: 1300px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center">
+        <h1 style="margin: 0; font-size: 23px; line-height: 23px">Bundle &amp; Save</h1>
+        <p style="margin: 0; font-size: 16px; line-height: 22.4px">Pair our tallow formulas and save on your complete ritual.</p>
+      </div>
+    </section>
+    <section aria-label="Products" style="padding: 16px 24px 72px">
+      <div class="pgrid" style="max-width: 1300px; margin: 0 auto; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 72px 60px">
+        {%- for p in collections['bundle'].products -%}<div style="display: flex">{% render 'product-card', product: p, strike: true %}</div>{%- endfor -%}
+      </div>
+    </section>
+  {%- else -%}
+    <section style="background: #DFDDD0; padding: 72px 24px">
+      <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px">
+        <h1 style="margin: 0; font-size: 34px; line-height: 40px">{{ page.title | escape }}</h1>
+      </div>
+    </section>
+    <section style="padding: 72px 24px">
+      <div class="rte" style="max-width: 760px; margin: 0 auto">{{ page.content }}</div>
+    </section>
+{%- endcase -%}
+
+{% schema %}
+{
+  "name": "Page",
+  "settings": [
+    { "type": "select", "id": "layout", "label": "Layout", "default": "auto", "options": [
+      { "value": "auto", "label": "Automatic (by page)" },
+      { "value": "about", "label": "About" },
+      { "value": "faq", "label": "FAQ" },
+      { "value": "contact", "label": "Contact" },
+      { "value": "shipping", "label": "Shipping & Returns" },
+      { "value": "klarna", "label": "Klarna Payments" },
+      { "value": "payment-terms", "label": "Payment Terms" },
+      { "value": "privacy", "label": "Privacy Policy" },
+      { "value": "plain", "label": "Plain page text" }
+    ] },
+    { "type": "checkbox", "id": "use_design", "label": "Use the Amun design for About, FAQ, Contact, Shipping and policy pages", "default": true, "info": "Turn off to show the text saved on each page in Online Store → Pages instead." }
+  ]
+}
+{% endschema %}

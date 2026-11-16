@@ -1,0 +1,28 @@
+<section aria-label="{{ section.settings.label | escape }}" style="display: flex; flex-wrap: wrap; gap: 4px">
+  {%- for block in section.blocks -%}
+    <a href="{{ block.settings.link }}" class="tile" {{ block.shopify_attributes }} style="position: relative; overflow: hidden; flex: 1 1 480px; min-height: 560px; background: #a7b393; color: #ffffff; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 0 24px 24px; text-decoration: none">
+      {% render 'amun-image', image: block.settings.image, fallback: block.settings.fallback, alt: '', style: 'position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 35%', sizes: '(min-width: 990px) 50vw, 100vw' %}
+      <span aria-hidden="true" style="position: absolute; inset: 0; background: rgba(0, 0, 0, 0.35)"></span>
+      <span style="position: relative"></span>
+      <span style="position: relative; font-size: 52px; line-height: 1.1; letter-spacing: 6px; text-transform: uppercase; text-align: center">{{ block.settings.title | escape | newline_to_br }}</span>
+      <span style="position: relative; font-size: 14px; text-decoration: underline">{{ block.settings.cta | escape }}</span>
+    </a>
+  {%- endfor -%}
+</section>
+
+{% schema %}
+{
+  "name": "Category tiles",
+  "settings": [{ "type": "text", "id": "label", "label": "Accessible label", "default": "Shop by category" }],
+  "blocks": [
+    { "type": "tile", "name": "Tile", "limit": 4, "settings": [
+      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "text", "id": "fallback", "label": "Built-in design photo" },
+      { "type": "textarea", "id": "title", "label": "Title", "default": "The\nHaircare" },
+      { "type": "text", "id": "cta", "label": "Link text", "default": "Shop Now" },
+      { "type": "text", "id": "link", "label": "Link", "default": "/collections/haircare" }
+    ] }
+  ],
+  "presets": [{ "name": "Category tiles" }]
+}
+{% endschema %}

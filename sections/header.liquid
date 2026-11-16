@@ -1,0 +1,84 @@
+{%- liquid
+  assign left_links = section.blocks | where: 'type', 'left_link'
+  assign right_links = section.blocks | where: 'type', 'right_link'
+  assign menu_links = section.blocks | where: 'type', 'menu_link'
+-%}
+<header class="site-header" style="position: sticky; top: 0; z-index: 50; border-bottom: 1px solid rgba(18, 18, 18, 0.15); padding: 0 24px; background: #9FA383">
+  <div class="hdr" style="min-height: 76px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px">
+    <button type="button" class="hdr-burger" aria-label="Open menu" aria-expanded="false" data-open-menu style="flex: 0 0 auto; width: 40px; height: 40px; padding: 0; background: none; border: 0; cursor: pointer; align-items: center; justify-content: flex-start"><svg aria-hidden="true" width="22" height="16" viewBox="0 0 22 16" fill="none" stroke="#121212" stroke-width="1.2"><path d="M0 1h22M0 8h22M0 15h22"></path></svg></button>
+    <nav class="hdr-nav" aria-label="Primary" style="display: flex; flex-wrap: wrap; gap: 24px; font-size: 14px; line-height: 14px; flex: 1 1 300px">
+      {%- for block in left_links -%}
+        <a href="{{ block.settings.url }}" {{ block.shopify_attributes }}>{{ block.settings.label | escape }}</a>
+      {%- endfor -%}
+    </nav>
+    <a href="{{ routes.root_url }}" class="hdr-logo" aria-label="{{ shop.name | escape }} home" style="flex: 0 0 auto; display: inline-flex">
+      {%- if settings.logo != blank -%}
+        {{ settings.logo | image_url: width: 240 | image_tag: alt: shop.name, width: 118, height: 30, style: 'display: block; width: 118px; height: 30px; object-fit: contain' }}
+      {%- else -%}
+        <img src="{{ 'amun-logo.png' | asset_url }}" alt="{{ shop.name | escape }}" width="118" height="30" style="display: block; width: 118px; height: 30px">
+      {%- endif -%}
+    </a>
+    <div class="hdr-right" style="display: flex; gap: 24px; align-items: center; justify-content: flex-end; font-size: 14px; line-height: 14px; flex: 1 1 300px">
+      {%- for block in right_links -%}
+        <a href="{{ block.settings.url }}" class="hdr-text" {{ block.shopify_attributes }}>{{ block.settings.label | escape }}</a>
+      {%- endfor -%}
+      <button type="button" aria-label="Search" data-open-search style="padding: 0; background: none; border: 0; cursor: pointer; display: inline-flex; color: #000000"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#000" stroke-width="1"><circle cx="7.5" cy="7.5" r="6"></circle><path d="M12 12l5 5"></path></svg></button>
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{{ routes.account_url }}" aria-label="Account"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#000" stroke-width="1"><circle cx="9" cy="5.5" r="4"></circle><path d="M1.5 17.5c0-4 3.4-6.5 7.5-6.5s7.5 2.5 7.5 6.5"></path></svg></a>
+      {%- endif -%}
+      <a href="{{ routes.cart_url }}" aria-label="Cart, {{ cart.item_count }} items" data-open-cart data-cart-icon style="position: relative; padding: 0; display: inline-flex; transition: transform 160ms ease"><svg aria-hidden="true" width="18" height="20" viewBox="0 0 18 20" fill="none" stroke="#000" stroke-width="1"><rect x="1" y="5.5" width="16" height="14"></rect><path d="M5.5 5.5V4a3.5 3.5 0 0 1 7 0v1.5"></path></svg><span class="cart-count" data-cart-count>{{ cart.item_count }}</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="overlay" data-menu hidden style="z-index: 95">
+  <div class="overlay__bg" data-close-menu aria-hidden="true"></div>
+  <nav class="mobile-menu" aria-label="Mobile">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px">
+      {%- if settings.logo != blank -%}
+        {{ settings.logo | image_url: width: 220 | image_tag: alt: shop.name, width: 110, height: 28, style: 'display: block; width: 110px; height: 28px; object-fit: contain' }}
+      {%- else -%}
+        <img src="{{ 'amun-logo.png' | asset_url }}" alt="{{ shop.name | escape }}" width="110" height="28" style="display: block; width: 110px; height: 28px">
+      {%- endif -%}
+      <button type="button" data-close-menu aria-label="Close menu" style="width: 44px; height: 44px; padding: 0; background: none; border: 0; cursor: pointer; display: inline-flex; align-items: center; justify-content: flex-end"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#121212" stroke-width="1.2"><path d="M1 1l14 14M15 1L1 15"></path></svg></button>
+    </div>
+    {%- for block in left_links -%}<a href="{{ block.settings.url }}">{{ block.settings.label | escape }}</a>{%- endfor -%}
+    {%- for block in right_links -%}<a href="{{ block.settings.url }}">{{ block.settings.label | escape }}</a>{%- endfor -%}
+    {%- if shop.customer_accounts_enabled -%}<a href="{{ routes.account_url }}">Account</a>{%- endif -%}
+    {%- for block in menu_links -%}<a href="{{ block.settings.url }}" {{ block.shopify_attributes }}>{{ block.settings.label | escape }}</a>{%- endfor -%}
+  </nav>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "header-section",
+  "settings": [],
+  "blocks": [
+    { "type": "left_link", "name": "Left link", "settings": [
+      { "type": "text", "id": "label", "label": "Label", "default": "Shop" },
+      { "type": "text", "id": "url", "label": "Link", "default": "/collections/all" }
+    ] },
+    { "type": "right_link", "name": "Right link", "settings": [
+      { "type": "text", "id": "label", "label": "Label", "default": "About" },
+      { "type": "text", "id": "url", "label": "Link", "default": "/pages/about-page" }
+    ] },
+    { "type": "menu_link", "name": "Extra mobile menu link", "settings": [
+      { "type": "text", "id": "label", "label": "Label", "default": "FAQ" },
+      { "type": "text", "id": "url", "label": "Link", "default": "/pages/faqs" }
+    ] }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "left_link", "settings": { "label": "Shop", "url": "/collections/all" } },
+      { "type": "left_link", "settings": { "label": "Bundle & Save", "url": "/collections/bundle" } },
+      { "type": "left_link", "settings": { "label": "Best Sellers", "url": "/collections/all?view=best-sellers" } },
+      { "type": "right_link", "settings": { "label": "About", "url": "/pages/about-page" } },
+      { "type": "right_link", "settings": { "label": "Blog", "url": "/blogs/news" } },
+      { "type": "menu_link", "settings": { "label": "Contact", "url": "/pages/contact-us" } },
+      { "type": "menu_link", "settings": { "label": "FAQ", "url": "/pages/faqs" } }
+    ]
+  },
+  "enabled_on": { "groups": ["header"] }
+}
+{% endschema %}

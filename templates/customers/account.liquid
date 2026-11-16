@@ -1,0 +1,18 @@
+<section style="max-width: 1000px; margin: 0 auto; padding: 72px 24px; display: flex; flex-direction: column; gap: 24px">
+  <h1 style="margin: 0; font-size: 34px; line-height: 40px; text-align: center">My Account</h1>
+  <p style="margin: 0; text-align: center; font-size: 14px">{{ customer.first_name | escape }} {{ customer.last_name | escape }} · <a href="{{ routes.account_addresses_url }}" style="text-decoration: underline">Addresses ({{ customer.addresses_count }})</a> · <a href="{{ routes.account_logout_url }}" style="text-decoration: underline">Log out</a></p>
+  <h2 style="margin: 24px 0 0; font-size: 18px">Order History</h2>
+  {%- paginate customer.orders by 20 -%}
+    {%- if customer.orders.size > 0 -%}
+      <div style="border-top: 1px solid #121212">
+        {%- for order in customer.orders -%}
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; padding: 14px 0; border-bottom: 1px solid rgba(18,18,18,.15); font-size: 14px">
+            <a href="{{ order.customer_url }}" style="text-decoration: underline">{{ order.name }}</a><span>{{ order.created_at | date: '%B %-d, %Y' }}</span><span>{{ order.financial_status_label }}</span><span>{{ order.fulfillment_status_label }}</span><span>{{ order.total_price | money }}</span>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <p style="margin: 0; font-size: 14px">You haven’t placed any orders yet.</p>
+    {%- endif -%}
+  {%- endpaginate -%}
+</section>

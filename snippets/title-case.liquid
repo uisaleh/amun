@@ -1,0 +1,4 @@
+{%- comment -%}Turns UPPERCASE Shopify titles into Title Case.{%- endcomment -%}
+{%- assign words = text | downcase | split: ' ' -%}
+{%- capture out -%}{%- for w in words -%}{{ w | capitalize }}{%- unless forloop.last %} {% endunless -%}{%- endfor -%}{%- endcapture -%}
+{{- out | replace: ' And ', ' and ' | replace: ' Of ', ' of ' | replace: ' The ', ' the ' | replace: 'Ml', 'ml' | replace: '’S ', '’s ' | replace: "'S ", "'s " | escape -}}

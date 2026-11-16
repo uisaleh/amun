@@ -1,0 +1,68 @@
+<footer class="site-footer" style="position: relative; overflow: hidden; background: #9FA383; color: #121212; padding: 64px 24px 42px">
+  <img width="1200" height="1200" src="{{ 'amun-mark.svg' | asset_url }}" alt="" aria-hidden="true" style="position: absolute; right: -60px; top: 50%; transform: translateY(-50%); height: 560px; width: auto; opacity: 0.12; filter: brightness(0); pointer-events: none">
+  <div style="position: relative; display: flex; flex-direction: column; gap: 60px">
+    <div style="display: flex; flex-wrap: wrap; gap: 42px 24px">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'links' -%}
+          <nav aria-label="{{ block.settings.heading | escape }}" style="flex: 1 1 140px; display: flex; flex-direction: column; gap: 10px" {{ block.shopify_attributes }}>
+            <h2 style="margin: 0 0 4px; font-size: 16px; line-height: 22.4px">{{ block.settings.heading | escape }}</h2>
+            {%- assign labels = block.settings.labels | newline_to_br | split: '<br />' -%}
+            {%- assign urls = block.settings.urls | newline_to_br | split: '<br />' -%}
+            {%- for label in labels -%}
+              {%- assign url = urls[forloop.index0] | strip -%}
+              <a href="{{ url | default: '#' }}" style="color: #121212; font-size: 13px; line-height: 18.2px">{{ label | strip | escape }}</a>
+            {%- endfor -%}
+          </nav>
+        {%- endif -%}
+      {%- endfor -%}
+      <div class="ft-nl" style="flex: 3 1 360px; display: flex; flex-direction: column; gap: 14px">
+        <h2 style="margin: 0; font-size: 16px; line-height: 22.4px">{{ section.settings.nl_heading | escape }}</h2>
+        <p style="margin: 0; font-size: 12px; line-height: 16.8px; max-width: 440px">{{ section.settings.nl_text | escape }}</p>
+        {% render 'newsletter-form', form_id: 'NewsletterFooter', variant: 'footer' %}
+      </div>
+    </div>
+    <div style="border-top: 1px solid #121212; padding-top: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px; font-size: 12px; line-height: 16.8px">
+      <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name | escape }}</span>
+      {%- if localization.available_countries.size > 1 -%}
+        {%- form 'localization', id: 'FooterCountry' -%}
+          <label style="display: inline-flex; align-items: center; gap: 10px">Country
+            <span style="position: relative; display: inline-flex; align-items: center">
+              <select name="country_code" onchange="this.form.submit()" style="appearance: none; -webkit-appearance: none; -moz-appearance: none; height: 34px; padding: 0 36px 0 12px; border: 1px solid #121212; border-radius: 0; background: #9FA383; color: #121212; font-size: 12px; line-height: 16px; cursor: pointer">
+                {%- for country in localization.available_countries -%}
+                  <option value="{{ country.iso_code }}"{% if country.iso_code == localization.country.iso_code %} selected{% endif %}>{{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})</option>
+                {%- endfor -%}
+              </select>
+              <svg aria-hidden="true" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="#121212" stroke-width="1.2" style="position: absolute; right: 13px; top: 50%; margin-top: -3px; pointer-events: none"><path d="M1 1l4 4 4-4"></path></svg>
+            </span>
+          </label>
+        {%- endform -%}
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "text", "id": "nl_heading", "label": "Signup heading", "default": "Get 10% Off Your First Order" },
+    { "type": "text", "id": "nl_text", "label": "Signup text", "default": "Join our list for new formulas, blog posts and launches from Amun Organics." }
+  ],
+  "blocks": [
+    { "type": "links", "name": "Link column", "settings": [
+      { "type": "text", "id": "heading", "label": "Heading", "default": "Shop" },
+      { "type": "textarea", "id": "labels", "label": "Link names (one per line)", "default": "Shop All" },
+      { "type": "textarea", "id": "urls", "label": "Link addresses (one per line, same order)", "default": "/collections/all" }
+    ] }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "links", "settings": { "heading": "Shop", "labels": "Shop All\nBundle & Save\nBest Sellers", "urls": "/collections/all\n/collections/bundle\n/collections/all?view=best-sellers" } },
+      { "type": "links", "settings": { "heading": "Learn", "labels": "About Us\nBlog", "urls": "/pages/about-page\n/blogs/news" } },
+      { "type": "links", "settings": { "heading": "Help", "labels": "Contact\nFAQ\nShipping & Returns", "urls": "/pages/contact-us\n/pages/faqs\n/pages/shipping-and-returns" } },
+      { "type": "links", "settings": { "heading": "Policies", "labels": "Klarna Payments\nPayment Terms\nPrivacy Policy", "urls": "/pages/klarna-payments\n/pages/payment-terms-conditions\n/pages/privacy-policy" } }
+    ]
+  },
+  "enabled_on": { "groups": ["footer"] }
+}
+{% endschema %}

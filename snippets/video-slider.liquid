@@ -1,0 +1,36 @@
+{%- comment -%}Params: items (array of "file^^label" strings) or blocks; heading; subheading; width{%- endcomment -%}
+<div class="slider slider--videos" data-slider style="max-width: {{ max | default: 1180 }}px">
+  <button type="button" class="slider__arrow slider__arrow--prev" aria-label="Previous videos" data-slider-prev><svg aria-hidden="true" width="14" height="28" viewBox="0 0 14 28" fill="none" stroke="#000" stroke-width="1"><path d="M13 1L1 14l12 13"></path></svg></button>
+  <div class="slider__view" data-slider-view>
+    <div class="slider__track">
+      {%- if blocks.size > 0 -%}
+        {%- for block in blocks -%}
+          {%- liquid
+            assign src = block.settings.video_url
+            if block.settings.video != blank
+              assign src = block.settings.video.sources | where: 'format', 'mp4' | first | map: 'url' | first
+            endif
+            if src != blank
+              unless src contains '//'
+                assign src = settings.video_base_url | append: src
+              endunless
+            endif
+          -%}
+          <figure class="vid-item" {{ block.shopify_attributes }} style="flex-basis: {{ item_w | default: 280 }}px">
+            <video data-src="{{ src }}" aria-label="{{ block.settings.label | escape }}" controls muted loop playsinline preload="none"{% if forloop.first %} data-autoplay{% endif %}></video>
+            <figcaption>{{ block.settings.label | escape }}</figcaption>
+          </figure>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for it in items -%}
+          {%- assign f = it | split: '^^' -%}
+          <figure class="vid-item" style="flex-basis: {{ item_w | default: 280 }}px">
+            <video data-src="{{ settings.video_base_url }}{{ f[0] }}" aria-label="{{ f[1] | escape }}" controls muted loop playsinline preload="none"{% if forloop.first %} data-autoplay{% endif %}></video>
+            <figcaption>{{ f[1] | escape }}</figcaption>
+          </figure>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+  <button type="button" class="slider__arrow slider__arrow--next" aria-label="Next videos" data-slider-next><svg aria-hidden="true" width="14" height="28" viewBox="0 0 14 28" fill="none" stroke="#000" stroke-width="1"><path d="M1 1l12 13L1 27"></path></svg></button>
+</div>

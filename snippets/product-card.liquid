@@ -1,0 +1,43 @@
+{%- comment -%}Params: product, strike (bool, show compare-at price), badge (optional override), class{%- endcomment -%}
+{%- liquid
+  capture nm
+    render 'amun-data', handle: product.handle, key: 'name'
+  endcapture
+  capture design_img
+    render 'amun-data', handle: product.handle, key: 'card_img'
+  endcapture
+  capture dbadge
+    render 'amun-data', handle: product.handle, key: 'badge'
+  endcapture
+  capture ddesc
+    render 'amun-data', handle: product.handle, key: 'card_desc'
+  endcapture
+  if badge != blank
+    assign dbadge = badge
+  endif
+  if ddesc == blank
+    assign ddesc = product.description | strip_html | truncatewords: 22
+  endif
+  assign v = product.selected_or_first_available_variant
+-%}
+<article class="pcard{% if class %} {{ class }}{% endif %}">
+  <a href="{{ product.url }}" class="pcard__media" aria-label="{% if nm != blank %}{{ nm | escape }}{% else %}{{ product.title | escape }}{% endif %}">
+    {%- if settings.use_design_images and design_img != blank -%}
+      <img src="{{ design_img | asset_url }}" alt="" loading="lazy" width="600" height="600" data-card-img>
+    {%- elsif product.featured_media -%}
+      {{ product.featured_media | image_url: width: 800 | image_tag: alt: '', loading: 'lazy', sizes: '(min-width: 1024px) 33vw, 76vw', data-card-img: '' }}
+    {%- endif -%}
+    {%- if dbadge != blank -%}<span class="pcard__badge">{{ dbadge | escape }}</span>{%- endif -%}
+  </a>
+  <div class="pcard__body">
+    <h3 class="pcard__title"><a href="{{ product.url }}">{% if nm != blank %}{{ nm | escape }}{% else %}{% render 'title-case', text: product.title %}{% endif %}</a></h3>
+    <p class="pcard__desc">{{ ddesc | escape }}</p>
+  </div>
+  {%- if product.available and product.variants.size == 1 and product.requires_selling_plan == false -%}
+    <button type="button" class="atc pcard__btn" data-add="{{ v.id }}">Add to Cart - {% if strike and v.compare_at_price > v.price %}<s>{{ v.compare_at_price | money_without_trailing_zeros }}</s> {% endif %}{{ v.price | money_without_trailing_zeros }}</button>
+  {%- elsif product.available -%}
+    <a href="{{ product.url }}" class="atc pcard__btn" style="display: flex; align-items: center; justify-content: center; text-decoration: none">Choose Options - {{ product.price_min | money_without_trailing_zeros }}</a>
+  {%- else -%}
+    <button type="button" class="pcard__btn" disabled>Sold Out</button>
+  {%- endif -%}
+</article>

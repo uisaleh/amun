@@ -1,0 +1,90 @@
+{%- liquid
+  assign title = collection.title
+  assign intro = collection.description | strip_html
+  case collection.handle
+    when 'all'
+      assign title = 'Shop All'
+      if intro == blank
+        assign intro = 'Tallow hair and skin essentials for your everyday ritual.'
+      endif
+    when 'bundle'
+      assign title = 'Bundle & Save'
+      assign intro = 'Pair our tallow formulas and save on your complete ritual.'
+  endcase
+  if section.settings.heading != blank
+    assign title = section.settings.heading
+  endif
+  if section.settings.text != blank
+    assign intro = section.settings.text
+  endif
+  assign use_list = false
+  if section.settings.products != blank
+    assign use_list = true
+  endif
+  if section.settings.order_all_only and collection.handle != 'all'
+    assign use_list = false
+  endif
+-%}
+<section style="padding: 20px 24px 0">
+  <div class="intro" style="max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: end; gap: 14px">
+    <div aria-hidden="true"></div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center">
+      <h1 style="margin: 0; font-size: 23px; line-height: 23px">{{ title | escape }}</h1>
+      {%- if intro != blank -%}<p style="margin: 0; font-size: 16px; line-height: 22.4px">{{ intro | escape }}</p>{%- endif -%}
+    </div>
+    <div style="justify-self: end">
+      {%- if section.settings.show_filter -%}
+        <button type="button" data-filter-toggle aria-expanded="false" style="background: none; border: 0; padding: 8px 0; font-size: 12px; line-height: 12px; text-transform: uppercase; cursor: pointer; color: #000000">Filter +</button>
+      {%- endif -%}
+    </div>
+  </div>
+  {%- if section.settings.show_filter -%}
+    <div data-filter-bar hidden role="group" aria-label="Filter products by category" style="max-width: 1300px; margin: 18px auto 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px">
+      {%- assign cats = 'All,Haircare,Skincare,Bundles' | split: ',' -%}
+      {%- for c in cats -%}
+        <button type="button" data-filter="{{ c }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}" style="height: 36px; padding: 0 18px; border: 1px solid #000; background: {% if forloop.first %}#000;color:#fff{% else %}#fff;color:#000{% endif %}; font-size: 12px; text-transform: uppercase; cursor: pointer; border-radius: 0">{{ c }}</button>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</section>
+<section aria-label="Products" style="padding: 16px 24px 72px">
+  {%- paginate collection.products by 24 -%}
+    <div class="pgrid" style="max-width: 1300px; margin: 0 auto; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 72px 60px">
+      {%- if use_list and paginate.current_page == 1 -%}
+        {%- for p in section.settings.products -%}
+          {%- capture cat -%}{% render 'amun-data', handle: p.handle, key: 'cat' %}{%- endcapture -%}
+          <div data-cat="{{ cat }}" style="display: flex">{% render 'product-card', product: p, strike: true %}</div>
+        {%- endfor -%}
+        {%- assign listed = section.settings.products | map: 'handle' | join: ',' | prepend: ',' | append: ',' -%}
+      {%- endif -%}
+      {%- for p in collection.products -%}
+        {%- capture key -%},{{ p.handle }},{%- endcapture -%}
+        {%- if use_list and listed contains key -%}{%- continue -%}{%- endif -%}
+        {%- capture cat -%}{% render 'amun-data', handle: p.handle, key: 'cat' %}{%- endcapture -%}
+        <div data-cat="{{ cat }}" style="display: flex">{% render 'product-card', product: p, strike: true %}</div>
+      {%- else -%}
+        <p style="grid-column: 1 / -1; text-align: center; font-size: 14px">No products here yet.</p>
+      {%- endfor -%}
+    </div>
+    {%- if paginate.pages > 1 -%}
+      <nav aria-label="Pagination" style="display: flex; justify-content: center; gap: 18px; margin-top: 48px; font-size: 14px">
+        {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}" style="text-decoration: underline">Previous</a>{%- endif -%}
+        <span>Page {{ paginate.current_page }} of {{ paginate.pages }}</span>
+        {%- if paginate.next -%}<a href="{{ paginate.next.url }}" style="text-decoration: underline">Next</a>{%- endif -%}
+      </nav>
+    {%- endif -%}
+  {%- endpaginate -%}
+</section>
+
+{% schema %}
+{
+  "name": "Collection",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading override" },
+    { "type": "text", "id": "text", "label": "Intro override" },
+    { "type": "checkbox", "id": "show_filter", "label": "Show category filter", "default": true },
+    { "type": "product_list", "id": "products", "label": "Show these first, in this order", "limit": 24 },
+    { "type": "checkbox", "id": "order_all_only", "label": "Only use the order above on Shop All", "default": true }
+  ]
+}
+{% endschema %}

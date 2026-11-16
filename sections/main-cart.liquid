@@ -1,0 +1,38 @@
+<section style="padding: 72px 24px" data-cart-page>
+  <div style="max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px">
+    <h1 style="margin: 0; font-size: 34px; line-height: 40px; text-align: center">Your Cart</h1>
+    {%- if cart.item_count == 0 -%}
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 48px 0; text-align: center">
+        <p style="margin: 0; font-size: 16px">Your cart is empty</p>
+        <a href="{{ routes.all_products_collection_url }}" class="atc-dark" style="display: inline-flex; align-items: center; justify-content: center; height: 50px; min-width: 200px; padding: 0 24px; background: #585128; color: #ffffff; font-size: 14px">Shop All</a>
+      </div>
+    {%- else -%}
+      <form action="{{ routes.cart_url }}" method="post" novalidate style="display: flex; flex-direction: column; gap: 24px">
+        <div style="border-top: 1px solid #121212">
+          {%- for item in cart.items -%}
+            <div class="cart-line">
+              <a href="{{ item.url }}" style="flex: 0 0 96px">{% if item.image %}{{ item.image | image_url: width: 200 | image_tag: alt: item.product.title, style: 'display: block; width: 96px; height: 120px; object-fit: cover; background: #efefea' }}{% endif %}</a>
+              <div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 8px">
+                <div style="display: flex; justify-content: space-between; gap: 10px"><a href="{{ item.url }}" style="font-size: 14px">{% render 'title-case', text: item.product.title %}</a><span style="font-size: 14px">{{ item.final_line_price | money }}</span></div>
+                {%- unless item.product.has_only_default_variant -%}<span style="font-size: 12px">{{ item.variant.title | escape }}</span>{%- endunless -%}
+                {%- if item.selling_plan_allocation -%}<span style="font-size: 12px">{{ item.selling_plan_allocation.selling_plan.name | escape }}</span>{%- endif -%}
+                <label style="display: inline-flex; align-items: center; gap: 10px; font-size: 12px">Qty <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" style="width: 64px; height: 36px; border: 1px solid #121212; text-align: center"></label>
+                <a href="{{ item.url_to_remove }}" style="font-size: 12px; text-decoration: underline">Remove</a>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; text-transform: uppercase">Order note<textarea name="note" rows="3" style="padding: 12px; border: 1px solid rgba(18,18,18,.4); border-radius: 0; font-size: 14px; text-transform: none">{{ cart.note }}</textarea></label>
+        <div style="display: flex; justify-content: space-between; font-size: 16px"><span>Subtotal</span><span>{{ cart.total_price | money }}</span></div>
+        <p style="margin: 0; font-size: 12px">Taxes and shipping calculated at checkout. Free standard shipping on orders ${{ settings.free_shipping_threshold }}+.</p>
+        <div style="display: flex; gap: 14px; flex-wrap: wrap">
+          <button type="submit" name="update" style="height: 52px; padding: 0 24px; background: #fff; border: 1px solid #121212; border-radius: 0; font-size: 14px; cursor: pointer">Update</button>
+          <button type="submit" name="checkout" class="atc-dark" style="flex: 1 1 220px; height: 52px; background: #585128; color: #ffffff; border: 1px solid #585128; border-radius: 0; font-size: 14px; cursor: pointer">Checkout</button>
+        </div>
+      </form>
+    {%- endif -%}
+  </div>
+</section>
+{% schema %}
+{ "name": "Cart", "settings": [] }
+{% endschema %}

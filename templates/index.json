@@ -1,0 +1,333 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {}
+    },
+    "collection": {
+      "type": "product-slider",
+      "settings": {
+        "products": [
+          "regenerative-shampoo",
+          "regenerative-conditioner",
+          "leave-in-conditioner",
+          "natures-pomade",
+          "tallow-face-lotion",
+          "shampoo-conditioner-leave-in-bundle",
+          "shampoo-conditioner",
+          "the-origin-pair"
+        ],
+        "heading": "The Amun Collection",
+        "text": "Our everyday essentials, designed to bring your hair, skin, and health back to harmony"
+      }
+    },
+    "tiles": {
+      "type": "category-tiles",
+      "blocks": {
+        "t1": {
+          "type": "tile",
+          "settings": {
+            "fallback": "amun-0f2eda62d9.jpg",
+            "title": "The\nHaircare",
+            "link": "/collections/haircare"
+          }
+        },
+        "t2": {
+          "type": "tile",
+          "settings": {
+            "fallback": "amun-6cb6f8d852.jpg",
+            "title": "The\nSkincare",
+            "link": "/products/tallow-face-lotion"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2"
+      ],
+      "settings": {}
+    },
+    "videos": {
+      "type": "video-slider",
+      "blocks": {
+        "v1": {
+          "type": "video",
+          "settings": {
+            "video_url": "51c34da49e45c807cd95929d20d74871.mp4",
+            "label": "Made by nature, for nature"
+          }
+        },
+        "v2": {
+          "type": "video",
+          "settings": {
+            "video_url": "1fcf0f3e63d5bc7344934d73696deec1.mp4",
+            "label": "Zero toxins, zero parabens, zero synthetic fragrance"
+          }
+        },
+        "v3": {
+          "type": "video",
+          "settings": {
+            "video_url": "9fc92213fd8506cecf163ee936f3bf0b.mp4",
+            "label": "Our shampoo awakens, our conditioner restores"
+          }
+        },
+        "v4": {
+          "type": "video",
+          "settings": {
+            "video_url": "5fc39886bc423edf170e0ae497c5aab0.mp4",
+            "label": "Healthy hair starts with what you put on it"
+          }
+        },
+        "v5": {
+          "type": "video",
+          "settings": {
+            "video_url": "6cda803e2ae0551b4f573466a45b679e.mp4",
+            "label": "For salty air and nourished hair"
+          }
+        },
+        "v6": {
+          "type": "video",
+          "settings": {
+            "video_url": "fc70c33dc06b2bafdcce0d2487f7b171.mp4",
+            "label": "A daily nutritional supplement for your hair"
+          }
+        },
+        "v7": {
+          "type": "video",
+          "settings": {
+            "video_url": "90c646265ba41dc5add11a9b7624ae4f.mp4",
+            "label": "A ritual for radiant hair health"
+          }
+        },
+        "v8": {
+          "type": "video",
+          "settings": {
+            "video_url": "377a0019c1a47b2de4e072b7de5c40b3.mp4",
+            "label": "Natural haircare without compromise"
+          }
+        },
+        "v9": {
+          "type": "video",
+          "settings": {
+            "video_url": "4a255b733dd0dbdf4a5d9f7806ad6729.mp4",
+            "label": "Designed as a leave-in nutritional supplement"
+          }
+        },
+        "v10": {
+          "type": "video",
+          "settings": {
+            "video_url": "f7dd8dd56b8676186c12d271f61916ef.mp4",
+            "label": "Nourish, don’t just coat"
+          }
+        },
+        "v11": {
+          "type": "video",
+          "settings": {
+            "video_url": "07627ed7aa2bea606b147b5513d8a89e.mp4",
+            "label": "Where nature meets transformation"
+          }
+        },
+        "v12": {
+          "type": "video",
+          "settings": {
+            "video_url": "f69aa69cb587fea951c0765c4bce3a2e.mp4",
+            "label": "Real nutrition for your hair"
+          }
+        },
+        "v13": {
+          "type": "video",
+          "settings": {
+            "video_url": "f3666d4b5dd36fcb261ae77cc0b42016.mp4",
+            "label": "What we wash with returns to the Earth"
+          }
+        },
+        "v14": {
+          "type": "video",
+          "settings": {
+            "video_url": "5e022c5e09ff2f30719dd91638ea8d1b.mp4",
+            "label": "A leave-in that does more"
+          }
+        },
+        "v15": {
+          "type": "video",
+          "settings": {
+            "video_url": "9e5beba6c31188f96c9b88533a0182c0.mp4",
+            "label": "Earth born, hair revived"
+          }
+        },
+        "v16": {
+          "type": "video",
+          "settings": {
+            "video_url": "3a72a5a9b5d8eac116001d7a717a43c3.mp4",
+            "label": "Holistic hair health, born from the earth"
+          }
+        },
+        "v17": {
+          "type": "video",
+          "settings": {
+            "video_url": "7dcfa2e4cc6079643951b9694421988b.mp4",
+            "label": "Whipped tallow and leave-in for after-sun care"
+          }
+        },
+        "v18": {
+          "type": "video",
+          "settings": {
+            "video_url": "eec9c621731d192c9b57ecf25f601108.mp4",
+            "label": "Meet our Regenerative Shampoo and Conditioner"
+          }
+        },
+        "v19": {
+          "type": "video",
+          "settings": {
+            "video_url": "58d255f8cd644bd2c2a9cc8be48e8eba.mp4",
+            "label": "A ritual for radiant hair"
+          }
+        },
+        "v20": {
+          "type": "video",
+          "settings": {
+            "video_url": "f3e476133a14d7aac5c89b1d5fa2b5f4.mp4",
+            "label": "Our Regenerative Shampoo and Conditioner for ultimate performance"
+          }
+        },
+        "v21": {
+          "type": "video",
+          "settings": {
+            "video_url": "1d2c9025d64acb87308931ce802e9dea.mp4",
+            "label": "Behind every bottle: why we choose glass"
+          }
+        }
+      },
+      "block_order": [
+        "v1",
+        "v2",
+        "v3",
+        "v4",
+        "v5",
+        "v6",
+        "v7",
+        "v8",
+        "v9",
+        "v10",
+        "v11",
+        "v12",
+        "v13",
+        "v14",
+        "v15",
+        "v16",
+        "v17",
+        "v18",
+        "v19",
+        "v20",
+        "v21"
+      ],
+      "settings": {}
+    },
+    "gift": {
+      "type": "image-with-text",
+      "settings": {
+        "layout": "image_right",
+        "fallback": "amun-274659e150.jpg",
+        "alt": "The full Amun Organics lineup in grey sand: Conditioner, Leave-In, Shampoo, Tallow Face Lotion and Nature's Pomade",
+        "heading": "A Better Way to Gift",
+        "text": "Each set brings together our tallow essentials at a special value, ready for anyone on your list — including you.",
+        "button_label": "Shop Now",
+        "button_link": "/collections/bundle"
+      }
+    },
+    "best": {
+      "type": "product-grid",
+      "settings": {
+        "products": [
+          "regenerative-shampoo",
+          "leave-in-conditioner",
+          "tallow-face-lotion"
+        ],
+        "heading": "Shop Best Sellers"
+      }
+    },
+    "bundle": {
+      "type": "image-banner",
+      "settings": {}
+    },
+    "easy": {
+      "type": "image-with-text",
+      "settings": {
+        "layout": "image_left",
+        "fallback": "amun-c7d4944dfc.jpg",
+        "alt": "Leave-In Conditioner on an onyx tray beside a wooden mirror, with palo santo",
+        "img_style": "flex: 2 1 640px; min-width: 0; width: 100%; height: 600px; object-fit: cover; object-position: center 62%; display: block; background: #a8774a",
+        "heading": "Intentionally Easy",
+        "text": "Fewer, better ingredients, sourced with care and kept in glass. Learn how we make every formula and why it starts with the land.",
+        "button_label": "Our Story",
+        "button_link": "/pages/about-page",
+        "pad_top": 72,
+        "pad_bottom": 72
+      }
+    },
+    "instagram": {
+      "type": "instagram",
+      "blocks": {
+        "p0": {
+          "type": "post",
+          "settings": {
+            "fallback": "amun-8738282e8a.jpg",
+            "alt": "Holding the Shampoo and Conditioner in a green meadow",
+            "pos": "center 45%"
+          }
+        },
+        "p1": {
+          "type": "post",
+          "settings": {
+            "fallback": "amun-595812f94d.jpg",
+            "alt": "Standing beside a white Highland cow by the pond",
+            "pos": "center 40%"
+          }
+        },
+        "p2": {
+          "type": "post",
+          "settings": {
+            "fallback": "amun-6a82dd36be.jpg",
+            "alt": "Shampoo and Conditioner on a rain-soaked wooden shelf with frangipani",
+            "pos": "center 60%"
+          }
+        },
+        "p3": {
+          "type": "post",
+          "settings": {
+            "fallback": "amun-388c419e9e.jpg",
+            "alt": "The Shampoo held against a Highland cow coat",
+            "pos": "center"
+          }
+        },
+        "p4": {
+          "type": "post",
+          "settings": {
+            "fallback": "amun-3a1187f81c.jpg",
+            "alt": "Two women with long flowing hair in a sunlit meadow",
+            "pos": "center 35%"
+          }
+        }
+      },
+      "block_order": [
+        "p0",
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "collection",
+    "tiles",
+    "videos",
+    "gift",
+    "best",
+    "bundle",
+    "easy",
+    "instagram"
+  ]
+}
