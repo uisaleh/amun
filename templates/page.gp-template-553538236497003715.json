@@ -1,44 +1,4 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
-  "sections": {
-    "gp_global_section_557289515190846296-1": {
-      "type": "gp-global-section-557289515190846296",
-      "settings": {
-        "section_preload": "false",
-        "checksum": "",
-        "gguabgdDc00_text_385127564": "TRANSFORM WITH TALLOW HAIRCARE",
-        "ggOwSd3Coiw_text_385127564": "TRANSFORM WITH TALLOW HAIRCARE",
-        "gg14-M0nuUD_text_385127564": "TRANSFORM WITH TALLOW HAIRCARE"
-      }
-    },
-    "gp_section_553538309863769283": {
-      "type": "gp-section-553538309863769283",
-      "settings": {
-        "checksum": "b96aae3759f329c28ba3cd764ea9e10aeb26cc0d92b8b6a167a8575d3b00baff_1_1_0_0__1",
-        "gg4rQH8YBU9_text": "Payment Terms &amp; Conditions",
-        "ggh1r3ueNuB_text": "<p>Amun Organics offers secure payment options for a seamless shopping experience.</p>",
-        "gggmjjM7BVx_text": "<p>Last updated: <span style=\"color:#575757;\"><strong>February 2025</strong></span></p>"
-      }
-    },
-    "gp_section_553538309863834819": {
-      "type": "gp-section-553538309863834819",
-      "settings": {
-        "checksum": "d08bcf33b387c083c737986707c02c8d5df3a40285baef2ad5430af4d801ac70_1_1_0_0__1",
-        "gggpET45PL4_text": "<p><strong>Accepted Payment Methods:</strong></p><p>Amun Organics offers secure payment options for a seamless shopping experience. We accept:</p><ul><li>Major credit and debit cards (Visa, Mastercard, American Express, Discover)</li><li>PayPal</li><li>Apple Pay &amp; Google Pay</li><li>Other secure payment methods as displayed at checkout</li></ul><p><strong>Order Processing &amp; Payment Authorization:</strong></p><ul><li>Payments are processed at the time of purchase to ensure order confirmation.</li><li>All transactions are encrypted and secured for your protection.</li><li>If a payment fails, please check your details and try again or contact your payment provider.</li></ul><p><strong>Pricing &amp; Currency:</strong></p><ul><li>All prices listed are in <strong>[currency]</strong>, and applicable taxes will be calculated at checkout.</li><li>Amun Organics reserves the right to adjust prices due to market fluctuations, promotions, or supplier costs.</li></ul><p><strong>Billing &amp; Transaction Security:</strong></p><ul><li>Your payment details are never stored on our servers. We use trusted third-party payment processors for secure transactions.</li><li>In case of suspicious or fraudulent transactions, we may request additional verification before processing an order.</li></ul><p><strong>Refunds &amp; Cancellations:</strong></p><ul><li>Orders cannot be canceled once they have been processed. Please double-check your order before completing payment.</li><li>Refunds are only applicable in cases of damaged or incorrect items, as per our Returns Policy.</li></ul><p>For any payment-related inquiries, feel free to contact our support team at <strong>[insert contact email]</strong>.</p>"
-      }
-    }
-  },
-  "order": [
-    "gp_global_section_557289515190846296-1",
-    "gp_section_553538309863769283",
-    "gp_section_553538309863834819"
-  ]
+  "sections": { "main": { "type": "main-page", "settings": { "use_design": true, "layout": "auto" } } },
+  "order": ["main"]
 }

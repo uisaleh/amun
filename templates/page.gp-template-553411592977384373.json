@@ -1,44 +1,4 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
-  "sections": {
-    "gp_global_section_557289515190846296-1": {
-      "type": "gp-global-section-557289515190846296",
-      "settings": {
-        "section_preload": "false",
-        "checksum": "",
-        "gguabgdDc00_text_385127564": "TRANSFORM WITH TALLOW HAIRCARE",
-        "ggOwSd3Coiw_text_385127564": "TRANSFORM WITH TALLOW HAIRCARE",
-        "gg14-M0nuUD_text_385127564": "TRANSFORM WITH TALLOW HAIRCARE"
-      }
-    },
-    "gp_section_553540808125449411": {
-      "type": "gp-section-553540808125449411",
-      "settings": {
-        "checksum": "01545f51ae9b3157b4367753daa039d6083f26d3be4e396891230bc2c29c8649_1_1_0_0__1",
-        "ggGNg5gUdZo_text": "Frequently Asked Questions",
-        "ggtqtGCRZCy_text": "<p>At Amun Organics, we prioritize your privacy and protect your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you visit our website or make a purchase.</p>",
-        "ggxcKQVmdNI_text": "<p>Last updated: <span style=\"color:#575757;\"><strong>February 2025</strong></span></p>"
-      }
-    },
-    "gp_section_553540808511325077": {
-      "type": "gp-section-553540808511325077",
-      "settings": {
-        "checksum": "6093f95ac9d8ce1990973ce51cf54287f2bd54e99e841b5404ebea59771540c9_1_1_0_0__1",
-        "ggIuU1C4ZiO_text": "<p><strong>1. Why does Amun Organics use grass-fed tallow in its products?</strong><br>Grass-fed tallow is an ancient, nutrient-dense ingredient rich in essential fatty acids, vitamins, and antioxidants that deeply nourish and repair both hair and skin. Unlike synthetic alternatives, tallow closely mimics our skin’s natural oils, making it highly bioavailable and effective in restoring moisture, strengthening hair strands, and promoting overall scalp health.</p><p>&nbsp;</p><p><strong>2. Are Amun Organics products free from synthetic chemicals and fragrances?</strong><br>Yes! We are committed to purity and transparency. Our products contain no synthetic fragrances, parabens, sulfates, or artificial preservatives. Every ingredient is intentionally chosen to support your health and well-being, ensuring a truly clean and nourishing experience.</p><p>&nbsp;</p><p><strong>3. Why do you use glass packaging instead of plastic?</strong><br>We choose glass because it preserves the purity and potency of our formulations without leaching harmful chemicals. Glass is also endlessly recyclable, making it a more sustainable choice for both your health and the environment. By choosing Amun Organics, you’re making an eco-conscious decision that supports a cleaner planet.</p><p>&nbsp;</p><p><strong>4. Are your products suitable for all hair types?</strong><br>Absolutely! Our formulations are designed to work in harmony with all hair types and textures. Whether you have straight, wavy, curly, or coily hair, our nutrient-rich blends provide hydration, strength, and balance without weighing your hair down.</p><p>&nbsp;</p><p><strong>5. Where are Amun Organics products made?</strong><br>Our products are formulated in Aspen and handcrafted in Canada with the utmost care. We source the highest quality organic ingredients, ensuring that each bottle reflects our commitment to integrity, sustainability, and holistic wellness.</p>"
-      }
-    }
-  },
-  "order": [
-    "gp_global_section_557289515190846296-1",
-    "gp_section_553540808125449411",
-    "gp_section_553540808511325077"
-  ]
+  "sections": { "main": { "type": "main-page", "settings": { "use_design": true, "layout": "auto" } } },
+  "order": ["main"]
 }

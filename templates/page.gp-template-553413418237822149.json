@@ -1,44 +1,4 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
-  "sections": {
-    "gp_global_section_557289515190846296-1": {
-      "type": "gp-global-section-557289515190846296",
-      "settings": {
-        "section_preload": "false",
-        "checksum": "",
-        "gguabgdDc00_text_385127564": "TRANSFORM WITH TALLOW HAIRCARE",
-        "ggOwSd3Coiw_text_385127564": "TRANSFORM WITH TALLOW HAIRCARE",
-        "gg14-M0nuUD_text_385127564": "TRANSFORM WITH TALLOW HAIRCARE"
-      }
-    },
-    "gp_section_553539655513932693": {
-      "type": "gp-section-553539655513932693",
-      "settings": {
-        "checksum": "840ec52cd4baa5614ff1e210c2b2e92bf28a19e376cff3679adbafd318e9350b_1_1_0_0__1",
-        "ggw6Z1n_tJ6_text": "Privacy Policy",
-        "ggqfb2X64JX_text": "<p>At Amun Organics, we prioritize your privacy and protect your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you visit our website or make a purchase.</p>",
-        "ggJ2k2-3rAc_text": "<p>Last updated: <span style=\"color:#575757;\"><strong>February 2025</strong></span></p>"
-      }
-    },
-    "gp_section_553539672878351422": {
-      "type": "gp-section-553539672878351422",
-      "settings": {
-        "checksum": "45a7c6da8e573eff696a00c69d12cef85fa15ec82cd8e0cf63585a87202353f0_1_1_0_0__1",
-        "ggauJMBTc9e_text": "<p>&nbsp;</p><p><strong>Effective Date:</strong> [Insert Date]</p><p>At Amun Organics, we value your privacy and are committed to protecting your personal information. This Privacy Policy outlines how we collect, use, and safeguard your data when you visit our website or make a purchase.</p><p>&nbsp;</p><p><strong>1. Information We Collect</strong></p><p>When you interact with Amun Organics, we may collect the following information:</p><ul><li>Personal Information: Name, email address, phone number, billing and shipping address.</li><li>Payment Information: We do not store credit/debit card details. Payments are securely processed through third-party providers like Klarna, PayPal, and Stripe.</li><li>Order Details: Products purchased, order history, and transaction details.</li><li>Website Usage Data: IP address, browser type, and browsing activity through cookies and analytics tools.</li></ul><p><strong>2. How We Use Your Information</strong></p><ul><li>Process and fulfill orders, including shipping and payment processing.</li><li>Provide customer support and respond to inquiries.</li><li>Send order updates, promotions, and marketing emails (you can opt out anytime).</li><li>Improve our website, services, and customer experience.</li><li>Comply with legal obligations and prevent fraud.</li></ul><p><strong>3. How We Protect Your Information</strong></p><ul><li>We use industry-standard security measures to protect your personal data.</li><li>Payment transactions are encrypted and handled by secure third-party providers.</li><li>We do not sell, rent, or share your information with third parties for marketing purposes.</li></ul><p><strong>4. Cookies &amp; Tracking Technologies</strong></p><ul><li>We use cookies to enhance your browsing experience and analyze website traffic.</li><li>You can manage cookie preferences through your browser settings.</li></ul><p><strong>5. Third-Party Services</strong></p><p>We may share necessary data with:</p><ul><li>Payment processors (Klarna, PayPal, Stripe) for secure transactions.</li><li>Shipping carriers for order delivery.</li><li>Analytics providers (Google Analytics) to improve website performance.</li></ul><p><strong>6. Your Rights &amp; Choices</strong></p><ul><li>Access &amp; Updates: You can request access to or updates to your personal data.</li><li>Opt-Out: Unsubscribe from marketing emails at any time.</li><li>Data Deletion: Request the removal of your personal information unless required by law.</li></ul><p><strong>7. Changes to This Policy</strong></p><p>We may update this Privacy Policy from time to time. Changes will be posted on this page with the revised effective date.</p><p>&nbsp;</p><p><strong>8. Contact Us</strong></p><p>For any privacy-related questions or requests, contact us at:<br>📧 <strong>[Insert Contact Email]</strong></p>"
-      }
-    }
-  },
-  "order": [
-    "gp_global_section_557289515190846296-1",
-    "gp_section_553539655513932693",
-    "gp_section_553539672878351422"
-  ]
+  "sections": { "main": { "type": "main-page", "settings": { "use_design": true, "layout": "auto" } } },
+  "order": ["main"]
 }

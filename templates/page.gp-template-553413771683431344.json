@@ -1,44 +1,4 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
-  "sections": {
-    "gp_global_section_557289515190846296-1": {
-      "type": "gp-global-section-557289515190846296",
-      "settings": {
-        "section_preload": "false",
-        "checksum": "",
-        "gguabgdDc00_text_385127564": "TRANSFORM WITH TALLOW HAIRCARE",
-        "ggOwSd3Coiw_text_385127564": "TRANSFORM WITH TALLOW HAIRCARE",
-        "gg14-M0nuUD_text_385127564": "TRANSFORM WITH TALLOW HAIRCARE"
-      }
-    },
-    "gp_section_553534901303903125": {
-      "type": "gp-section-553534901303903125",
-      "settings": {
-        "checksum": "24bb7335752a619b94cfe0f444f75f64d9dcb83746fe86170380fe339cb8592b_1_1_0_0__1",
-        "gg-VdEZcA0O_text": "<p>At Amun Organics, we offer Klarna as a payment option to provide you with flexibility and convenience when shopping with us. Klarna allows you to shop now and pay later with easy, interest-free installments.</p><p>How Klarna Works</p><p><strong>Select Klarna at Checkout</strong> – Choose Klarna as your payment method during checkout.</p><p><strong>Choose Your Payment Plan</strong> – Klarna offers multiple options, including:</p><ul><li><strong>Pay in 4</strong>: Split your purchase into four equal, interest-free payments, paid every two weeks.</li><li><strong>Pay Later</strong>: Get your order now and pay in full within 30 days.</li><li><strong>Financing Options</strong>: Longer-term installment plans may be available.</li></ul><p><strong>Complete Your Order</strong> – Once approved by Klarna, your order will be processed and shipped as usual.</p><p><strong>Manage Payments Easily</strong> – You can track and manage your payments directly in the Klarna app.</p><p>Eligibility &amp; Approval</p><ul><li>Klarna’s payment options are subject to an eligibility check.</li><li>Your credit score will not be impacted if you choose <strong>Pay in 4</strong> or <strong>Pay Later</strong>, but financing options may require a credit check.</li><li>Payment plans are offered directly by Klarna, and approval is determined by their policies.</li></ul><p>Klarna Terms &amp; Conditions</p><ul><li>Late or missed payments may result in additional fees. Please ensure you can meet your payment obligations before selecting Klarna.</li><li>For more information or assistance, visit Klarna’s website or contact their customer support.</li><li>By selecting Klarna at checkout, you agree to Klarna’s terms and conditions.</li></ul><p>If you have any questions regarding Klarna payments for your Amun Organics order, feel free to contact us at <strong>[insert contact email]</strong>.</p>"
-      }
-    },
-    "gp_section_553534901522007102": {
-      "type": "gp-section-553534901522007102",
-      "settings": {
-        "checksum": "f457f542bff5c3b241d66c223d5649d5aa4ac947e65a2418a53509c8487fd700_1_1_0_0__1",
-        "gg8VCHLgG9X_text": "Klarna Payments",
-        "ggIKBdE0ERP_text": "<p>At Amun Organics, we offer Klarna as a payment option to provide you with flexibility and convenience when shopping with us.</p>",
-        "ggCCV5j7iAm_text": "<p>Last updated: <span style=\"color:#575757;\"><strong>February 2025</strong></span></p>"
-      }
-    }
-  },
-  "order": [
-    "gp_global_section_557289515190846296-1",
-    "gp_section_553534901522007102",
-    "gp_section_553534901303903125"
-  ]
+  "sections": { "main": { "type": "main-page", "settings": { "use_design": true, "layout": "auto" } } },
+  "order": ["main"]
 }

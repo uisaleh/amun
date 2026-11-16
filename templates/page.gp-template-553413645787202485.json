@@ -1,44 +1,4 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
-  "sections": {
-    "gp_global_section_557289515190846296-1": {
-      "type": "gp-global-section-557289515190846296",
-      "settings": {
-        "section_preload": "false",
-        "checksum": "",
-        "gguabgdDc00_text_385127564": "TRANSFORM WITH TALLOW HAIRCARE",
-        "ggOwSd3Coiw_text_385127564": "TRANSFORM WITH TALLOW HAIRCARE",
-        "gg14-M0nuUD_text_385127564": "TRANSFORM WITH TALLOW HAIRCARE"
-      }
-    },
-    "gp_section_553413658437223621": {
-      "type": "gp-section-553413658437223621",
-      "settings": {
-        "checksum": "cbc18e71cf9ef03dc1bd062b863ac6b472a95f23af9d104c46b78441680b522f_1_1_0_0__1",
-        "gg1hImIjIzs_text": "Shipping &amp; Returns",
-        "ggpMpUyu3kq_text": "<p>Our refund policy is designed to ensure customer satisfaction. If for any reason you are not satisfied with your purchase, you can request a refund within a certain timeframe.&nbsp;</p>",
-        "ggtRCphnPBB_text": "<p>Last updated: <span style=\"color:#575757;\"><strong>February 2025</strong></span></p>"
-      }
-    },
-    "gp_section_553531849696085054": {
-      "type": "gp-section-553531849696085054",
-      "settings": {
-        "checksum": "5093a7d1b22a2b9a078061bb3c9339798ec1c4948e77e256a55de3f01f13ef08_1_1_0_0__1",
-        "ggTfdU5cHqr_text": "<p>At Amun Organics, we are dedicated to delivering your products with care and efficiency.</p><p><strong>Processing Time: </strong>Orders are typically processed within 1-3 business days.<br><strong>Shipping Rates &amp; Delivery: </strong>Shipping costs are calculated at checkout based on your location and selected shipping method. Delivery times vary by region.</p><p><br><strong>International Shipping:&nbsp;</strong></p><p>We currently ship worldwide. International orders may be subject to customs fees, duties, or taxes, which are the responsibility of the customer.<br>Tracking Your Order: Once your order has shipped, you will receive a tracking number via email to monitor its journey to your doorstep.</p><p><br><strong>Returns &amp; Exchanges:</strong><br>We stand behind the quality of our products and want you to be fully satisfied with your purchase.</p><p>Returns: Due to the nature of our handcrafted organic products, we do not accept returns. However, if you receive a damaged or defective item, please contact us within 7 days of delivery for a resolution.<br>Exchanges: If an item arrives damaged or incorrect, we will gladly replace it. Please provide photos and details of the issue when reaching out to our support team.</p><p><br><strong>Refunds:&nbsp;</strong></p><p>Refunds are issued only in cases of damaged, defective, or incorrect items. Approved refunds will be processed back to the original payment method.</p><p><br>For any questions regarding shipping or returns, feel free to contact our customer support team at [insert contact email]. We’re here to help!</p>"
-      }
-    }
-  },
-  "order": [
-    "gp_global_section_557289515190846296-1",
-    "gp_section_553413658437223621",
-    "gp_section_553531849696085054"
-  ]
+  "sections": { "main": { "type": "main-page", "settings": { "use_design": true, "layout": "auto" } } },
+  "order": ["main"]
 }
