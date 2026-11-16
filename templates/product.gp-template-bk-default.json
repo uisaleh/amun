@@ -8,38 +8,13 @@
  * ------------------------------------------------------------
  */
 {
-  "order": [
-    "main",
-    "ingredients",
-    "videos",
-    "ritual",
-    "reviews",
-    "recommendations"
-  ],
   "sections": {
-    "ingredients": {
-      "settings": {},
-      "type": "key-ingredients"
-    },
-    "main": {
-      "settings": {},
-      "type": "main-product"
-    },
-    "recommendations": {
-      "settings": {},
-      "type": "product-recommendations"
-    },
-    "reviews": {
-      "settings": {},
-      "type": "product-reviews"
-    },
-    "ritual": {
-      "settings": {},
-      "type": "product-ritual"
-    },
-    "videos": {
-      "settings": {},
-      "type": "product-videos"
-    }
-  }
+    "main": { "type": "main-product", "settings": {} },
+    "ingredients": { "type": "key-ingredients", "settings": {} },
+    "videos": { "type": "product-videos", "settings": {} },
+    "ritual": { "type": "product-ritual", "settings": {} },
+    "reviews": { "type": "product-reviews", "settings": {} },
+    "recommendations": { "type": "product-recommendations", "settings": {} }
+  },
+  "order": ["main", "ingredients", "videos", "ritual", "reviews", "recommendations"]
 }

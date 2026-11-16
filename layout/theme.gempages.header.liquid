@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#9FA383">
+    <link rel="canonical" href="{{ canonical_url }}">
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 48, height: 48 }}">
+    {%- else -%}
+      <link rel="icon" type="image/png" href="{{ 'amun-favicon.png' | asset_url }}">
+    {%- endif -%}
+    <link rel="preconnect" href="https://files.gempages.net" crossorigin>
+    <link rel="preload" href="{{ 'sentient-400.woff2' | asset_url }}" as="font" type="font/woff2" crossorigin>
+
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    {% render 'meta-tags' %}
+
+    <style>
+      @font-face{font-family:'Sentient';src:url('{{ 'sentient-400.woff2' | asset_url }}') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+      @font-face{font-family:'Sentient';src:url('https://files.gempages.net/551189810572690646-ab23a4bb-b876-46dd-ba4e-7c9f4aa4bc27.woff2') format('woff2');font-weight:500 700;font-style:normal;font-display:swap}
+      @font-face{font-family:'Helvetica';src:url('https://files.gempages.net/551189810572690646-fc5ee4ad-693d-4972-bb78-330ad33ed87f.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
+      @font-face{font-family:'Helvetica';src:url('https://files.gempages.net/551189810572690646-a7d2edd6-390e-4d65-b335-35217199a060.ttf') format('truetype');font-weight:500 900;font-style:normal;font-display:swap}
+    </style>
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+
+    <script>
+      window.Amun = {
+        routes: {
+          root: {{ routes.root_url | json }},
+          cart: {{ routes.cart_url | json }},
+          cartAdd: {{ routes.cart_add_url | json }},
+          cartChange: {{ routes.cart_change_url | json }},
+          cartUpdate: {{ routes.cart_update_url | json }},
+          search: {{ routes.predictive_search_url | json }},
+          allProducts: {{ routes.all_products_collection_url | json }}
+        },
+        moneyFormat: {{ shop.money_format | json }},
+        freeShip: {{ settings.free_shipping_threshold | default: 150 | times: 100 | json }},
+        shipRates: [
+          { id: 'standard', label: {{ settings.ship_standard_label | json }}, eta: {{ settings.ship_standard_eta | json }}, price: {{ settings.ship_standard_price | times: 100 | round | json }}, freeOver: true },
+          { id: 'express', label: {{ settings.ship_express_label | json }}, eta: {{ settings.ship_express_eta | json }}, price: {{ settings.ship_express_price | times: 100 | round | json }} },
+          { id: 'overnight', label: {{ settings.ship_overnight_label | json }}, eta: {{ settings.ship_overnight_eta | json }}, price: {{ settings.ship_overnight_price | times: 100 | round | json }} }
+        ],
+        coupon: {{ settings.newsletter_code | json }},
+        popupDelay: {{ settings.popup_delay | default: 2.5 | times: 1000 | json }},
+        popupEnabled: {{ settings.popup_enabled | json }}
+      };
+      {%- assign design_handles = 'regenerative-shampoo,leave-in-conditioner,regenerative-conditioner,natures-pomade,tallow-face-lotion,shampoo-conditioner-leave-in-bundle,shampoo-conditioner,the-origin-pair' | split: ',' %}
+      window.Amun.design = {
+        {%- for dh in design_handles -%}
+          {%- capture dn -%}{% render 'amun-data', handle: dh, key: 'name' %}{%- endcapture -%}
+          {%- capture di -%}{% render 'amun-data', handle: dh, key: 'card_img' %}{%- endcapture -%}
+          {{ dh | json }}: { "name": {{ dn | json }}, "img": {% if settings.use_design_images %}{{ di | asset_url | json }}{% else %}""{% endif %} }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      };
+    </script>
+    <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+
+    {{ content_for_header }}
+  </head>
+
+  <body class="template-{{ template.name }}">
+    <a class="skip-link" href="#MainContent">Skip to content</a>
+    <div class="page-wrap">
+      {% sections 'header-group' %}
+
+      <main id="MainContent" role="main" tabindex="-1">
+        {{ content_for_layout }}
+      </main>
+
+      
+    </div>
+
+    
+    
+    
+    <span class="fly" aria-hidden="true" data-fly hidden><span class="fly__dot"><img width="1200" height="1200" alt="" data-fly-img></span></span>
+  </body>
+</html>
