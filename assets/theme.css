@@ -183,7 +183,6 @@ details.faq-item>div{padding:0 0 24px;font-size:14px;line-height:19.6px;max-widt
   .slider .slider__track>*{flex-basis:76%;scroll-snap-align:center}
   .slider .pcard{text-align:center}
   .slider .pcard__body{align-items:center}
-  .slider .pcard:not(.is-on)>.pcard__body,.slider .pcard:not(.is-on)>.pcard__btn{visibility:hidden}
   .slider--videos{margin-right:-24px;margin-left:0}
   .slider--videos>.slider__arrow{display:none}
   .slider--videos .slider__track{padding:0 24px 0 0;gap:10px}
