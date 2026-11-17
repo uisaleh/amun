@@ -13,10 +13,12 @@
       </div>
       <p data-search-heading style="margin: 0; font-size: 12px; line-height: 16.8px; text-transform: uppercase">Popular products</p>
       <div data-search-results style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap: 14px">
-        {%- for p in collections.all.products limit: 4 -%}
-          {% render 'search-result', product: p %}
+        {%- for p in collections.all.products limit: 50 -%}
+          {% render 'search-result', product: p, index: forloop.index %}
         {%- endfor -%}
       </div>
+      <p data-search-empty hidden style="margin: 0; font-size: 14px; line-height: 19.6px"></p>
+      <button type="submit" data-search-all hidden class="link-btn" style="align-self: flex-start; font-size: 13px">See all results</button>
     </form>
   </div>
 </div>

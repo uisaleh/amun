@@ -65,25 +65,27 @@
   document.addEventListener('input', function (e) {
     if (!e.target.matches('[data-search-input]')) return;
     var q = e.target.value.trim(); clearTimeout(searchTimer);
-    searchTimer = setTimeout(function () { runSearch(q); }, 200);
+    searchTimer = setTimeout(function () { runSearch(q); }, 60);
   });
   function runSearch(q) {
-    var head = $('[data-search-heading]'), box = $('[data-search-results]');
-    if (!box) return;
-    if (!q) { head.textContent = 'Popular products'; return; }
-    fetch((A.routes.search || '/search/suggest') + '.json?q=' + encodeURIComponent(q) + '&resources[type]=product&resources[limit]=8')
-      .then(function (r) { return r.json(); })
-      .then(function (d) {
-        var ps = (d.resources && d.resources.results && d.resources.results.products) || [];
-        head.textContent = ps.length ? 'Results for “' + q + '”' : 'No results';
-        box.innerHTML = ps.length ? ps.map(function (p) {
-          var dz = design(p.handle) || {};
-          var img = dz.img || p.featured_image && p.featured_image.url || p.image || '';
-          return '<a href="' + esc(p.url) + '" style="display:flex;align-items:center;gap:14px;padding:10px;background:#FEF9F6;text-decoration:none">' +
-            (img ? '<img src="' + esc(img) + '" alt="" style="flex:0 0 56px;width:56px;height:70px;object-fit:cover;background:#efefea">' : '') +
-            '<span style="display:flex;flex-direction:column;gap:4px;min-width:0"><span style="font-size:14px;line-height:19.6px">' + esc(dz.name || titleCase(p.title)) + '</span><span style="font-size:12px;line-height:16.8px">' + esc(money(Math.round(parseFloat(p.price) * 100))) + '</span></span></a>';
-        }).join('') : '<p style="margin:0;font-size:14px;line-height:19.6px">No products match “' + esc(q) + '”. Try shampoo, conditioner, pomade or lotion.</p>';
-      }).catch(function () {});
+    var head = $('[data-search-heading]'), items = $$('[data-search-item]'), empty = $('[data-search-empty]'), all = $('[data-search-all]');
+    if (!items.length) return;
+    var words = q.toLowerCase().split(/\s+/).filter(Boolean);
+    if (!words.length) {
+      head.textContent = 'Popular products'; head.hidden = false;
+      items.forEach(function (el, i) { el.hidden = i > 3; });
+      if (empty) empty.hidden = true; if (all) all.hidden = true; return;
+    }
+    var shown = 0;
+    items.forEach(function (el) {
+      var t = el.getAttribute('data-terms') || '';
+      var ok = words.every(function (w) { return t.indexOf(w) !== -1 || (w.length > 3 && t.indexOf(w.replace(/s$/, '')) !== -1); });
+      el.hidden = !ok; if (ok) shown++;
+    });
+    head.textContent = shown ? 'Results for “' + q + '”' : '';
+    head.hidden = !shown;
+    if (empty) { empty.hidden = !!shown; empty.textContent = 'No products match “' + q + '”. Try shampoo, conditioner, pomade, lotion or bundle.'; }
+    if (all) all.hidden = !shown;
   }
 
   /* ---------- Cart ---------- */
