@@ -499,8 +499,28 @@
     });
   }
 
+  /* ---------- Header: show when scrolling up ---------- */
+  function initHeader() {
+    var wrap = $('.header-section'); if (!wrap) return;
+    var lastY = window.pageYOffset, ticking = false;
+    function update() {
+      var y = window.pageYOffset, h = wrap.offsetHeight;
+      wrap.style.setProperty('--hdr-hide', (-h - 2) + 'px');
+      var anyOpen = $$('.overlay:not([hidden])').length > 0;
+      if (anyOpen || y <= h) wrap.classList.remove('is-hidden');
+      else if (y > lastY + 6) wrap.classList.add('is-hidden');
+      else if (y < lastY - 6) wrap.classList.remove('is-hidden');
+      if (Math.abs(y - lastY) > 6 || y <= h) lastY = y;
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    wrap.addEventListener('focusin', function () { wrap.classList.remove('is-hidden'); });
+    update();
+  }
+
   /* ---------- Boot ---------- */
   function boot() {
+    initHeader();
     $$('[data-slider]').forEach(initSlider);
     initVideos();
     $$('[data-product]').forEach(initProduct);

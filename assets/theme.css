@@ -23,7 +23,10 @@ body.no-scroll{overflow:hidden}
 .btn-outline{display:inline-flex;align-items:center;justify-content:center;height:50px;min-width:200px;padding:0 24px;border:1px solid #000000;font-size:14px;color:#000;background:transparent}
 .btn-outline:hover{text-decoration:none;background:#585128;border-color:#585128;color:#fff}
 
-/* Header */
+/* Header: stays pinned, hides on scroll down, returns on scroll up */
+.header-section{position:sticky;top:0;z-index:50;transition:top 260ms ease}
+.header-section.is-hidden{top:var(--hdr-hide,-80px)}
+.header-section .site-header{position:relative!important}
 .site-header a:not([aria-label]){text-transform:uppercase;letter-spacing:0.6px}
 .hdr-burger{display:none}
 .cart-count{position:absolute;left:1px;right:1px;top:6px;height:13px;display:flex;align-items:center;justify-content:center;font-size:9px;line-height:1}
