@@ -15,7 +15,7 @@
       {%- if settings.logo != blank -%}
         {{ settings.logo | image_url: width: 240 | image_tag: alt: shop.name, width: 118, height: 30, style: 'display: block; width: 118px; height: 30px; object-fit: contain' }}
       {%- else -%}
-        <img src="{{ 'amun-logo.png' | asset_url }}" alt="{{ shop.name | escape }}" width="118" height="30" style="display: block; width: 118px; height: 30px">
+        <img src="{{ 'amun-logo.webp' | asset_url }}" alt="{{ shop.name | escape }}" width="118" height="30" style="display: block; width: 118px; height: 30px">
       {%- endif -%}
     </a>
     <div class="hdr-right" style="display: flex; gap: 24px; align-items: center; justify-content: flex-end; font-size: 14px; line-height: 14px; flex: 1 1 300px">
@@ -38,7 +38,7 @@
       {%- if settings.logo != blank -%}
         {{ settings.logo | image_url: width: 220 | image_tag: alt: shop.name, width: 110, height: 28, style: 'display: block; width: 110px; height: 28px; object-fit: contain' }}
       {%- else -%}
-        <img src="{{ 'amun-logo.png' | asset_url }}" alt="{{ shop.name | escape }}" width="110" height="28" style="display: block; width: 110px; height: 28px">
+        <img src="{{ 'amun-logo.webp' | asset_url }}" alt="{{ shop.name | escape }}" width="110" height="28" style="display: block; width: 110px; height: 28px">
       {%- endif -%}
       <button type="button" data-close-menu aria-label="Close menu" style="width: 44px; height: 44px; padding: 0; background: none; border: 0; cursor: pointer; display: inline-flex; align-items: center; justify-content: flex-end"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#121212" stroke-width="1.2"><path d="M1 1l14 14M15 1L1 15"></path></svg></button>
     </div>

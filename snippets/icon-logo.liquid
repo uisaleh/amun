@@ -1,5 +1,5 @@
 {%- if settings.logo_icon != blank -%}
   {{ settings.logo_icon | image_url: width: 120 | image_tag: class: 'sec-head__icon', alt: '', width: 57, height: 30, loading: 'lazy' }}
 {%- else -%}
-  <img class="sec-head__icon" src="{{ 'amun-icon.png' | asset_url }}" alt="" aria-hidden="true" width="57" height="30" loading="lazy">
+  <img class="sec-head__icon" src="{{ 'amun-icon.webp' | asset_url }}" alt="" aria-hidden="true" width="57" height="30" loading="lazy">
 {%- endif -%}
