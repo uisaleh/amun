@@ -23,7 +23,7 @@
 <article class="pcard{% if class %} {{ class }}{% endif %}">
   <a href="{{ product.url }}" class="pcard__media" aria-label="{% if nm != blank %}{{ nm | escape }}{% else %}{{ product.title | escape }}{% endif %}">
     {%- if settings.use_design_images and design_img != blank -%}
-      <img src="{{ design_img | asset_url }}" alt="" loading="lazy" width="600" height="600" data-card-img>
+      <img {% render 'asset-src', file: design_img, sizes: '(min-width: 990px) 400px, 76vw' %} alt="" loading="lazy" width="600" height="600" data-card-img>
     {%- elsif product.featured_media -%}
       {{ product.featured_media | image_url: width: 800 | image_tag: alt: '', loading: 'lazy', sizes: '(min-width: 1024px) 33vw, 76vw', data-card-img: '' }}
     {%- endif -%}

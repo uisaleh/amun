@@ -4,7 +4,7 @@
     {%- if settings.popup_image != blank -%}
       {{ settings.popup_image | image_url: width: 900 | image_tag: class: 'pop-img', alt: '', loading: 'lazy', style: 'flex: 1 1 300px; min-width: 0; width: 100%; min-height: 420px; object-fit: cover; object-position: 30% center; display: block' }}
     {%- else -%}
-      <img width="1200" height="1200" class="pop-img" src="{{ 'amun-fb28d4cdcc.jpg' | asset_url }}" alt="" loading="lazy" style="flex: 1 1 300px; min-width: 0; width: 100%; min-height: 420px; object-fit: cover; object-position: 30% center; display: block; height: auto">
+      <img width="1200" height="1200" class="pop-img" {% render 'asset-src', file: 'amun-fb28d4cdcc.jpg', sizes: '(min-width: 860px) 380px, 100vw' %} alt="" loading="lazy" style="flex: 1 1 300px; min-width: 0; width: 100%; min-height: 420px; object-fit: cover; object-position: 30% center; display: block; height: auto">
     {%- endif -%}
     <div class="pop-body" style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; justify-content: center; gap: 16px; padding: 48px 36px">
       {% render 'icon-logo', size: 'small' %}

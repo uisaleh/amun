@@ -61,7 +61,7 @@
           {%- if use_gal -%}
             {%- for it in gal_items -%}
               {%- assign f = it | split: '^^' -%}
-              <div class="gal-peek__item"><img width="1200" height="1200" src="{{ f[0] | asset_url }}" alt="{{ f[1] | escape }}" {% unless forloop.first %}loading="lazy"{% endunless %} style="transform: {% if forloop.first %}{{ zoom }}{% else %}none{% endif %}; height: 100%"></div>
+              <div class="gal-peek__item"><img width="1200" height="1200" {% render 'asset-src', file: f[0], sizes: '(min-width: 990px) 440px, 76vw' %} alt="{{ f[1] | escape }}" {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %} style="transform: {% if forloop.first %}{{ zoom }}{% else %}none{% endif %}; height: 100%"></div>
             {%- endfor -%}
           {%- else -%}
             {%- for m in product.media -%}
@@ -75,7 +75,7 @@
         {%- if use_gal -%}
           {%- for it in gal_items -%}
             {%- assign f = it | split: '^^' -%}
-            <button type="button" class="gal-thumb" aria-label="Show image: {{ f[1] | escape }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}" data-gal-thumb="{{ forloop.index0 }}" data-src="{{ f[0] | asset_url }}" data-alt="{{ f[1] | escape }}" data-zoom="{% if forloop.first %}{{ zoom }}{% else %}none{% endif %}"><img width="1200" height="1200" src="{{ f[0] | asset_url }}" alt="" loading="lazy"></button>
+            <button type="button" class="gal-thumb" aria-label="Show image: {{ f[1] | escape }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}" data-gal-thumb="{{ forloop.index0 }}" data-src="{{ f[0] | split: '.' | first | append: '-1600.webp' | asset_url }}" data-alt="{{ f[1] | escape }}" data-zoom="{% if forloop.first %}{{ zoom }}{% else %}none{% endif %}"><img width="1200" height="1200" {% render 'asset-src', file: f[0], sizes: '240px' %} alt="" loading="lazy"></button>
           {%- endfor -%}
         {%- else -%}
           {%- for m in product.media -%}
@@ -87,7 +87,7 @@
       <div class="gal-main">
         {%- if use_gal -%}
           {%- assign f = gal_items[0] | split: '^^' -%}
-          <img width="1200" height="1200" src="{{ f[0] | asset_url }}" alt="{{ f[1] | escape }}" data-gal-main style="transform: {{ zoom }}; height: 100%">
+          <img width="1200" height="1200" {% render 'asset-src', file: f[0], sizes: '(min-width: 990px) 440px, 76vw' %} alt="{{ f[1] | escape }}" fetchpriority="high" data-gal-main style="transform: {{ zoom }}; height: 100%">
         {%- elsif product.featured_media -%}
           {{ product.featured_media | image_url: width: 1100 | image_tag: alt: product.featured_media.alt, data-gal-main: '' }}
         {%- endif -%}
@@ -211,7 +211,7 @@
   <div class="sticky-atc" data-sticky-atc role="region" aria-label="Quick add to cart" aria-hidden="true">
     {%- if use_gal -%}
       {%- assign f = gal_items[0] | split: '^^' -%}
-      <img src="{{ f[0] | asset_url }}" alt="" width="44" height="54" loading="lazy" style="flex: 0 0 44px; width: 44px; height: 54px; object-fit: cover; background: #efefea; display: block">
+      <img {% render 'asset-src', file: f[0], sizes: '240px' %} alt="" width="44" height="54" loading="lazy" style="flex: 0 0 44px; width: 44px; height: 54px; object-fit: cover; background: #efefea; display: block">
     {%- elsif product.featured_media -%}
       {{ product.featured_media | image_url: width: 120 | image_tag: alt: '', loading: 'lazy', style: 'flex: 0 0 44px; width: 44px; height: 54px; object-fit: cover; background: #efefea; display: block' }}
     {%- endif -%}

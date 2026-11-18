@@ -61,7 +61,7 @@
         {%- for dh in design_handles -%}
           {%- capture dn -%}{% render 'amun-data', handle: dh, key: 'name' %}{%- endcapture -%}
           {%- capture di -%}{% render 'amun-data', handle: dh, key: 'card_img' %}{%- endcapture -%}
-          {{ dh | json }}: { "name": {{ dn | json }}, "img": {% if settings.use_design_images %}{{ di | asset_url | json }}{% else %}""{% endif %} }{% unless forloop.last %},{% endunless %}
+          {{ dh | json }}: { "name": {{ dn | json }}, "img": {% if settings.use_design_images %}{{ di | split: '.' | first | append: '-800.webp' | asset_url | json }}{% else %}""{% endif %} }{% unless forloop.last %},{% endunless %}
         {%- endfor -%}
       };
     </script>

@@ -13,7 +13,7 @@
 {%- if rt != blank -%}
 {%- assign f = ri | split: '^^' -%}
 <section aria-labelledby="ben-h" style="display: flex; flex-wrap: wrap; align-items: center; gap: 42px 0; padding: 0 0 72px">
-  <img width="1200" height="1200" src="{{ f[0] | asset_url }}" alt="{{ f[1] | escape }}" loading="lazy" style="flex: 2 1 640px; min-width: 0; width: 100%; height: 720px; object-fit: cover; object-position: {{ f[2] | default: 'center' }}; display: block; background: #3a2418">
+  <img width="1200" height="1200" {% render 'asset-src', file: f[0], sizes: '(min-width: 990px) 66vw, 100vw' %} alt="{{ f[1] | escape }}" loading="lazy" style="flex: 2 1 640px; min-width: 0; width: 100%; height: 720px; object-fit: cover; object-position: {{ f[2] | default: 'center' }}; display: block; background: #3a2418">
   <div style="flex: 1 1 360px; display: flex; flex-direction: column; gap: 24px; padding: 42px">
     <h2 id="ben-h" style="margin: 0; font-size: 23px; line-height: 32.2px">{{ rt | escape }}</h2>
     {%- assign paras = rp | split: '~~' -%}
