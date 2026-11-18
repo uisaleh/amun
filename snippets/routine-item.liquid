@@ -20,7 +20,7 @@
   </a>
   <div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 6px">
     <a href="{{ product.url }}" style="font-size: 14px; line-height: 19.6px">{% if nm != blank %}{{ nm | escape }}{% else %}{% render 'title-case', text: product.title %}{% endif %}</a>
-    <span style="font-size: 12px; line-height: 16.8px">{{ ddesc | default: product.description | strip_html | truncatewords: 20 | escape }}</span>
+    <span style="font-size: 12px; line-height: 16.8px">{{ ddesc | default: product.description | newline_to_br | replace: '</', ' </' | replace: '<br', ' <br' | strip_html | replace: '  ', ' ' | replace: '  ', ' ' | strip | truncatewords: 20 | escape }}</span>
     <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-top: 6px">
       {%- if product.available -%}
         <button type="button" class="atc" data-add="{{ rv.id }}" style="height: 44px; padding: 0 20px; border: 1px solid #000000; border-radius: 0; background: #ffffff; color: #000000; font-size: 12px; cursor: pointer">Add to Cart - {{ rv.price | money_without_trailing_zeros }}</button>

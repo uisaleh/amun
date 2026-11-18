@@ -1,6 +1,6 @@
 {%- liquid
   assign title = collection.title
-  assign intro = collection.description | strip_html
+  assign intro = collection.description | newline_to_br | replace: '</', ' </' | replace: '<br', ' <br' | strip_html | replace: '  ', ' ' | replace: '  ', ' ' | strip
   case collection.handle
     when 'all'
       assign title = 'Shop All'

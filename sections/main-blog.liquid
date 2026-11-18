@@ -15,7 +15,7 @@
       <span style="font-size: 10px; line-height: 14px; text-transform: uppercase; border: 1px solid #000000; padding: 8px 20px">Featured</span>
       <p style="margin: 10px 0 0; font-size: 12px; line-height: 16.8px">{% if featured.tags.first %}{{ featured.tags.first | escape }} · {% endif %}{{ featured.published_at | date: '%B %-d, %Y' }}</p>
       <h2 style="margin: 0; font-size: 23px; line-height: 32.2px"><a href="{{ featured.url }}">{{ featured.title | escape }}</a></h2>
-      <p style="margin: 0; font-size: 14px; line-height: 19.6px; max-width: 360px">{{ featured.excerpt_or_content | strip_html | truncatewords: 30 }}</p>
+      <p style="margin: 0; font-size: 14px; line-height: 19.6px; max-width: 360px">{{ featured.excerpt_or_content | newline_to_br | replace: '</', ' </' | replace: '<br', ' <br' | strip_html | replace: '  ', ' ' | replace: '  ', ' ' | strip | truncatewords: 30 }}</p>
       <a href="{{ featured.url }}" class="btn-outline" style="margin-top: 10px">Read the Story</a>
     </div>
   </section>
@@ -40,7 +40,7 @@
         </a>
         <p style="margin: 0; font-size: 12px; line-height: 16.8px">{% if article.tags.first %}{{ article.tags.first | escape }} · {% endif %}{{ article.published_at | date: '%B %-d, %Y' }}</p>
         <h2 style="margin: 0; font-size: 18px; line-height: 25.2px"><a href="{{ article.url }}">{{ article.title | escape }}</a></h2>
-        <p style="margin: 0; font-size: 14px; line-height: 19.6px">{{ article.excerpt_or_content | strip_html | truncatewords: 24 }}</p>
+        <p style="margin: 0; font-size: 14px; line-height: 19.6px">{{ article.excerpt_or_content | newline_to_br | replace: '</', ' </' | replace: '<br', ' <br' | strip_html | replace: '  ', ' ' | replace: '  ', ' ' | strip | truncatewords: 24 }}</p>
         <a href="{{ article.url }}" style="font-size: 12px; line-height: 16.8px; text-decoration: underline">Read More</a>
       </article>
     {%- endfor -%}

@@ -1,11 +1,11 @@
-{%- assign words = article.content | strip_html | split: ' ' | size -%}
+{%- assign words = article.content | newline_to_br | replace: '</', ' </' | replace: '<br', ' <br' | strip_html | replace: '  ', ' ' | replace: '  ', ' ' | strip | split: ' ' | size -%}
 {%- assign minutes = words | divided_by: 200 | at_least: 1 -%}
 <section style="padding: 42px 24px 60px">
   <div style="max-width: 1300px; margin: 0 auto"><a href="{{ blog.url }}" style="display: inline-flex; align-items: center; gap: 10px; font-size: 12px; line-height: 16.8px"><svg aria-hidden="true" width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="#000" stroke-width="1"><path d="M15 5H1M5 1L1 5l4 4"></path></svg>Back to {{ section.settings.blog_name | default: blog.title | escape }}</a></div>
   <div style="max-width: 760px; margin: 42px auto 0; display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center">
     <p style="margin: 0; font-size: 12px; line-height: 16.8px">{% if article.tags.first %}{{ article.tags.first | escape }} · {% endif %}{{ minutes }} min read</p>
     <h1 style="margin: 0; font-size: 34px; line-height: 40px">{{ article.title | escape }}</h1>
-    {%- if article.excerpt != blank -%}<p style="margin: 0; font-size: 20px; line-height: 28px; font-weight: 300">{{ article.excerpt | strip_html }}</p>{%- endif -%}
+    {%- if article.excerpt != blank -%}<p style="margin: 0; font-size: 20px; line-height: 28px; font-weight: 300">{{ article.excerpt | newline_to_br | replace: '</', ' </' | replace: '<br', ' <br' | strip_html | replace: '  ', ' ' | replace: '  ', ' ' | strip }}</p>{%- endif -%}
     <p style="margin: 0; font-size: 12px; line-height: 16.8px">{{ article.published_at | date: '%B %-d, %Y' }}{% if article.author != blank %} · By {{ article.author | escape }}{% endif %}</p>
   </div>
 </section>
