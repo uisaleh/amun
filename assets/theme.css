@@ -1,7 +1,7 @@
 /* Amun Organics theme — ported from the Amun design */
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:#FEF9F6;color:#121212;font-family:Helvetica,'Helvetica Neue',Arial,sans-serif;font-weight:400;letter-spacing:0.6px}
+body{margin:0;background:#FEF9F6;color:#121212;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:400;letter-spacing:0.6px}
 img,video{max-width:100%}
 input,select,textarea,button{font-family:inherit;letter-spacing:inherit}
 h1,h2,h3,h4{font-family:'Sentient',Georgia,'Times New Roman',serif;font-weight:400!important;letter-spacing:0.6px}
@@ -13,6 +13,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .skip-link:focus{left:10px;top:10px}
 main:focus{outline:none}
 body.no-scroll{overflow:hidden}
+
+/* Skip rendering work for sections below the fold until they are near */
+main>.shopify-section~.shopify-section{content-visibility:auto;contain-intrinsic-size:auto 900px}
+.site-footer{content-visibility:auto;contain-intrinsic-size:auto 520px}
 
 /* Buttons */
 .atc{transition:background-color 200ms ease,color 200ms ease,border-color 200ms ease}

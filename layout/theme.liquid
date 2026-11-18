@@ -11,7 +11,6 @@
     {%- else -%}
       <link rel="icon" type="image/png" href="{{ 'amun-favicon.png' | asset_url }}">
     {%- endif -%}
-    <link rel="preconnect" href="https://files.gempages.net" crossorigin>
     <link rel="preload" href="{{ 'sentient-400.woff2' | asset_url }}" as="font" type="font/woff2" crossorigin>
 
     <title>
@@ -28,9 +27,6 @@
 
     <style>
       @font-face{font-family:'Sentient';src:url('{{ 'sentient-400.woff2' | asset_url }}') format('woff2');font-weight:400;font-style:normal;font-display:swap}
-      @font-face{font-family:'Sentient';src:url('https://files.gempages.net/551189810572690646-ab23a4bb-b876-46dd-ba4e-7c9f4aa4bc27.woff2') format('woff2');font-weight:500 700;font-style:normal;font-display:swap}
-      @font-face{font-family:'Helvetica';src:url('https://files.gempages.net/551189810572690646-fc5ee4ad-693d-4972-bb78-330ad33ed87f.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
-      @font-face{font-family:'Helvetica';src:url('https://files.gempages.net/551189810572690646-a7d2edd6-390e-4d65-b335-35217199a060.ttf') format('truetype');font-weight:500 900;font-style:normal;font-display:swap}
     </style>
     {{ 'theme.css' | asset_url | stylesheet_tag }}
 

@@ -273,7 +273,7 @@
     if (!('IntersectionObserver' in window)) { vids.forEach(load); return; }
     var io = new IntersectionObserver(function (ents) {
       ents.forEach(function (en) { if (en.isIntersecting) { load(en.target); io.unobserve(en.target); } });
-    }, { rootMargin: '300px 600px' });
+    }, { rootMargin: '200px 300px' });
     vids.forEach(function (v) { io.observe(v); });
   }
 
@@ -469,7 +469,15 @@
       var popErr = popup.querySelector('[data-nl-error]:not([hidden])');
       if ((posted && /NewsletterPopup/.test(location.hash)) || popErr) { openPopup(); }
       else if (A.popupEnabled && !store.get('amun-popup-seen') && !store.get('amun-nl') && !posted) {
-        setTimeout(function () { if (!$$('.overlay:not([hidden])').length) { openPopup(); store.set('amun-popup-seen', '1'); } }, A.popupDelay || 2500);
+        // Show only after the visitor starts browsing (scroll, tap or key), then wait the set delay.
+        var armed = false, start = Date.now();
+        var arm = function () {
+          if (armed) return; armed = true;
+          ['scroll', 'pointerdown', 'keydown', 'touchstart'].forEach(function (ev) { window.removeEventListener(ev, arm, true); });
+          var wait = Math.max(1200, (A.popupDelay || 2500) - (Date.now() - start));
+          setTimeout(function () { if (!$$('.overlay:not([hidden])').length) { openPopup(); store.set('amun-popup-seen', '1'); } }, wait);
+        };
+        ['scroll', 'pointerdown', 'keydown', 'touchstart'].forEach(function (ev) { window.addEventListener(ev, arm, { capture: true, passive: true }); });
       }
     }
     document.addEventListener('submit', function (e) {
@@ -505,9 +513,10 @@
   function initHeader() {
     var wrap = $('.header-section'); if (!wrap) return;
     var lastY = window.pageYOffset, ticking = false;
+    var h = 0;
+    function measure() { h = wrap.offsetHeight; wrap.style.setProperty('--hdr-hide', (-h - 2) + 'px'); }
     function update() {
-      var y = window.pageYOffset, h = wrap.offsetHeight;
-      wrap.style.setProperty('--hdr-hide', (-h - 2) + 'px');
+      var y = window.pageYOffset; if (!h) measure();
       var anyOpen = $$('.overlay:not([hidden])').length > 0;
       if (anyOpen || y <= h) wrap.classList.remove('is-hidden');
       else if (y > lastY + 6) wrap.classList.add('is-hidden');
@@ -517,21 +526,32 @@
     }
     window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
     wrap.addEventListener('focusin', function () { wrap.classList.remove('is-hidden'); });
-    update();
+    window.addEventListener('resize', function () { h = 0; });
+    requestAnimationFrame(update);
   }
 
   /* ---------- Boot ---------- */
+  var idle = window.requestIdleCallback || function (fn) { return setTimeout(fn, 200); };
+  function whenNear(els, fn) {
+    if (!('IntersectionObserver' in window)) { els.forEach(fn); return; }
+    var io = new IntersectionObserver(function (ents) {
+      ents.forEach(function (en) { if (en.isIntersecting) { io.unobserve(en.target); fn(en.target); } });
+    }, { rootMargin: '400px 0px' });
+    els.forEach(function (el) { io.observe(el); });
+  }
   function boot() {
     initHeader();
-    $$('[data-slider]').forEach(initSlider);
-    initVideos();
-    $$('[data-product]').forEach(initProduct);
-    $$('[data-ings]').forEach(initIngredients);
-    $$('#reviews').forEach(initReviews);
-    initFilter();
     initNewsletter();
-    initRecs();
-    getCart().then(function (c) { cartState = c; setCount(c.item_count); }).catch(function () {});
+    $$('[data-product]').forEach(initProduct);
+    idle(function () {
+      whenNear($$('[data-slider]'), initSlider);
+      initVideos();
+      $$('[data-ings]').forEach(initIngredients);
+      $$('#reviews').forEach(initReviews);
+      initFilter();
+      initRecs();
+      getCart().then(function (c) { cartState = c; setCount(c.item_count); }).catch(function () {});
+    });
     if (/[?&]cart=open/.test(location.search)) openCart();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
