@@ -1,12 +1,32 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "hero",
-      "settings": {}
+      "settings": {
+        "image": "shopify://shop_images/DSCF2375_2.jpg",
+        "fallback": "amun-fb28d4cdcc.jpg",
+        "alt": "A woman in a meadow holding an AMUN bottle on her shoulder, with an AMUN gift bag on her arm",
+        "heading": "Transform with Tallow",
+        "text": "Professional-grade holistic hair & skin care using nature’s finest ingredients to nourish you and the land.",
+        "button_label": "Shop Now",
+        "button_link": "/collections/all"
+      }
     },
     "collection": {
       "type": "product-slider",
       "settings": {
+        "show_icon": true,
+        "heading": "The Amun Collection",
+        "text": "Our everyday essentials, designed to bring your hair, skin, and health back to harmony",
         "products": [
           "regenerative-shampoo",
           "regenerative-conditioner",
@@ -17,8 +37,10 @@
           "shampoo-conditioner",
           "the-origin-pair"
         ],
-        "heading": "The Amun Collection",
-        "text": "Our everyday essentials, designed to bring your hair, skin, and health back to harmony"
+        "collection": "",
+        "strike": false,
+        "pad_top": 72,
+        "pad_bottom": 64
       }
     },
     "tiles": {
@@ -29,6 +51,7 @@
           "settings": {
             "fallback": "amun-0f2eda62d9.jpg",
             "title": "The\nHaircare",
+            "cta": "Shop Now",
             "link": "/collections/haircare"
           }
         },
@@ -37,6 +60,7 @@
           "settings": {
             "fallback": "amun-6cb6f8d852.jpg",
             "title": "The\nSkincare",
+            "cta": "Shop Now",
             "link": "/products/tallow-face-lotion"
           }
         }
@@ -45,7 +69,9 @@
         "t1",
         "t2"
       ],
-      "settings": {}
+      "settings": {
+        "label": "Shop by category"
+      }
     },
     "videos": {
       "type": "video-slider",
@@ -221,7 +247,10 @@
         "v20",
         "v21"
       ],
-      "settings": {}
+      "settings": {
+        "heading": "See Our Formulas in Action",
+        "text": "See our tallow formulas in action."
+      }
     },
     "gift": {
       "type": "image-with-text",
@@ -229,26 +258,39 @@
         "layout": "image_right",
         "fallback": "amun-274659e150.jpg",
         "alt": "The full Amun Organics lineup in grey sand: Conditioner, Leave-In, Shampoo, Tallow Face Lotion and Nature's Pomade",
+        "img_style": "flex: 2 1 640px; min-width: 0; width: 100%; height: 600px; object-fit: cover; object-position: center; display: block; background: #c9c3b6",
         "heading": "A Better Way to Gift",
         "text": "Each set brings together our tallow essentials at a special value, ready for anyone on your list — including you.",
         "button_label": "Shop Now",
-        "button_link": "/collections/bundle"
+        "button_link": "/collections/bundle",
+        "pad_top": 0,
+        "pad_bottom": 0
       }
     },
     "best": {
       "type": "product-grid",
       "settings": {
+        "show_icon": true,
+        "heading": "Shop Best Sellers",
+        "text": "A new kind of haircare: clean tallow formulas that restore your hair's balance so it looks — and feels — its best all the time.",
         "products": [
           "regenerative-shampoo",
           "leave-in-conditioner",
           "tallow-face-lotion"
         ],
-        "heading": "Shop Best Sellers"
+        "collection": "",
+        "limit": 3
       }
     },
     "bundle": {
       "type": "image-banner",
-      "settings": {}
+      "settings": {
+        "fallback": "amun-92937c7119.jpg",
+        "heading": "Bundle & Save",
+        "text": "Pair your favorites and save on your full wash day ritual.",
+        "button_label": "Shop Bundle & Save",
+        "button_link": "/collections/bundle"
+      }
     },
     "easy": {
       "type": "image-with-text",
@@ -273,7 +315,8 @@
           "settings": {
             "fallback": "amun-8738282e8a.jpg",
             "alt": "Holding the Shampoo and Conditioner in a green meadow",
-            "pos": "center 45%"
+            "pos": "center 45%",
+            "link": ""
           }
         },
         "p1": {
@@ -281,7 +324,8 @@
           "settings": {
             "fallback": "amun-595812f94d.jpg",
             "alt": "Standing beside a white Highland cow by the pond",
-            "pos": "center 40%"
+            "pos": "center 40%",
+            "link": ""
           }
         },
         "p2": {
@@ -289,7 +333,8 @@
           "settings": {
             "fallback": "amun-6a82dd36be.jpg",
             "alt": "Shampoo and Conditioner on a rain-soaked wooden shelf with frangipani",
-            "pos": "center 60%"
+            "pos": "center 60%",
+            "link": ""
           }
         },
         "p3": {
@@ -297,7 +342,8 @@
           "settings": {
             "fallback": "amun-388c419e9e.jpg",
             "alt": "The Shampoo held against a Highland cow coat",
-            "pos": "center"
+            "pos": "center",
+            "link": ""
           }
         },
         "p4": {
@@ -305,7 +351,8 @@
           "settings": {
             "fallback": "amun-3a1187f81c.jpg",
             "alt": "Two women with long flowing hair in a sunlit meadow",
-            "pos": "center 35%"
+            "pos": "center 35%",
+            "link": ""
           }
         }
       },
