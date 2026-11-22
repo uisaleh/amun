@@ -148,7 +148,8 @@
       var autos = autoDiscounts(cart);
       var parts = codes.map(function (c) { return c.code; });
       if (autos.length) parts = parts.concat(autos.map(function (t) { return t + ' (applied automatically)'; }));
-      $('[data-discount-code]').textContent = parts.length ? parts.join(', ') : 'Savings';
+      $('[data-discount-code]').textContent = parts.length ? parts.join(', ') : 'Discount applied automatically';
+      recheckIfPending(cart);
       $('[data-remove-code]').hidden = !codes.length;
       $('[data-discount-amt]').textContent = '−' + money(disc);
     } else { drow.hidden = true; }
@@ -157,19 +158,33 @@
     $('[data-klarna]').textContent = money(Math.round(cart.total_price / 4));
   }
   // Automatic discounts (e.g. Holiday Edition 15%) applied to the cart
+  var lastAutoNames = [];
   function autoDiscounts(cart) {
     var seen = {}, out = [];
-    function add(app) {
-      if (!app || app.type !== 'automatic') return;
-      var key = app.title || 'auto';
-      if (seen[key]) return; seen[key] = 1;
-      var label = app.title || '';
-      if (app.value_type === 'percentage' && app.value && label.indexOf('%') === -1) label = (label ? label + ' ' : '') + Math.round(Number(app.value)) + '%';
-      out.push(label || 'Automatic discount');
+    var codes = (cart.discount_codes || []).map(function (c) { return String(c.code || '').toUpperCase(); });
+    function push(title, app) {
+      title = String(title || '').trim();
+      if (!title || codes.indexOf(title.toUpperCase()) !== -1) return;
+      if (app && app.type && app.type !== 'automatic') return;
+      var label = title;
+      if (app && app.value_type === 'percentage' && app.value && label.indexOf('%') === -1) label += ' ' + Math.round(Number(app.value)) + '%';
+      if (seen[label]) return; seen[label] = 1; out.push(label);
     }
-    (cart.cart_level_discount_applications || []).forEach(add);
-    (cart.items || []).forEach(function (it) { (it.line_level_discount_allocations || []).forEach(function (a) { add(a.discount_application); }); });
+    (cart.cart_level_discount_applications || []).forEach(function (app) { push(app.title, app); });
+    (cart.items || []).forEach(function (it) {
+      (it.line_level_discount_allocations || []).forEach(function (al) { var app = al.discount_application || {}; push(app.title, app); });
+      (it.discounts || []).forEach(function (d) { push(d.title, null); });
+    });
+    var hasCodeSaving = (cart.discount_codes || []).some(function (c) { return c.applicable; });
+    if (out.length) lastAutoNames = out;
+    else if ((cart.total_discount || 0) > 0 && !hasCodeSaving && lastAutoNames.length) out = lastAutoNames.slice();
     return out;
+  }
+  // Shopify sometimes returns the cart before automatic discounts are attached; check again shortly.
+  var recheckTimer = null;
+  function recheckIfPending(cart) {
+    var pending = (cart.total_discount || 0) > 0 && !autoDiscounts(cart).length && !(cart.discount_codes || []).some(function (c) { return c.applicable; });
+    if (pending && !recheckTimer) recheckTimer = setTimeout(function () { recheckTimer = null; getCart().then(renderCart); }, 700);
   }
   function refreshCart() { return getCart().then(renderCart); }
   function openCart() { show($('[data-cart]')); refreshCart(); }
@@ -188,16 +203,21 @@
     var code = (f.code.value || '').trim().toUpperCase(), err = $('[data-code-error]');
     err.hidden = true;
     if (!code) { err.textContent = 'Enter a discount code.'; err.hidden = false; return; }
-    applyCode(code).then(function (cart) {
-      var ok = (cart.discount_codes || []).some(function (c) { return c.code.toUpperCase() === code && c.applicable; });
-      if (!ok) {
+    applyCode(code).then(function (updated) {
+      var ok = (updated.discount_codes || []).some(function (c) { return c.code.toUpperCase() === code && c.applicable; });
+      if (ok) { f.code.value = ''; return; }
+      return getCart().then(function (cart) {
+        renderCart(cart);
         var autos = autoDiscounts(cart);
-        err.textContent = autos.length
-          ? 'Your holiday discount (' + autos[0] + ') is already applied automatically, so this code can’t be added to the same order.'
+        var autoOn = autos.length || ((cart.total_discount || 0) > 0 && !(cart.discount_codes || []).some(function (c) { return c.applicable; }));
+        err.textContent = autoOn
+          ? 'Your holiday discount' + (autos.length ? ' (' + autos[0] + ')' : '') + ' is already applied automatically, so this code can’t be added to the same order.'
           : 'That code isn’t valid for this cart.';
         err.hidden = false;
-      }
-      else { f.code.value = ''; }
+        // drop the unusable code so it doesn't linger on the cart
+        var keep = (cart.discount_codes || []).filter(function (c) { return c.applicable; }).map(function (c) { return c.code; });
+        if ((cart.discount_codes || []).length !== keep.length) post(A.routes.cartUpdate || '/cart/update', { discount: keep.join(',') }).then(renderCart).catch(function () {});
+      });
     }).catch(function () { err.textContent = 'We couldn’t apply that code. You can also enter it at checkout.'; err.hidden = false; });
   });
   function applyCode(code) {
