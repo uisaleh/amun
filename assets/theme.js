@@ -145,13 +145,31 @@
     var drow = $('[data-discount-row]');
     if (disc > 0 || codes.length) {
       drow.hidden = false;
-      $('[data-discount-code]').textContent = codes.length ? codes.map(function (c) { return c.code; }).join(', ') : 'Savings';
+      var autos = autoDiscounts(cart);
+      var parts = codes.map(function (c) { return c.code; });
+      if (autos.length) parts = parts.concat(autos.map(function (t) { return t + ' (applied automatically)'; }));
+      $('[data-discount-code]').textContent = parts.length ? parts.join(', ') : 'Savings';
       $('[data-remove-code]').hidden = !codes.length;
       $('[data-discount-amt]').textContent = '−' + money(disc);
     } else { drow.hidden = true; }
     var total = cart.total_price + shipCost;
     $('[data-total]').textContent = money(total);
     $('[data-klarna]').textContent = money(Math.round(cart.total_price / 4));
+  }
+  // Automatic discounts (e.g. Holiday Edition 15%) applied to the cart
+  function autoDiscounts(cart) {
+    var seen = {}, out = [];
+    function add(app) {
+      if (!app || app.type !== 'automatic') return;
+      var key = app.title || 'auto';
+      if (seen[key]) return; seen[key] = 1;
+      var label = app.title || '';
+      if (app.value_type === 'percentage' && app.value && label.indexOf('%') === -1) label = (label ? label + ' ' : '') + Math.round(Number(app.value)) + '%';
+      out.push(label || 'Automatic discount');
+    }
+    (cart.cart_level_discount_applications || []).forEach(add);
+    (cart.items || []).forEach(function (it) { (it.line_level_discount_allocations || []).forEach(function (a) { add(a.discount_application); }); });
+    return out;
   }
   function refreshCart() { return getCart().then(renderCart); }
   function openCart() { show($('[data-cart]')); refreshCart(); }
@@ -172,7 +190,13 @@
     if (!code) { err.textContent = 'Enter a discount code.'; err.hidden = false; return; }
     applyCode(code).then(function (cart) {
       var ok = (cart.discount_codes || []).some(function (c) { return c.code.toUpperCase() === code && c.applicable; });
-      if (!ok) { err.textContent = 'That code isn’t valid for this cart.'; err.hidden = false; }
+      if (!ok) {
+        var autos = autoDiscounts(cart);
+        err.textContent = autos.length
+          ? 'Your holiday discount (' + autos[0] + ') is already applied automatically, so this code can’t be added to the same order.'
+          : 'That code isn’t valid for this cart.';
+        err.hidden = false;
+      }
       else { f.code.value = ''; }
     }).catch(function () { err.textContent = 'We couldn’t apply that code. You can also enter it at checkout.'; err.hidden = false; });
   });
