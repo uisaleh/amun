@@ -1,6 +1,11 @@
 {%- if settings.popup_enabled and settings.popup_mode != 'newsletter' -%}
 {%- liquid
-  assign hl = settings.holiday_link | default: '/collections/bundle'
+  capture hl
+    render 'campaign-url', url: settings.holiday_link
+  endcapture
+  if hl == blank
+    assign hl = settings.holiday_url | default: '/collections/haircare'
+  endif
   if settings.holiday_code != blank
     assign hl = '/discount/' | append: settings.holiday_code | append: '?redirect=' | append: hl
   endif

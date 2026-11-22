@@ -208,7 +208,7 @@
             {% render 'routine-item', product: rp %}
           {%- endif -%}
         {%- endfor -%}
-        <p style="margin: 0; font-size: 12px; line-height: 16.8px">Pick your favorites and save with <a href="{{ routes.collections_url }}/bundle" style="text-decoration: underline">Bundle &amp; Save</a></p>
+        <p style="margin: 0; font-size: 12px; line-height: 16.8px">{% if settings.holiday_campaign %}Give the gift of harmony: <a href="{{ settings.holiday_url | default: '/collections/haircare' }}" style="text-decoration: underline">15% off our holiday bundles</a>{% else %}Pick your favorites and save with <a href="{{ routes.collections_url }}/bundle" style="text-decoration: underline">Bundle &amp; Save</a>{% endif %}</p>
         <p style="margin: 0; font-size: 12px; line-height: 16.8px">Have a question? <a href="/pages/faqs" style="text-decoration: underline">Read our FAQ</a></p>
       {%- endif -%}
     </div>

@@ -10,7 +10,7 @@
     <h2 style="margin: 0; font-size: 18px; line-height: 25.2px">{{ section.settings.heading | escape }}</h2>
     <p style="margin: 0; font-size: 14px; line-height: 19.6px; max-width: 320px">{{ section.settings.text | escape }}</p>
     {%- if section.settings.button_label != blank -%}
-      <a href="{{ section.settings.button_link }}" class="btn-outline" style="margin-top: 10px">{{ section.settings.button_label | escape }}</a>
+      <a href="{% render 'campaign-url', url: section.settings.button_link %}" class="btn-outline" style="margin-top: 10px">{{ section.settings.button_label | escape }}</a>
     {%- endif -%}
   </div>
 {%- endcapture -%}

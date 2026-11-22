@@ -33,6 +33,11 @@
   {%- when 'payment-terms' -%}{% render 'page-payment-terms' %}
   {%- when 'privacy' -%}{% render 'page-privacy' %}
   {%- when 'bundle' -%}
+    {%- if settings.holiday_campaign and request.design_mode == false -%}
+      {%- assign hol = settings.holiday_url | default: '/collections/haircare' -%}
+      <meta http-equiv="refresh" content="0; url={{ hol }}"><script>location.replace({{ hol | json }});</script>
+      <p style="padding: 72px 24px; text-align: center">Our bundles have moved to the <a href="{{ hol }}" style="text-decoration: underline">Holiday collection</a>.</p>
+    {%- else -%}
     <section style="padding: 20px 24px 0">
       <div style="max-width: 1300px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center">
         <h1 style="margin: 0; font-size: 23px; line-height: 23px">Bundle &amp; Save</h1>
@@ -44,6 +49,7 @@
         {%- for p in collections['bundle'].products -%}<div style="display: flex">{% render 'product-card', product: p, strike: true %}</div>{%- endfor -%}
       </div>
     </section>
+    {%- endif -%}
   {%- else -%}
     <section style="background: #DFDDD0; padding: 72px 24px">
       <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px">

@@ -1,3 +1,9 @@
+{%- if settings.holiday_campaign and collection.handle == 'bundle' and request.design_mode == false -%}
+  {%- assign hol = settings.holiday_url | default: '/collections/haircare' -%}
+  <meta http-equiv="refresh" content="0; url={{ hol }}">
+  <script>location.replace({{ hol | json }});</script>
+  <p style="padding: 72px 24px; text-align: center">Our bundles have moved to the <a href="{{ hol }}" style="text-decoration: underline">Holiday collection</a>.</p>
+{%- else -%}
 {%- liquid
   assign title = collection.title
   assign intro = collection.description | newline_to_br | replace: '</', ' </' | replace: '<br', ' <br' | strip_html | replace: '  ', ' ' | replace: '  ', ' ' | strip
@@ -112,6 +118,8 @@
     {%- endif -%}
   {%- endpaginate -%}
 </section>
+{%- endif -%}
+
 {%- endif -%}
 
 {% schema %}

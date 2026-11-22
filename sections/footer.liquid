@@ -10,7 +10,8 @@
             {%- assign urls = block.settings.urls | newline_to_br | split: '<br />' -%}
             {%- for label in labels -%}
               {%- assign url = urls[forloop.index0] | strip -%}
-              <a href="{{ url | default: '#' }}" style="color: #121212; font-size: 13px; line-height: 18.2px">{{ label | strip | escape }}</a>
+              {%- capture lu -%}{% render 'campaign-url', url: url %}{%- endcapture -%}
+              <a href="{{ lu | default: '#' }}" style="color: #121212; font-size: 13px; line-height: 18.2px">{% if lu != url %}{{ settings.holiday_nav_label | default: 'Holiday Gifts' | escape }}{% else %}{{ label | strip | escape }}{% endif %}</a>
             {%- endfor -%}
           </nav>
         {%- endif -%}

@@ -1,0 +1,2 @@
+{%- comment -%}Returns the link, swapped to the holiday page while the holiday campaign hides Bundle & Save. Param: url{%- endcomment -%}
+{%- if settings.holiday_campaign and url contains '/collections/bundle' -%}{{ settings.holiday_url | default: '/collections/haircare' }}{%- else -%}{{ url }}{%- endif -%}

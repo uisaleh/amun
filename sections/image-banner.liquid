@@ -1,10 +1,22 @@
+{%- liquid
+  assign ib_heading = section.settings.heading
+  assign ib_text = section.settings.text
+  assign ib_label = section.settings.button_label
+  assign ib_link = section.settings.button_link
+  if settings.holiday_campaign and ib_link contains '/collections/bundle'
+    assign ib_heading = section.settings.campaign_heading
+    assign ib_text = section.settings.campaign_text
+    assign ib_label = section.settings.campaign_button
+    assign ib_link = settings.holiday_url | default: '/collections/haircare'
+  endif
+-%}
 <section aria-labelledby="ib-h-{{ section.id }}" style="position: relative; overflow: hidden; background: #6b6a5c; min-height: 560px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 64px 24px; color: #ffffff; text-align: center">
   {% render 'amun-image', image: section.settings.image, fallback: section.settings.fallback, alt: '', style: 'position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 62%', sizes: '100vw' %}
   <span aria-hidden="true" style="position: absolute; inset: 0; background: rgba(0, 0, 0, 0.45)"></span>
-  <h2 id="ib-h-{{ section.id }}" style="position: relative; margin: 0; font-size: 23px; line-height: 23px">{{ section.settings.heading | escape }}</h2>
-  <p style="position: relative; margin: 0; font-size: 14px; line-height: 19.6px">{{ section.settings.text | escape }}</p>
-  {%- if section.settings.button_label != blank -%}
-    <a href="{{ section.settings.button_link }}" style="position: relative; margin-top: 10px; display: inline-flex; align-items: center; justify-content: center; height: 50px; min-width: 200px; padding: 0 24px; background: #ffffff; color: #000000; font-size: 14px">{{ section.settings.button_label | escape }}</a>
+  <h2 id="ib-h-{{ section.id }}" style="position: relative; margin: 0; font-size: 23px; line-height: 23px">{{ ib_heading | escape }}</h2>
+  <p style="position: relative; margin: 0; font-size: 14px; line-height: 19.6px">{{ ib_text | escape }}</p>
+  {%- if ib_label != blank -%}
+    <a href="{{ ib_link }}" style="position: relative; margin-top: 10px; display: inline-flex; align-items: center; justify-content: center; height: 50px; min-width: 200px; padding: 0 24px; background: #ffffff; color: #000000; font-size: 14px">{{ ib_label | escape }}</a>
   {%- endif -%}
 </section>
 
@@ -17,7 +29,11 @@
     { "type": "text", "id": "heading", "label": "Heading", "default": "Bundle & Save" },
     { "type": "text", "id": "text", "label": "Text", "default": "Pair your favorites and save on your full wash day ritual." },
     { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop Bundle & Save" },
-    { "type": "text", "id": "button_link", "label": "Button link", "default": "/collections/bundle" }
+    { "type": "text", "id": "button_link", "label": "Button link", "default": "/collections/bundle" },
+    { "type": "header", "content": "During the holiday campaign" },
+    { "type": "text", "id": "campaign_heading", "label": "Heading", "default": "The Holiday Edition" },
+    { "type": "text", "id": "campaign_text", "label": "Text", "default": "Give the gift of harmony — 15% off every holiday bundle." },
+    { "type": "text", "id": "campaign_button", "label": "Button label", "default": "Shop the Holiday Bundles" }
   ],
   "presets": [{ "name": "Image banner" }]
 }

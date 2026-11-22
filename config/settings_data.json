@@ -21,7 +21,9 @@
         "settings": {}
       }
     },
-    "popup_mode": "holiday"
+    "popup_mode": "holiday",
+    "holiday_campaign": true,
+    "holiday_link": "/collections/haircare"
   },
   "presets": {
     "Default": {
