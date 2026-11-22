@@ -162,13 +162,18 @@
   function autoDiscounts(cart) {
     var seen = {}, out = [];
     var codes = (cart.discount_codes || []).map(function (c) { return String(c.code || '').toUpperCase(); });
+    function clean(t) {
+      var el = document.createElement('textarea'); el.innerHTML = String(t || '');
+      return el.value.replace(/^[\s"'“”‘’]+|[\s"'“”‘’]+$/g, '').replace(/\s+/g, ' ');
+    }
     function push(title, app) {
-      title = String(title || '').trim();
+      title = clean(title);
       if (!title || codes.indexOf(title.toUpperCase()) !== -1) return;
       if (app && app.type && app.type !== 'automatic') return;
       var label = title;
       if (app && app.value_type === 'percentage' && app.value && label.indexOf('%') === -1) label += ' ' + Math.round(Number(app.value)) + '%';
-      if (seen[label]) return; seen[label] = 1; out.push(label);
+      var key = label.toLowerCase().replace(/[^a-z0-9%]+/g, '');
+      if (seen[key] || seen[title.toLowerCase().replace(/[^a-z0-9%]+/g, '')]) return; seen[key] = 1; seen[title.toLowerCase().replace(/[^a-z0-9%]+/g, '')] = 1; out.push(label);
     }
     (cart.cart_level_discount_applications || []).forEach(function (app) { push(app.title, app); });
     (cart.items || []).forEach(function (it) {
