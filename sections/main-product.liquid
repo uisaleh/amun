@@ -55,7 +55,13 @@
 <section style="padding: 28px 24px 72px" data-product data-product-handle="{{ product.handle }}">
   <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 42px 60px; align-items: flex-start">
 
-    <div class="gal" data-gallery>
+    {%- liquid
+  assign gal_count = product.media.size
+  if use_gal
+    assign gal_count = gal_items.size
+  endif
+-%}
+    <div class="gal{% if gal_count < 2 %} gal--single{% endif %}" data-gallery>
       <div class="gal-peek">
         <div class="gal-peek__track" data-gal-peek>
           {%- if use_gal -%}
