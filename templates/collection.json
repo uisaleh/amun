@@ -1,6 +1,87 @@
 {
   "sections": {
-    "main": { "type": "main-collection", "settings": { "products": ["regenerative-shampoo", "leave-in-conditioner", "regenerative-conditioner", "natures-pomade", "tallow-face-lotion", "shampoo-conditioner-leave-in-bundle", "shampoo-conditioner", "the-origin-pair"], "order_all_only": true } }
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "products": [
+          "regenerative-shampoo",
+          "leave-in-conditioner",
+          "regenerative-conditioner",
+          "natures-pomade",
+          "tallow-face-lotion",
+          "shampoo-conditioner-leave-in-bundle",
+          "shampoo-conditioner",
+          "the-origin-pair"
+        ],
+        "order_all_only": true
+      },
+      "blocks": {
+        "hd": {
+          "type": "holiday_bundle",
+          "settings": {
+            "product_handle": "shampoo-conditioner",
+            "label": "Holiday Edition",
+            "name": "Hair Harmony Duo",
+            "tagline": "Purify. Replenish. Return to Harmony.",
+            "includes": "Regenerative Shampoo + Regenerative Conditioner",
+            "text": "A luxurious two-step ritual inspired by the ancient technology of tallow, designed to bring cleansing and deep nourishment into perfect harmony.",
+            "cta": "GIVE THE GIFT OF HAIR HARMONY",
+            "intention": "Foundation",
+            "gifting": "Cleanse + deep conditioning"
+          }
+        },
+        "ht": {
+          "type": "holiday_bundle",
+          "settings": {
+            "product_handle": "shampoo-conditioner-leave-in-bundle",
+            "label": "Holiday Edition",
+            "name": "Hair Harmony Trio",
+            "tagline": "From the first cleanse to the final touch. A complete return to hair harmony.",
+            "includes": "Shampoo + Conditioner + Leave-In Conditioner",
+            "text": "Three nutrient-rich formulas, intentionally united to create a complete ritual of cleansing, conditioning, and daily nourishment.",
+            "cta": "DISCOVER THE COMPLETE RITUAL",
+            "intention": "Complete hair care",
+            "gifting": "Cleanse + condition + daily leave-on care"
+          }
+        },
+        "hs": {
+          "type": "holiday_bundle",
+          "settings": {
+            "product_handle": "hair-skin-harmony",
+            "label": "Holiday Edition",
+            "name": "Hair & Skin Harmony",
+            "tagline": "Ancient nourishment. Modern vitality. Lasting harmony.",
+            "includes": "Face Lotion + Leave-In Conditioner",
+            "text": "A luxurious pairing of two nutrient-rich formulas, thoughtfully crafted to bring the ancestral wisdom of nature into your daily ritual.",
+            "cta": "GIVE THE GIFT OF HARMONY",
+            "intention": "Daily nourishment",
+            "gifting": "Leave-on care for skin and hair"
+          }
+        },
+        "hc": {
+          "type": "holiday_bundle",
+          "settings": {
+            "product_handle": "the-harmony-collection",
+            "label": "Holiday Edition",
+            "name": "The Harmony Collection",
+            "tagline": "Five expressions of nature. One complete ritual of harmony.",
+            "includes": "Shampoo + Conditioner + Leave-In + Pomade + Face Lotion",
+            "text": "The ultimate expression of AMUN. Five intentional formulas, thoughtfully united into one extraordinary gift.",
+            "cta": "GIFT THE COMPLETE COLLECTION",
+            "intention": "Full AMUN experience",
+            "gifting": "Hair, styling, and skin-care essentials"
+          }
+        }
+      },
+      "block_order": [
+        "hd",
+        "ht",
+        "hs",
+        "hc"
+      ]
+    }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }

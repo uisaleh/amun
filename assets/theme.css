@@ -55,6 +55,15 @@ main>.shopify-section~.shopify-section{content-visibility:auto;contain-intrinsic
 .pcard__btn{margin-top:auto;height:48px;border:1px solid #000000;background:#ffffff;color:#000000;font-size:12px;line-height:12px;border-radius:0;cursor:pointer;width:100%}
 .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:48px 24px}
 
+/* Holiday bundles */
+.holiday-grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr))!important;gap:48px 28px!important}
+.holiday-card .pcard__btn{height:auto;min-height:48px;font-size:12px;line-height:16px}
+.holiday-card__text{display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.hol-table{width:100%;border-collapse:collapse;font-size:14px;line-height:19.6px;min-width:560px}
+.hol-table th,.hol-table td{text-align:left;padding:14px 12px;border-bottom:1px solid rgba(18,18,18,.15);vertical-align:top;font-weight:400}
+.hol-table thead th{font-weight:700;border-bottom:1px solid #121212}
+.hol-table tbody th a{text-decoration:underline}
+
 /* Section heading */
 .sec-head{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;margin-bottom:42px}
 .sec-head__icon{display:block;width:57px;height:30px;object-fit:contain}
@@ -191,6 +200,7 @@ details.faq-item>div{padding:0 0 24px;font-size:14px;line-height:19.6px;max-widt
   .pgrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:36px 14px!important}
   .pgrid .pcard__btn{font-size:12px!important;padding-left:6px!important;padding-right:6px!important}
   .pgrid .pcard__title{font-size:16px;line-height:22px}
+  .holiday-grid{grid-template-columns:minmax(0,1fr)!important}
   .ft-nl{order:-1;flex-basis:100%!important;margin-bottom:8px}
   .social{padding-top:48px!important}
   .slider{margin-left:-24px;margin-right:-24px}

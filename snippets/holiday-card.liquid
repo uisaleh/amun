@@ -1,0 +1,43 @@
+{%- comment -%}Holiday bundle card. Params: block, index{%- endcomment -%}
+{%- liquid
+  assign b = block.settings
+  assign p = all_products[b.product_handle]
+  assign has_p = false
+  if p != blank and p.id
+    assign has_p = true
+    assign v = p.selected_or_first_available_variant
+  endif
+  capture hover_img
+    if has_p
+      render 'amun-data', handle: p.handle, key: 'hover_img'
+    endif
+  endcapture
+-%}
+{%- if has_p or request.design_mode -%}
+<article class="pcard holiday-card" {{ block.shopify_attributes }}>
+  <a href="{% if has_p %}{{ p.url }}{% else %}#{% endif %}" class="pcard__media" aria-label="{{ b.name | escape }}" style="background: #4C2028">
+    {%- if b.image != blank -%}
+      {{ b.image | image_url: width: 1000 | image_tag: alt: '', loading: 'lazy', sizes: '(min-width: 990px) 33vw, 92vw', widths: '500, 800, 1000' }}
+    {%- elsif hover_img != blank -%}
+      <img {% render 'asset-src', file: hover_img, sizes: '(min-width: 990px) 33vw, 92vw' %} alt="" loading="lazy" width="600" height="600" data-card-img>
+    {%- elsif has_p and p.featured_media -%}
+      {{ p.featured_media | image_url: width: 1000 | image_tag: alt: '', loading: 'lazy', sizes: '(min-width: 990px) 33vw, 92vw', data-card-img: '' }}
+    {%- endif -%}
+    {%- if b.label != blank -%}<span class="pcard__badge">{{ b.label | escape }}</span>{%- endif -%}
+  </a>
+  <div class="pcard__body" style="gap: 8px">
+    <h3 class="pcard__title"><a href="{% if has_p %}{{ p.url }}{% else %}#{% endif %}">{{ b.name | escape }}</a></h3>
+    {%- if b.tagline != blank -%}<p style="margin: 0; font-family: 'Sentient', Georgia, serif; font-size: 16px; line-height: 22px; font-style: italic">{{ b.tagline | escape }}</p>{%- endif -%}
+    {%- if b.includes != blank -%}<p style="margin: 0; font-size: 12px; line-height: 16.8px; text-transform: uppercase; letter-spacing: 0.8px">{{ b.includes | escape }}</p>{%- endif -%}
+    {%- if b.text != blank -%}<p class="holiday-card__text" style="margin: 0; font-size: 14px; line-height: 19.6px">{{ b.text | escape }}</p>{%- endif -%}
+    {%- if has_p -%}
+      <p style="margin: 4px 0 0; font-size: 16px; line-height: 22.4px">{% if v.compare_at_price > v.price %}<s style="font-size: 14px; color: #4a4a40">{{ v.compare_at_price | money_without_trailing_zeros }}</s> {% endif %}{{ v.price | money_without_trailing_zeros }}</p>
+    {%- endif -%}
+  </div>
+  {%- if has_p -%}
+    <a href="{{ p.url }}" class="atc-dark pcard__btn" style="display: flex; align-items: center; justify-content: center; padding: 0 12px; background: #585128; color: #ffffff; border: 1px solid #585128; text-align: center; letter-spacing: 0.8px; text-decoration: none">{{ b.cta | default: 'SHOP NOW' | escape }}</a>
+  {%- else -%}
+    <p class="pcard__btn" style="display: flex; align-items: center; justify-content: center; margin: 0; border: 1px dashed #121212; text-align: center; font-size: 12px; padding: 0 12px">Not visible to customers yet — create a product with the handle “{{ b.product_handle }}” in Shopify</p>
+  {%- endif -%}
+</article>
+{%- endif -%}

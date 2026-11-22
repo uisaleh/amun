@@ -20,6 +20,11 @@
   if section.settings.text != blank
     assign intro = section.settings.text
   endif
+  assign holiday = false
+  assign holiday_blocks = section.blocks | where: 'type', 'holiday_bundle'
+  if section.settings.holiday_handle != blank and collection.handle == section.settings.holiday_handle and holiday_blocks.size > 0
+    assign holiday = true
+  endif
   assign use_list = false
   if section.settings.products != blank
     assign use_list = true
@@ -34,14 +39,15 @@
     <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center">
       <h1 style="margin: 0; font-size: 23px; line-height: 23px">{{ title | escape }}</h1>
       {%- if intro != blank -%}<p style="margin: 0; font-size: 16px; line-height: 22.4px">{{ intro | escape }}</p>{%- endif -%}
+      {%- if holiday and section.settings.holiday_offer != blank -%}<p style="margin: 6px 0 0; font-size: 14px; line-height: 19.6px; font-weight: 700">{{ section.settings.holiday_offer | escape }}</p>{%- endif -%}
     </div>
     <div style="justify-self: end">
-      {%- if section.settings.show_filter -%}
+      {%- if section.settings.show_filter and holiday == false -%}
         <button type="button" data-filter-toggle aria-expanded="false" style="background: none; border: 0; padding: 8px 0; font-size: 12px; line-height: 12px; text-transform: uppercase; cursor: pointer; color: #000000">Filter +</button>
       {%- endif -%}
     </div>
   </div>
-  {%- if section.settings.show_filter -%}
+  {%- if section.settings.show_filter and holiday == false -%}
     <div data-filter-bar hidden role="group" aria-label="Filter products by category" style="max-width: 1300px; margin: 18px auto 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px">
       {%- assign cats = 'All,Haircare,Skincare,Bundles' | split: ',' -%}
       {%- for c in cats -%}
@@ -50,6 +56,34 @@
     </div>
   {%- endif -%}
 </section>
+{%- if holiday -%}
+<section aria-label="Holiday bundles" style="padding: 36px 24px 72px">
+  <div class="pgrid holiday-grid" style="max-width: 1300px; margin: 0 auto">
+    {%- for block in holiday_blocks -%}{% render 'holiday-card', block: block %}{%- endfor -%}
+  </div>
+</section>
+{%- assign rows = section.blocks | where: 'type', 'holiday_bundle' -%}
+{%- if section.settings.table_heading != blank -%}
+<section aria-labelledby="hol-table-h" style="padding: 0 24px 96px">
+  <div style="max-width: 980px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px">
+    <h2 id="hol-table-h" style="margin: 0; font-size: 23px; line-height: 32.2px; text-align: center">{{ section.settings.table_heading | escape }}</h2>
+    <div style="overflow-x: auto">
+      <table class="hol-table">
+        <thead><tr><th scope="col">Bundle</th><th scope="col">Distinct intention</th><th scope="col">What the customer is gifting</th></tr></thead>
+        <tbody>
+          {%- for block in rows -%}
+            {%- assign hp = all_products[block.settings.product_handle] -%}
+            {%- if hp.id or request.design_mode -%}
+              <tr><th scope="row">{% if hp.id %}<a href="{{ hp.url }}">{{ block.settings.name | escape }}</a>{% else %}{{ block.settings.name | escape }}{% endif %}</th><td>{{ block.settings.intention | escape }}</td><td>{{ block.settings.gifting | escape }}</td></tr>
+            {%- endif -%}
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+{%- endif -%}
+{%- else -%}
 <section aria-label="Products" style="padding: 16px 24px 72px">
   {%- paginate collection.products by 24 -%}
     <div class="pgrid" style="max-width: 1300px; margin: 0 auto; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 72px 60px">
@@ -78,6 +112,7 @@
     {%- endif -%}
   {%- endpaginate -%}
 </section>
+{%- endif -%}
 
 {% schema %}
 {
@@ -87,7 +122,25 @@
     { "type": "text", "id": "text", "label": "Intro override" },
     { "type": "checkbox", "id": "show_filter", "label": "Show category filter", "default": true },
     { "type": "product_list", "id": "products", "label": "Show these first, in this order", "limit": 24 },
-    { "type": "checkbox", "id": "order_all_only", "label": "Only use the order above on Shop All", "default": true }
+    { "type": "checkbox", "id": "order_all_only", "label": "Only use the order above on Shop All", "default": true },
+    { "type": "header", "content": "Holiday bundles page" },
+    { "type": "text", "id": "holiday_handle", "label": "Collection that shows the holiday bundles", "default": "haircare", "info": "Collection handle. Leave empty to turn the holiday layout off." },
+    { "type": "text", "id": "holiday_offer", "label": "Offer line", "default": "Enjoy 15% off every holiday bundle — applied automatically at checkout." },
+    { "type": "text", "id": "table_heading", "label": "Comparison table heading", "default": "How These Four Gifts Work Together" }
+  ],
+  "blocks": [
+    { "type": "holiday_bundle", "name": "Holiday bundle", "settings": [
+      { "type": "text", "id": "product_handle", "label": "Product handle", "info": "The end of the product's address, e.g. shampoo-conditioner" },
+      { "type": "image_picker", "id": "image", "label": "Image (optional)" },
+      { "type": "text", "id": "label", "label": "Badge", "default": "Holiday Edition" },
+      { "type": "text", "id": "name", "label": "Name", "default": "Hair Harmony Duo" },
+      { "type": "text", "id": "tagline", "label": "Tagline" },
+      { "type": "text", "id": "includes", "label": "What's included" },
+      { "type": "textarea", "id": "text", "label": "Short description" },
+      { "type": "text", "id": "cta", "label": "Button label", "default": "SHOP NOW" },
+      { "type": "text", "id": "intention", "label": "Table: distinct intention" },
+      { "type": "text", "id": "gifting", "label": "Table: what the customer is gifting" }
+    ] }
   ]
 }
 {% endschema %}
