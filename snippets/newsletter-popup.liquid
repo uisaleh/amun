@@ -1,4 +1,30 @@
-{%- if settings.popup_enabled -%}
+{%- if settings.popup_enabled and settings.popup_mode != 'newsletter' -%}
+{%- liquid
+  assign hl = settings.holiday_link | default: '/collections/bundle'
+  if settings.holiday_code != blank
+    assign hl = '/discount/' | append: settings.holiday_code | append: '?redirect=' | append: hl
+  endif
+-%}
+<div data-popup hidden style="position: fixed; inset: 0; z-index: 120; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(18, 18, 18, 0.55)">
+  <div role="dialog" aria-modal="true" aria-labelledby="pop-h" data-popup-box style="position: relative; width: 100%; max-width: 760px; max-height: calc(100vh - 32px); overflow: auto; display: flex; flex-wrap: wrap; background: #FEF9F6; color: #121212; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3)">
+    {%- if settings.holiday_image != blank -%}
+      {{ settings.holiday_image | image_url: width: 900 | image_tag: class: 'pop-img', alt: '', loading: 'lazy', style: 'flex: 1 1 300px; min-width: 0; width: 100%; min-height: 420px; object-fit: cover; object-position: center; display: block' }}
+    {%- else -%}
+      <img width="1200" height="1500" class="pop-img" {% render 'asset-src', file: 'amun-b75042e8f8.png', sizes: '(min-width: 860px) 380px, 100vw' %} alt="" loading="lazy" style="flex: 1 1 300px; min-width: 0; width: 100%; min-height: 420px; object-fit: cover; object-position: center; display: block; height: auto; background: #4C2028">
+    {%- endif -%}
+    <div class="pop-body" style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; justify-content: center; gap: 16px; padding: 48px 36px">
+      {% render 'icon-logo', size: 'small' %}
+      {%- if settings.holiday_eyebrow != blank -%}<p style="margin: 0; font-size: 12px; line-height: 16.8px; letter-spacing: 2px; text-transform: uppercase">{{ settings.holiday_eyebrow | escape }}</p>{%- endif -%}
+      <h2 id="pop-h" style="margin: 0; font-size: 28px; line-height: 34px">{{ settings.holiday_heading | escape }}</h2>
+      <p style="margin: 0; font-size: 14px; line-height: 20px">{{ settings.holiday_text | escape }}</p>
+      {%- if settings.holiday_offer != blank -%}<p style="margin: 0; font-size: 14px; line-height: 20px; font-weight: 700">{{ settings.holiday_offer | escape }}</p>{%- endif -%}
+      <a href="{{ hl }}" class="atc-dark" data-popup-cta style="display: flex; align-items: center; justify-content: center; height: 50px; padding: 0 20px; background: #585128; color: #ffffff; border: 1px solid #585128; font-size: 13px; letter-spacing: 1px; text-align: center; text-decoration: none">{{ settings.holiday_button | escape }}</a>
+      <button type="button" data-close-popup style="align-self: flex-start; padding: 4px 0; background: none; border: 0; color: #121212; font-size: 12px; text-decoration: underline; cursor: pointer">No thanks</button>
+    </div>
+    <button type="button" aria-label="Close" data-close-popup style="position: absolute; top: 10px; right: 10px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: #FEF9F6; border: 0; border-radius: 0; cursor: pointer"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#121212" stroke-width="1.2"><path d="M1 1l12 12M13 1L1 13"></path></svg></button>
+  </div>
+</div>
+{%- elsif settings.popup_enabled -%}
 <div data-popup hidden style="position: fixed; inset: 0; z-index: 120; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(18, 18, 18, 0.55)">
   <div role="dialog" aria-modal="true" aria-labelledby="pop-h" data-popup-box style="position: relative; width: 100%; max-width: 760px; max-height: calc(100vh - 32px); overflow: auto; display: flex; flex-wrap: wrap; background: #FEF9F6; color: #121212; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3)">
     {%- if settings.popup_image != blank -%}

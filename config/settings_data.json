@@ -20,7 +20,8 @@
         "disabled": true,
         "settings": {}
       }
-    }
+    },
+    "popup_mode": "holiday"
   },
   "presets": {
     "Default": {

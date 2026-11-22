@@ -447,7 +447,7 @@
 
   /* ---------- Newsletter + popup ---------- */
   var popup = $('[data-popup]');
-  function closePopup() { if (popup && !popup.hidden) { popup.hidden = true; store.set('amun-popup-seen', '1'); hide(null); document.body.classList.remove('no-scroll'); } }
+  function closePopup() { if (popup && !popup.hidden) { popup.hidden = true; store.set(A.popupKey || 'amun-popup-seen', '1'); hide(null); document.body.classList.remove('no-scroll'); } }
   function openPopup() { if (!popup) return; popup.hidden = false; document.body.classList.add('no-scroll'); var i = popup.querySelector('input[type="email"], [data-copy-code]'); if (i) setTimeout(function () { i.focus(); }, 50); }
   bind('[data-close-popup]', function () { closePopup(); });
   if (popup) popup.addEventListener('click', function (e) { if (e.target === popup) closePopup(); });
@@ -468,14 +468,14 @@
       }
       var popErr = popup.querySelector('[data-nl-error]:not([hidden])');
       if ((posted && /NewsletterPopup/.test(location.hash)) || popErr) { openPopup(); }
-      else if (A.popupEnabled && !store.get('amun-popup-seen') && !store.get('amun-nl') && !posted) {
+      else if (A.popupEnabled && !store.get(A.popupKey || 'amun-popup-seen') && !(A.popupKey === 'amun-popup-seen' && store.get('amun-nl')) && !posted) {
         // Show only after the visitor starts browsing (scroll, tap or key), then wait the set delay.
         var armed = false, start = Date.now();
         var arm = function () {
           if (armed) return; armed = true;
           ['scroll', 'pointerdown', 'keydown', 'touchstart'].forEach(function (ev) { window.removeEventListener(ev, arm, true); });
           var wait = Math.max(1200, (A.popupDelay || 2500) - (Date.now() - start));
-          setTimeout(function () { if (!$$('.overlay:not([hidden])').length) { openPopup(); store.set('amun-popup-seen', '1'); } }, wait);
+          setTimeout(function () { if (!$$('.overlay:not([hidden])').length) { openPopup(); store.set(A.popupKey || 'amun-popup-seen', '1'); } }, wait);
         };
         ['scroll', 'pointerdown', 'keydown', 'touchstart'].forEach(function (ev) { window.addEventListener(ev, arm, { capture: true, passive: true }); });
       }

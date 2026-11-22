@@ -33,12 +33,23 @@
     ]
   },
   {
-    "name": "10% signup offer",
+    "name": "Popup & signup offer",
     "settings": [
       { "type": "paragraph", "content": "Create this code in Discounts (10% off, one use per customer) so it works at checkout." },
       { "type": "text", "id": "newsletter_code", "label": "Discount code given after signup", "default": "WELCOME10" },
       { "type": "checkbox", "id": "popup_enabled", "label": "Show the first-visit popup", "default": true },
+      { "type": "select", "id": "popup_mode", "label": "Popup type", "default": "holiday", "options": [ { "value": "holiday", "label": "Holiday promotion" }, { "value": "newsletter", "label": "10% signup offer" } ] },
       { "type": "range", "id": "popup_delay", "label": "Popup delay", "min": 0, "max": 15, "step": 0.5, "unit": "s", "default": 2.5 },
+      { "type": "header", "content": "Holiday promotion" },
+      { "type": "text", "id": "holiday_eyebrow", "label": "Small heading", "default": "THE HOLIDAY EDITION" },
+      { "type": "text", "id": "holiday_heading", "label": "Heading", "default": "Give the Gift of Harmony." },
+      { "type": "textarea", "id": "holiday_text", "label": "Text", "default": "Bring your hair and skin back to harmony with our intentionally crafted formulas, rooted in nature and inspired by ancestral technology." },
+      { "type": "text", "id": "holiday_offer", "label": "Offer line", "default": "Enjoy 15% off any holiday bundle." },
+      { "type": "text", "id": "holiday_button", "label": "Button label", "default": "SHOP THE HOLIDAY BUNDLES" },
+      { "type": "text", "id": "holiday_link", "label": "Button link", "default": "/collections/bundle" },
+      { "type": "text", "id": "holiday_code", "label": "Discount code to apply (optional)", "info": "Leave empty if you use an automatic discount. If you enter a code, it is added to the cart when the button is clicked." },
+      { "type": "image_picker", "id": "holiday_image", "label": "Holiday popup image", "info": "Leave empty to use the Hair Revival Trio photo." },
+      { "type": "header", "content": "10% signup offer" },
       { "type": "image_picker", "id": "popup_image", "label": "Popup image", "info": "Leave empty to use the meadow photo." },
       { "type": "text", "id": "popup_heading", "label": "Popup heading", "default": "Take 10% Off Your First Order" },
       { "type": "textarea", "id": "popup_text", "label": "Popup text", "default": "Join the Amun list for new formulas, rituals and launches — and get 10% off your first order." }

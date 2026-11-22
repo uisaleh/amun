@@ -50,7 +50,8 @@
         ],
         coupon: {{ settings.newsletter_code | json }},
         popupDelay: {{ settings.popup_delay | default: 2.5 | times: 1000 | json }},
-        popupEnabled: {{ settings.popup_enabled | json }}
+        popupEnabled: {{ settings.popup_enabled | json }},
+        popupKey: {% if settings.popup_mode == 'newsletter' %}'amun-popup-seen'{% else %}'amun-popup-holiday-seen'{% endif %}
       };
       {%- assign design_handles = 'regenerative-shampoo,leave-in-conditioner,regenerative-conditioner,natures-pomade,tallow-face-lotion,shampoo-conditioner-leave-in-bundle,shampoo-conditioner,the-origin-pair' | split: ',' %}
       window.Amun.design = {
