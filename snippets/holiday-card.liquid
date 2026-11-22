@@ -12,17 +12,23 @@
       render 'amun-data', handle: p.handle, key: 'hover_img'
     endif
   endcapture
+  capture card_img
+    if has_p
+      render 'amun-data', handle: p.handle, key: 'card_img'
+    endif
+  endcapture
 -%}
 {%- if has_p or request.design_mode -%}
 <article class="pcard holiday-card" {{ block.shopify_attributes }}>
-  <a href="{% if has_p %}{{ p.url }}{% else %}#{% endif %}" class="pcard__media" aria-label="{{ b.name | escape }}" style="background: #4C2028">
+  <a href="{% if has_p %}{{ p.url }}{% else %}#{% endif %}" class="pcard__media" aria-label="{{ b.name | escape }}">
     {%- if b.image != blank -%}
-      {{ b.image | image_url: width: 1000 | image_tag: alt: '', loading: 'lazy', sizes: '(min-width: 990px) 33vw, 92vw', widths: '500, 800, 1000' }}
-    {%- elsif hover_img != blank -%}
-      <img {% render 'asset-src', file: hover_img, sizes: '(min-width: 990px) 33vw, 92vw' %} alt="" loading="lazy" width="600" height="600" data-card-img>
+      {{ b.image | image_url: width: 1000 | image_tag: alt: '', loading: 'lazy', sizes: '(min-width: 990px) 33vw, 92vw', widths: '500, 800, 1000', data-card-img: '' }}
+    {%- elsif settings.use_design_images and card_img != blank -%}
+      <img {% render 'asset-src', file: card_img, sizes: '(min-width: 990px) 33vw, 92vw' %} alt="" loading="lazy" width="600" height="600" data-card-img>
     {%- elsif has_p and p.featured_media -%}
       {{ p.featured_media | image_url: width: 1000 | image_tag: alt: '', loading: 'lazy', sizes: '(min-width: 990px) 33vw, 92vw', data-card-img: '' }}
     {%- endif -%}
+    {%- if hover_img != blank -%}<img {% render 'asset-src', file: hover_img, sizes: '(min-width: 990px) 33vw, 92vw' %} alt="" loading="lazy" width="600" height="600" class="pcard__hover" aria-hidden="true">{%- endif -%}
     {%- if b.label != blank -%}<span class="pcard__badge">{{ b.label | escape }}</span>{%- endif -%}
   </a>
   <div class="pcard__body" style="gap: 8px">
