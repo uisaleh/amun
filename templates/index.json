@@ -15,10 +15,11 @@
         "image": "shopify://shop_images/IMG_2732.jpg",
         "fallback": "amun-fb28d4cdcc.jpg",
         "alt": "A woman in a meadow holding an AMUN bottle on her shoulder, with an AMUN gift bag on her arm",
-        "heading": "Transform with Tallow",
-        "text": "Professional-grade holistic hair & skin care using nature’s finest ingredients to nourish you and the land.",
-        "button_label": "Shop Now",
-        "button_link": "/collections/haircare"
+        "heading": "Ancient technology. Modern vitality.",
+        "text": "Professional-grade formulas bringing your hair, skin, and health back to harmony.",
+        "button_label": "SHOP NOW",
+        "button_link": "/collections/all",
+        "eyebrow": "REDEFINING HAIR HEALTH."
       }
     },
     "collection": {
