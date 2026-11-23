@@ -249,8 +249,8 @@
         "v21"
       ],
       "settings": {
-        "heading": "See Our Formulas in Action",
-        "text": "See our tallow formulas in action."
+        "heading": "AMUN in Motion",
+        "text": "Discover the textures, rituals, and moments that bring AMUN to life."
       }
     },
     "gift": {
@@ -260,12 +260,13 @@
         "fallback": "amun-274659e150.jpg",
         "alt": "The full Amun Organics lineup in grey sand: Conditioner, Leave-In, Shampoo, Tallow Face Lotion and Nature's Pomade",
         "img_style": "flex: 2 1 640px; min-width: 0; width: 100%; height: 600px; object-fit: cover; object-position: center; display: block; background: #c9c3b6",
-        "heading": "A Better Way to Gift",
-        "text": "Each set brings together our tallow essentials at a special value, ready for anyone on your list — including you.",
-        "button_label": "Shop Now",
-        "button_link": "/collections/bundle",
+        "heading": "The Gift of Harmony",
+        "text": "This season, discover the beauty of giving with intention. Thoughtfully curated collections of AMUN's nutrient-rich hair and skin care, bringing ancient nourishment and modern luxury into the everyday ritual.",
+        "button_label": "SHOP THE HOLIDAY BUNDLES",
+        "button_link": "/collections/haircare",
         "pad_top": 0,
-        "pad_bottom": 0
+        "pad_bottom": 0,
+        "subheading": "The Holiday Edition"
       }
     },
     "best": {
@@ -273,7 +274,7 @@
       "settings": {
         "show_icon": true,
         "heading": "Shop Best Sellers",
-        "text": "A new kind of haircare: clean tallow formulas that restore your hair's balance so it looks — and feels — its best all the time.",
+        "text": "Where high performance meets nature's finest ingredients. Discover our most-loved formulas, crafted to deeply nourish, regenerate, and reveal the natural vitality of your hair and skin.",
         "products": [
           "regenerative-shampoo",
           "leave-in-conditioner",
