@@ -12,14 +12,15 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "image": "shopify://shop_images/IMG_2732.jpg",
-        "fallback": "amun-fb28d4cdcc.jpg",
-        "alt": "A woman in a meadow holding an AMUN bottle on her shoulder, with an AMUN gift bag on her arm",
+        "fallback": "amun-2c7f691423.jpg",
+        "alt": "The AMUN collection on a bordeaux backdrop: Regenerative Conditioner, Tallow Face Lotion, Leave-In Conditioner, Nature's Pomade and Regenerative Shampoo",
         "heading": "Ancient technology. Modern vitality.",
         "text": "Professional-grade formulas bringing your hair, skin, and health back to harmony.",
         "button_label": "SHOP NOW",
         "button_link": "/collections/all",
-        "eyebrow": "REDEFINING HAIR HEALTH."
+        "eyebrow": "REDEFINING HAIR HEALTH.",
+        "layout": "split",
+        "bg": "#3B141C"
       }
     },
     "collection": {

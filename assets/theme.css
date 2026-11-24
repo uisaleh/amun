@@ -27,6 +27,18 @@ main>.shopify-section~.shopify-section{content-visibility:auto;contain-intrinsic
 .btn-outline{display:inline-flex;align-items:center;justify-content:center;height:50px;min-width:200px;padding:0 24px;border:1px solid #000000;font-size:14px;color:#000;background:transparent}
 .btn-outline:hover{text-decoration:none;background:#585128;border-color:#585128;color:#fff}
 
+/* Hero: text beside product photo */
+.hero-split{display:flex;align-items:stretch;min-height:640px;background-image:linear-gradient(180deg,rgba(255,255,255,.06) 0%,rgba(0,0,0,0) 35%,rgba(0,0,0,.08) 50%,rgba(255,255,255,.04) 70%,rgba(255,255,255,.12) 100%)}
+.hero-split__media{position:absolute;top:0;right:0;bottom:0;width:66%}
+.hero-split__fade{position:absolute;top:0;bottom:0;left:-1px;width:16%;background:linear-gradient(90deg,var(--hero-bg) 0%,rgba(0,0,0,0) 100%)}
+.hero-split__copy{position:relative;z-index:1;width:40%;min-width:340px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:60px 24px 60px 42px;text-align:center}
+@media (max-width:1100px){
+  .hero-split{flex-direction:column;min-height:0}
+  .hero-split__media{position:relative;width:100%;aspect-ratio:16/9;max-height:62vh}
+  .hero-split__fade{top:auto;left:0;right:0;width:auto;height:30%;bottom:0;background:linear-gradient(0deg,var(--hero-bg) 0%,rgba(0,0,0,0) 100%)}
+  .hero-split__copy{width:auto;min-width:0;padding:8px 24px 48px}
+}
+
 /* Banner button hover */
 .banner-btn{transition:background-color 200ms ease,color 200ms ease}
 .banner-btn:hover,.banner-btn:focus-visible{background:#4C2028!important;border-color:#4C2028!important;color:#ffffff!important;text-decoration:none}
