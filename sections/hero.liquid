@@ -1,5 +1,5 @@
-{%- if section.settings.layout == 'split' -%}
-<section class="hero-split" aria-labelledby="hero-h-{{ section.id }}" style="--hero-bg: {{ section.settings.bg }}; position: relative; overflow: hidden; background: var(--hero-bg); color: #ffffff">
+{%- if section.settings.layout == 'split' or section.settings.layout == 'right' -%}
+<section class="hero-split{% if section.settings.layout == 'right' %} hero-right{% endif %}" aria-labelledby="hero-h-{{ section.id }}" style="--hero-bg: {{ section.settings.bg }}; position: relative; overflow: hidden; background: var(--hero-bg); color: #ffffff">
   <div class="hero-split__media">
     {% render 'amun-image', image: section.settings.image, fallback: section.settings.fallback, alt: section.settings.alt, loading: 'eager', style: 'position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center center', sizes: '(min-width: 1101px) 66vw, 100vw' %}
     <span class="hero-split__fade" aria-hidden="true"></span>
@@ -33,7 +33,7 @@
 {
   "name": "Hero",
   "settings": [
-    { "type": "select", "id": "layout", "label": "Layout", "default": "overlay", "options": [ { "value": "overlay", "label": "Text over photo" }, { "value": "split", "label": "Text beside photo (product shot)" } ] },
+    { "type": "select", "id": "layout", "label": "Layout", "default": "overlay", "options": [ { "value": "overlay", "label": "Text over photo" }, { "value": "split", "label": "Text beside photo (product shot)" }, { "value": "right", "label": "Photo full width, text on the right" } ] },
     { "type": "color", "id": "bg", "label": "Background colour (beside photo)", "default": "#3B141C" },
     { "type": "image_picker", "id": "image", "label": "Image" },
     { "type": "text", "id": "fallback", "label": "Built-in design photo", "default": "amun-fb28d4cdcc.jpg", "info": "Used when no image is picked." },

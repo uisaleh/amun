@@ -32,6 +32,16 @@ main>.shopify-section~.shopify-section{content-visibility:auto;contain-intrinsic
 .hero-split__media{position:absolute;top:0;right:0;bottom:0;width:66%}
 .hero-split__fade{position:absolute;top:0;bottom:0;left:-1px;width:16%;background:linear-gradient(90deg,var(--hero-bg) 0%,rgba(0,0,0,0) 100%)}
 .hero-split__copy{position:relative;z-index:1;width:40%;min-width:340px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:60px 24px 60px 42px;text-align:center}
+/* full-width photo with text in the empty right side */
+.hero-right .hero-split__media{left:0;width:100%}
+.hero-right .hero-split__media img{object-position:left center!important}
+.hero-right .hero-split__fade{left:auto;right:0;width:45%;background:linear-gradient(270deg,rgba(43,18,20,.55) 0%,rgba(0,0,0,0) 100%)}
+.hero-right .hero-split__copy{margin-left:auto;width:34%;min-width:360px;padding:60px 48px 60px 24px}
+@media (max-width:1100px){
+  .hero-right .hero-split__copy{margin-left:0;width:auto;min-width:0;padding:8px 24px 48px}
+  .hero-right .hero-split__fade{right:0;left:0;width:auto;background:linear-gradient(0deg,var(--hero-bg) 0%,rgba(0,0,0,0) 100%)}
+  .hero-right .hero-split__media img{object-position:center center!important}
+}
 @media (max-width:1100px){
   .hero-split{flex-direction:column;min-height:0}
   .hero-split__media{position:relative;width:100%;aspect-ratio:16/9;max-height:62vh}
