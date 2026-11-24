@@ -1,7 +1,19 @@
 {%- if section.settings.layout == 'split' or section.settings.layout == 'right' -%}
 <section class="hero-split{% if section.settings.layout == 'right' %} hero-right{% endif %}" aria-labelledby="hero-h-{{ section.id }}" style="--hero-bg: {{ section.settings.bg }}; position: relative; overflow: hidden; background: var(--hero-bg); color: #ffffff">
   <div class="hero-split__media">
-    {% render 'amun-image', image: section.settings.image, fallback: section.settings.fallback, alt: section.settings.alt, loading: 'eager', style: 'position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center center', sizes: '(min-width: 1101px) 66vw, 100vw' %}
+    {%- if section.settings.mobile_image != blank or section.settings.mobile_fallback != blank -%}
+      {%- assign mb = section.settings.mobile_fallback | split: '.' | first -%}
+      <picture>
+        {%- if section.settings.mobile_image != blank -%}
+          <source media="(max-width: 1100px)" srcset="{{ section.settings.mobile_image | image_url: width: 800 }} 800w, {{ section.settings.mobile_image | image_url: width: 1600 }} 1600w" sizes="100vw">
+        {%- else -%}
+          <source media="(max-width: 1100px)" srcset="{{ mb | append: '-800.webp' | asset_url }} 800w, {{ mb | append: '-1600.webp' | asset_url }} 1600w" sizes="100vw">
+        {%- endif -%}
+        {% render 'amun-image', image: section.settings.image, fallback: section.settings.fallback, alt: section.settings.alt, loading: 'eager', style: 'position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center center', sizes: '(min-width: 1101px) 66vw, 100vw' %}
+      </picture>
+    {%- else -%}
+      {% render 'amun-image', image: section.settings.image, fallback: section.settings.fallback, alt: section.settings.alt, loading: 'eager', style: 'position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center center', sizes: '(min-width: 1101px) 66vw, 100vw' %}
+    {%- endif -%}
     <span class="hero-split__fade" aria-hidden="true"></span>
   </div>
   <div class="hero-split__copy">
@@ -36,6 +48,8 @@
     { "type": "select", "id": "layout", "label": "Layout", "default": "overlay", "options": [ { "value": "overlay", "label": "Text over photo" }, { "value": "split", "label": "Text beside photo (product shot)" }, { "value": "right", "label": "Photo full width, text on the right" } ] },
     { "type": "color", "id": "bg", "label": "Background colour (beside photo)", "default": "#3B141C" },
     { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "image_picker", "id": "mobile_image", "label": "Mobile & tablet image (optional)" },
+    { "type": "text", "id": "mobile_fallback", "label": "Built-in mobile photo" },
     { "type": "text", "id": "fallback", "label": "Built-in design photo", "default": "amun-fb28d4cdcc.jpg", "info": "Used when no image is picked." },
     { "type": "text", "id": "alt", "label": "Image description", "default": "A woman in a meadow holding an AMUN bottle on her shoulder, with an AMUN gift bag on her arm" },
     { "type": "text", "id": "eyebrow", "label": "Small heading", "default": "REDEFINING HAIR HEALTH." },

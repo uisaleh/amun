@@ -20,7 +20,8 @@
         "button_link": "/collections/all",
         "eyebrow": "REDEFINING HAIR HEALTH.",
         "layout": "right",
-        "bg": "#3E1A1F"
+        "bg": "#3E1A1F",
+        "mobile_fallback": "amun-2c7f691423.jpg"
       }
     },
     "collection": {
