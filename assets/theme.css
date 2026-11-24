@@ -194,9 +194,13 @@ details.faq-item>div{padding:0 0 24px;font-size:14px;line-height:19.6px;max-widt
   .ig .slider__track>*{flex-basis:calc((100% - 8px) / 3)}
 }
 @media (max-width: 860px){
-  .pop-img{flex-basis:100%!important;min-height:0!important;height:180px!important}
+  .pop-img{flex-basis:100%!important;min-height:0!important;height:auto!important;aspect-ratio:1/1;object-fit:cover!important;object-position:center center!important}
   .pop-body{padding:28px 24px 24px!important;gap:12px!important}
   .pop-body h2{font-size:24px!important;line-height:30px!important}
+  .pop-body{padding:20px 22px 18px!important;gap:10px!important}
+  .pop-body .sec-head__icon{display:none}
+  .pop-body p{font-size:13px!important;line-height:18px!important}
+  .pop-body [data-popup-cta]{height:46px!important}
   .hdr{flex-wrap:nowrap!important;min-height:56px!important;gap:12px!important}
   .hdr-nav,.hdr-text{display:none!important}
   .hdr-burger{display:inline-flex!important}
@@ -264,3 +268,5 @@ details.faq-item>div{padding:0 0 24px;font-size:14px;line-height:19.6px;max-widt
   .site-footer>img[aria-hidden="true"]{height:200px!important;top:auto!important;bottom:28px;right:-36px!important;transform:none!important}
 }
 @media (prefers-reduced-motion: reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+@media (max-width:860px) and (max-height:620px){.pop-img{aspect-ratio:auto!important;height:40vh!important;object-fit:contain!important;background:#4a1f27!important}}
