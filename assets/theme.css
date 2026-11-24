@@ -29,7 +29,7 @@ main>.shopify-section~.shopify-section{content-visibility:auto;contain-intrinsic
 
 /* Banner button hover */
 .banner-btn{transition:background-color 200ms ease,color 200ms ease}
-.banner-btn:hover,.banner-btn:focus-visible{background:#4C2028!important;color:#ffffff!important;text-decoration:none}
+.banner-btn:hover,.banner-btn:focus-visible{background:#4C2028!important;border-color:#4C2028!important;color:#ffffff!important;text-decoration:none}
 
 /* Announcement bar hover */
 .announce{transition:background-color 200ms ease,color 200ms ease}
