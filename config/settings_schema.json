@@ -37,7 +37,7 @@
     "settings": [
       { "type": "checkbox", "id": "holiday_campaign", "label": "Holiday campaign is running", "default": true, "info": "Hides the Bundle & Save page: its links go to the holiday page instead, and visitors to /collections/bundle are sent there. Untick after the holidays to bring Bundle & Save back." },
       { "type": "text", "id": "holiday_url", "label": "Holiday page link", "default": "/collections/haircare" },
-      { "type": "text", "id": "holiday_nav_label", "label": "Menu name for the holiday page", "default": "Holiday Gifts" }
+      { "type": "text", "id": "holiday_nav_label", "label": "Menu name for the holiday page", "default": "Holiday Collection" }
     ]
   },
   {

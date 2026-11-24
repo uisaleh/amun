@@ -9,7 +9,7 @@
     <nav class="hdr-nav" aria-label="Primary" style="display: flex; flex-wrap: wrap; gap: 24px; font-size: 14px; line-height: 14px; flex: 1 1 300px">
       {%- for block in left_links -%}
         {%- capture lu -%}{% render 'campaign-url', url: block.settings.url %}{%- endcapture -%}
-        <a href="{{ lu }}" {{ block.shopify_attributes }}>{% if lu != block.settings.url %}{{ settings.holiday_nav_label | default: 'Holiday Gifts' | escape }}{% else %}{{ block.settings.label | escape }}{% endif %}</a>
+        <a href="{{ lu }}" {{ block.shopify_attributes }}>{% if lu != block.settings.url %}{{ settings.holiday_nav_label | default: 'Holiday Collection' | escape }}{% else %}{{ block.settings.label | escape }}{% endif %}</a>
       {%- endfor -%}
     </nav>
     <a href="{{ routes.root_url }}" class="hdr-logo" aria-label="{{ shop.name | escape }} home" style="flex: 0 0 auto; display: inline-flex">
@@ -43,7 +43,7 @@
       {%- endif -%}
       <button type="button" data-close-menu aria-label="Close menu" style="width: 44px; height: 44px; padding: 0; background: none; border: 0; cursor: pointer; display: inline-flex; align-items: center; justify-content: flex-end"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#121212" stroke-width="1.2"><path d="M1 1l14 14M15 1L1 15"></path></svg></button>
     </div>
-    {%- for block in left_links -%}{%- capture lu -%}{% render 'campaign-url', url: block.settings.url %}{%- endcapture -%}<a href="{{ lu }}">{% if lu != block.settings.url %}{{ settings.holiday_nav_label | default: 'Holiday Gifts' | escape }}{% else %}{{ block.settings.label | escape }}{% endif %}</a>{%- endfor -%}
+    {%- for block in left_links -%}{%- capture lu -%}{% render 'campaign-url', url: block.settings.url %}{%- endcapture -%}<a href="{{ lu }}">{% if lu != block.settings.url %}{{ settings.holiday_nav_label | default: 'Holiday Collection' | escape }}{% else %}{{ block.settings.label | escape }}{% endif %}</a>{%- endfor -%}
     {%- for block in right_links -%}<a href="{{ block.settings.url }}">{{ block.settings.label | escape }}</a>{%- endfor -%}
     {%- if shop.customer_accounts_enabled -%}<a href="{{ routes.account_url }}">Account</a>{%- endif -%}
     {%- for block in menu_links -%}<a href="{{ block.settings.url }}" {{ block.shopify_attributes }}>{{ block.settings.label | escape }}</a>{%- endfor -%}

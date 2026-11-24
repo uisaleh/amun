@@ -23,7 +23,8 @@
     },
     "popup_mode": "holiday",
     "holiday_campaign": true,
-    "holiday_link": "/collections/haircare"
+    "holiday_link": "/collections/haircare",
+    "holiday_nav_label": "Holiday Collection"
   },
   "presets": {
     "Default": {
