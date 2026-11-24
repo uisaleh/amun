@@ -18,6 +18,9 @@
   if badge != blank
     assign dbadge = badge
   endif
+  if settings.holiday_campaign and dbadge == 'Bundle & Save'
+    assign dbadge = 'Holiday Edition'
+  endif
   if ddesc == blank
     assign ddesc = product.description | newline_to_br | replace: '</', ' </' | replace: '<br', ' <br' | strip_html | replace: '  ', ' ' | replace: '  ', ' ' | strip | truncatewords: 22
   endif
