@@ -16,7 +16,7 @@
   <h2 id="ib-h-{{ section.id }}" style="position: relative; margin: 0; font-size: 23px; line-height: 23px">{{ ib_heading | escape }}</h2>
   <p style="position: relative; margin: 0; font-size: 14px; line-height: 19.6px">{{ ib_text | escape }}</p>
   {%- if ib_label != blank -%}
-    <a href="{{ ib_link }}" style="position: relative; margin-top: 10px; display: inline-flex; align-items: center; justify-content: center; height: 50px; min-width: 200px; padding: 0 24px; background: #ffffff; color: #000000; font-size: 14px">{{ ib_label | escape }}</a>
+    <a href="{{ ib_link }}" class="banner-btn" style="position: relative; margin-top: 10px; display: inline-flex; align-items: center; justify-content: center; height: 50px; min-width: 200px; padding: 0 24px; background: #ffffff; color: #000000; font-size: 14px">{{ ib_label | escape }}</a>
   {%- endif -%}
 </section>
 

@@ -27,6 +27,10 @@ main>.shopify-section~.shopify-section{content-visibility:auto;contain-intrinsic
 .btn-outline{display:inline-flex;align-items:center;justify-content:center;height:50px;min-width:200px;padding:0 24px;border:1px solid #000000;font-size:14px;color:#000;background:transparent}
 .btn-outline:hover{text-decoration:none;background:#585128;border-color:#585128;color:#fff}
 
+/* Banner button hover */
+.banner-btn{transition:background-color 200ms ease,color 200ms ease}
+.banner-btn:hover,.banner-btn:focus-visible{background:#4C2028!important;color:#ffffff!important;text-decoration:none}
+
 /* Announcement bar hover */
 .announce{transition:background-color 200ms ease,color 200ms ease}
 .announce a,.announce span{transition:color 200ms ease}
