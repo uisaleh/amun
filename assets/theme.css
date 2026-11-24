@@ -270,3 +270,6 @@ details.faq-item>div{padding:0 0 24px;font-size:14px;line-height:19.6px;max-widt
 @media (prefers-reduced-motion: reduce){*{scroll-behavior:auto!important;transition:none!important}}
 
 @media (max-width:860px) and (max-height:620px){.pop-img{aspect-ratio:auto!important;height:40vh!important;object-fit:contain!important;background:#4a1f27!important}}
+
+/* Holiday bundles: bordeaux photo by default where hover is not available (phones/tablets) */
+@media (hover:none),(max-width:860px){.holiday-card .pcard__hover{opacity:1}}
