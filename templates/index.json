@@ -12,7 +12,7 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "fallback": "amun-6d9464f218.png",
+        "fallback": "amun-28ceb91605.png",
         "alt": "The AMUN collection on a bordeaux backdrop: Regenerative Conditioner, Tallow Face Lotion, Leave-In Conditioner, Nature's Pomade and Regenerative Shampoo",
         "heading": "Ancient technology. Modern vitality.",
         "text": "Professional-grade formulas bringing your hair, skin, and health back to harmony.",
@@ -21,7 +21,7 @@
         "eyebrow": "REDEFINING HAIR HEALTH.",
         "layout": "right",
         "bg": "#3E1A1F",
-        "mobile_fallback": "amun-2c7f691423.jpg"
+        "mobile_fallback": "amun-311b565ba3.png"
       }
     },
     "collection": {

@@ -1,4 +1,5 @@
 {%- if section.settings.layout == 'split' or section.settings.layout == 'right' -%}
+{%- assign hero_sizes = '(min-width: 1101px) 66vw, 100vw' -%}{%- if section.settings.layout == 'right' -%}{%- assign hero_sizes = '100vw' -%}{%- endif -%}
 <section class="hero-split{% if section.settings.layout == 'right' %} hero-right{% endif %}" aria-labelledby="hero-h-{{ section.id }}" style="--hero-bg: {{ section.settings.bg }}; position: relative; overflow: hidden; background: var(--hero-bg); color: #ffffff">
   <div class="hero-split__media">
     {%- if section.settings.mobile_image != blank or section.settings.mobile_fallback != blank -%}
@@ -9,10 +10,10 @@
         {%- else -%}
           <source media="(max-width: 1100px)" srcset="{{ mb | append: '-800.webp' | asset_url }} 800w, {{ mb | append: '-1600.webp' | asset_url }} 1600w" sizes="100vw">
         {%- endif -%}
-        {% render 'amun-image', image: section.settings.image, fallback: section.settings.fallback, alt: section.settings.alt, loading: 'eager', style: 'position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center center', sizes: '(min-width: 1101px) 66vw, 100vw' %}
+        {% render 'amun-image', image: section.settings.image, fallback: section.settings.fallback, alt: section.settings.alt, loading: 'eager', style: 'position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center center', sizes: hero_sizes %}
       </picture>
     {%- else -%}
-      {% render 'amun-image', image: section.settings.image, fallback: section.settings.fallback, alt: section.settings.alt, loading: 'eager', style: 'position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center center', sizes: '(min-width: 1101px) 66vw, 100vw' %}
+      {% render 'amun-image', image: section.settings.image, fallback: section.settings.fallback, alt: section.settings.alt, loading: 'eager', style: 'position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center center', sizes: hero_sizes %}
     {%- endif -%}
     <span class="hero-split__fade" aria-hidden="true"></span>
   </div>
