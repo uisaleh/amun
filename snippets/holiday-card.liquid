@@ -29,7 +29,7 @@
       {{ p.featured_media | image_url: width: 1000 | image_tag: alt: '', loading: 'lazy', sizes: '(min-width: 990px) 33vw, 92vw', data-card-img: '' }}
     {%- endif -%}
     {%- if hover_img != blank -%}<img {% render 'asset-src', file: hover_img, sizes: '(min-width: 990px) 33vw, 92vw' %} alt="" loading="lazy" width="600" height="600" class="pcard__hover" aria-hidden="true">{%- endif -%}
-    {%- if b.label != blank -%}<span class="pcard__badge">{{ b.label | escape }}</span>{%- endif -%}
+    {%- if b.label != blank -%}<span class="pcard__badge{% if b.label contains 'Holiday' %} pcard__badge--holiday{% endif %}">{{ b.label | escape }}</span>{%- endif -%}
   </a>
   <div class="pcard__body" style="gap: 8px">
     <h3 class="pcard__title"><a href="{% if has_p %}{{ p.url }}{% else %}#{% endif %}">{{ b.name | escape }}</a></h3>

@@ -34,7 +34,7 @@
     {%- elsif product.featured_media -%}
       {{ product.featured_media | image_url: width: 800 | image_tag: alt: '', loading: 'lazy', sizes: '(min-width: 1024px) 33vw, 76vw', data-card-img: '' }}
     {%- endif -%}
-    {%- if dbadge != blank -%}<span class="pcard__badge">{{ dbadge | escape }}</span>{%- endif -%}
+    {%- if dbadge != blank -%}<span class="pcard__badge{% if dbadge == 'Holiday Edition' %} pcard__badge--holiday{% endif %}">{{ dbadge | escape }}</span>{%- endif -%}
   </a>
   <div class="pcard__body">
     <h3 class="pcard__title"><a href="{{ product.url }}">{% if nm != blank %}{{ nm | escape }}{% else %}{% render 'title-case', text: product.title %}{% endif %}</a></h3>

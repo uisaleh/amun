@@ -273,3 +273,8 @@ details.faq-item>div{padding:0 0 24px;font-size:14px;line-height:19.6px;max-widt
 
 /* Holiday bundles: bordeaux photo by default where hover is not available (phones/tablets) */
 @media (hover:none),(max-width:860px){.holiday-card .pcard__hover{opacity:1}}
+
+/* Holiday Edition badge: bordeaux on the light photo, white once the bordeaux photo shows */
+.pcard__badge--holiday{background:#4C2028;color:#ffffff;transition:background-color 350ms ease,color 350ms ease}
+@media (hover:hover){.pcard__media:hover .pcard__badge--holiday,.pcard__media:focus-visible .pcard__badge--holiday{background:#ffffff;color:#121212}}
+@media (hover:none),(max-width:860px){.holiday-card .pcard__badge--holiday{background:#ffffff;color:#121212}}
